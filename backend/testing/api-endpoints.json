@@ -1,0 +1,96 @@
+[
+  {
+    "name": "Admin sign-in endpoint should issue session cookies",
+    "method": "POST",
+    "path": "/api/auth/signin",
+    "expectedStatuses": [200, 400, 401, 403],
+    "body": {
+      "email": "__API_TEST_ADMIN_EMAIL__",
+      "password": "__API_TEST_ADMIN_PASSWORD__",
+      "next": "/admin"
+    },
+    "skipBodyEnvReplacement": false,
+    "notes": "The runner performs admin login separately too. This endpoint is listed so the report always shows auth health."
+  },
+  {
+    "name": "Theme preference update should not break UI",
+    "method": "POST",
+    "path": "/api/theme",
+    "expectedStatuses": [200, 400, 401, 403],
+    "requiresAuth": true,
+    "body": { "themeMode": "dark" },
+    "notes": "Frontend catches failures, but backend should still return a controlled JSON response."
+  },
+  {
+    "name": "Public course listing",
+    "method": "GET",
+    "path": "/api/courses",
+    "expectedStatuses": [200, 401, 403],
+    "notes": "Frequent read API; v22 wraps it in local TTL cache."
+  },
+  {
+    "name": "Profile should work for signed-in admin",
+    "method": "GET",
+    "path": "/api/profile",
+    "expectedStatuses": [200],
+    "requiresAuth": true
+  },
+  {
+    "name": "Creator courses should work for signed-in admin creator profile",
+    "method": "GET",
+    "path": "/api/creator/courses",
+    "expectedStatuses": [200],
+    "requiresAuth": true
+  },
+  {
+    "name": "Admin overview should work for signed-in admin",
+    "method": "GET",
+    "path": "/api/admin/moderation",
+    "expectedStatuses": [200, 400, 404],
+    "requiresAuth": true,
+    "requiresAdmin": true
+  },
+  {
+    "name": "Admin finance settings should work for signed-in admin",
+    "method": "GET",
+    "path": "/api/admin/finance/settings",
+    "expectedStatuses": [200],
+    "requiresAuth": true,
+    "requiresAdmin": true
+  },
+  {
+    "name": "Admin broadcasts should work for signed-in admin",
+    "method": "GET",
+    "path": "/api/admin/broadcasts",
+    "expectedStatuses": [200],
+    "requiresAuth": true,
+    "requiresAdmin": true
+  },
+  {
+    "name": "Admin support messages should work for signed-in admin",
+    "method": "GET",
+    "path": "/api/admin/messages",
+    "expectedStatuses": [200],
+    "requiresAuth": true,
+    "requiresAdmin": true
+  },
+  {
+    "name": "Admin intro card should work for signed-in admin",
+    "method": "GET",
+    "path": "/api/admin/intro-card",
+    "expectedStatuses": [200, 404],
+    "requiresAuth": true,
+    "requiresAdmin": true
+  },
+  {
+    "name": "Admin payouts should work for signed-in admin",
+    "method": "GET",
+    "path": "/api/admin/payouts",
+    "expectedStatuses": [200],
+    "requiresAuth": true,
+    "requiresAdmin": true
+  }
+]
+
+
+

@@ -1,0 +1,2012 @@
+{
+  "baseUrl": "http://localhost:3000",
+  "generatedAt": "2026-04-27T17:53:30.202Z",
+  "auth": {
+    "mode": "admin",
+    "ok": true,
+    "cookieHeader": "[redacted]",
+    "login": {
+      "email": "admin@cs-ranger.local",
+      "status": 200,
+      "ok": true,
+      "durationMs": 3406,
+      "cookieHeader": "app_theme=dark; sb-illjaelzyaoohummjizn-auth-token=base64-eyJhY2Nlc3NfdG9rZW4iOiJleUpoYkdjaU9pSkZVekkxTmlJc0ltdHBaQ0k2SWpGbU4yUTRNR1l5TFRVMlpHSXROREJtWXkwNFlXUXhMVFV4WXpZeE5XTTROek5oTnlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKcGMzTWlPaUpvZEhSd2N6b3ZMMmxzYkdwaFpXeDZlV0Z2YjJoMWJXMXFhWHB1TG5OMWNHRmlZWE5sTG1OdkwyRjFkR2d2ZGpFaUxDSnpkV0lpT2lKaFpHTm1NV1ZrTWkwd1lUUTVMVFE0TnpJdE9XVXhNeTAyT1ROa1lUbGlNREEzWldZaUxDSmhkV1FpT2lKaGRYUm9aVzUwYVdOaGRHVmtJaXdpWlhod0lqb3hOemMzTXpFMU9UazVMQ0pwWVhRaU9qRTNOemN6TVRJek9Ua3NJbVZ0WVdsc0lqb2lZV1J0YVc1QVkzTXRjbUZ1WjJWeUxteHZZMkZzSWl3aWNHaHZibVVpT2lJaUxDSmhjSEJmYldWMFlXUmhkR0VpT25zaWNISnZkbWxrWlhJaU9pSmxiV0ZwYkNJc0luQnliM1pwWkdWeWN5STZXeUpsYldGcGJDSmRmU3dpZFhObGNsOXRaWFJoWkdGMFlTSTZleUpsYldGcGJGOTJaWEpwWm1sbFpDSTZkSEoxWlN3aVpuVnNiRjl1WVcxbElqb2lRMU1nVW1GdVoyVnlJRlJsYzNRZ1FXUnRhVzRpTENKd2NtVm1aWEp5WldSZmNtOXNaU0k2SW1OeVpXRjBiM0lpTENKMWMyVnlibUZ0WlNJNkltRmtiV2x1WDNSbGMzUmxjaUo5TENKeWIyeGxJam9pWVhWMGFHVnVkR2xqWVhSbFpDSXNJbUZoYkNJNkltRmhiREVpTENKaGJYSWlPbHQ3SW0xbGRHaHZaQ0k2SW5CaGMzTjNiM0prSWl3aWRHbHRaWE4wWVcxd0lqb3hOemMzTXpFeU16azVmVjBzSW5ObGMzTnBiMjVmYVdRaU9pSTFaRFU1TW1Sak1pMHlNMk5sTFRReFptTXRPR1JrWmkxbVlXWXpZbU5qTlRVME5HSWlMQ0pwYzE5aGJtOXVlVzF2ZFhNaU9tWmhiSE5sZlEuY2ozZGRTWVJxUHdQek95WmJZUTFWME93TTRTblZwWjQzbDVybVQtR1RaVnNSX05VeldudXpyaHkxd0FWSURKNVduelc1Q0JjRkpCbWx0XzdNOVRUMnciLCJ0b2tlbl90eXBlIjoiYmVhcmVyIiwiZXhwaXJlc19pbiI6MzYwMCwiZXhwaXJlc19hdCI6MTc3NzMxNTk5OSwicmVmcmVzaF90b2tlbiI6ImdmYnJmNnp4YWxkNSIsInVzZXIiOnsiaWQiOiJhZGNmMWVkMi0wYTQ5LTQ4NzItOWUxMy02OTNkYTliMDA3ZWYiLCJhdWQiOiJhdXRoZW50aWNhdGVkIiwicm9sZSI6ImF1dGhlbnRpY2F0ZWQiLCJlbWFpbCI6ImFkbWluQGNzLXJhbmdlci5sb2NhbCIsImVtYWlsX2NvbmZpcm1lZF9hdCI6IjIwMjYtMDQtMjdUMTc6NTI6NTMuMjY1ODYxWiIsInBob25lIjoiIiwiY29uZmlybWVkX2F0IjoiMjAyNi0wNC0yN1QxNzo1Mjo1My4yNjU4NjFaIiwibGFzdF9zaWduX2luX2F0IjoiMjAyNi0wNC0yN1QxNzo1MzoxOS44Mzk3NjIxNjlaIiwiYXBwX21ldGFkYXRhIjp7InByb3ZpZGVyIjoiZW1haWwiLCJwcm92aWRlcnMiOlsiZW1haWwiXX0sInVzZXJfbWV0YWRhdGEiOnsiZW1haWxfdmVyaWZpZWQiOnRydWUsImZ1bGxfbmFtZSI6IkNTIFJhbmdlciBUZXN0IEFkbWluIiwicHJlZmVycmVkX3JvbGUiOiJjcmVhdG9yIiwidXNlcm5hbWUiOiJhZG1pbl90ZXN0ZXIifSwiaWRlbnRpdGllcyI6W3siaWRlbnRpdHlfaWQiOiJkYjgyN2U0Zi02MDE2LTQ3ZGQtYjQ0Yi05MDU2Yjk1YWU5ZmUiLCJpZCI6ImFkY2YxZWQyLTBhNDktNDg3Mi05ZTEzLTY5M2RhOWIwMDdlZiIsInVzZXJfaWQiOiJhZGNmMWVkMi0wYTQ5LTQ4NzItOWUxMy02OTNkYTliMDA3ZWYiLCJpZGVudGl0eV9kYXRhIjp7ImVtYWlsIjoiYWRtaW5AY3MtcmFuZ2VyLmxvY2FsIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJwaG9uZV92ZXJpZmllZCI6ZmFsc2UsInN1YiI6ImFkY2YxZWQyLTBhNDktNDg3Mi05ZTEzLTY5M2RhOWIwMDdlZiJ9LCJwcm92aWRlciI6ImVtYWlsIiwibGFzdF9zaWduX2luX2F0IjoiMjAyNi0wNC0yN1QxNzo1Mjo1My4yNTU5NjdaIiwiY3JlYXRlZF9hdCI6IjIwMjYtMDQtMjdUMTc6NTI6NTMuMjU2MDIzWiIsInVwZGF0ZWRfYXQiOiIyMDI2LTA0LTI3VDE3OjUyOjUzLjI1NjAyM1oiLCJlbWFpbCI6ImFkbWluQGNzLXJhbmdlci5sb2NhbCJ9XSwiY3JlYXRlZF9hdCI6IjIwMjYtMDQtMjdUMTc6NTI6NTMuMjE3MTEzWiIsInVwZGF0ZWRfYXQiOiIyMDI2LTA0LTI3VDE3OjUzOjE5Ljg3NTI4NloiLCJpc19hbm9ueW1vdXMiOmZhbHNlfSwid2Vha19wYXNzd29yZCI6bnVsbH0",
+      "setCookieCount": 2,
+      "responsePreview": "{\"redirectTo\":\"/admin\"}"
+    },
+    "note": "Signed in as admin@cs-ranger.local; captured 2 cookies."
+  },
+  "discovered": [
+    {
+      "path": "/api/admin/broadcasts",
+      "frontendFile": "frontend/app/api/admin/broadcasts/route.ts",
+      "backendFile": "backend/Payments, Admin & Trust/routes/admin/broadcasts/route.ts",
+      "methods": [
+        "POST"
+      ],
+      "dynamic": false
+    },
+    {
+      "path": "/api/admin/bulk-payouts",
+      "frontendFile": "frontend/app/api/admin/bulk-payouts/route.ts",
+      "backendFile": "backend/Payments, Admin & Trust/routes/admin/bulk-payouts/route.ts",
+      "methods": [
+        "POST"
+      ],
+      "dynamic": false
+    },
+    {
+      "path": "/api/admin/finance/settings",
+      "frontendFile": "frontend/app/api/admin/finance/settings/route.ts",
+      "backendFile": "backend/Payments, Admin & Trust/routes/admin/finance/settings/route.ts",
+      "methods": [
+        "PATCH"
+      ],
+      "dynamic": false
+    },
+    {
+      "path": "/api/admin/intro-card",
+      "frontendFile": "frontend/app/api/admin/intro-card/route.ts",
+      "backendFile": "backend/Payments, Admin & Trust/routes/admin/intro-card/route.ts",
+      "methods": [
+        "POST"
+      ],
+      "dynamic": false
+    },
+    {
+      "path": "/api/admin/messages",
+      "frontendFile": "frontend/app/api/admin/messages/route.ts",
+      "backendFile": "backend/Payments, Admin & Trust/routes/admin/messages/route.ts",
+      "methods": [
+        "POST"
+      ],
+      "dynamic": false
+    },
+    {
+      "path": "/api/admin/messages/[messageId]",
+      "frontendFile": "frontend/app/api/admin/messages/[messageId]/route.ts",
+      "backendFile": "backend/Payments, Admin & Trust/routes/admin/messages/[messageId]/route.ts",
+      "methods": [
+        "PATCH"
+      ],
+      "dynamic": true
+    },
+    {
+      "path": "/api/admin/moderation",
+      "frontendFile": "frontend/app/api/admin/moderation/route.ts",
+      "backendFile": "backend/Payments, Admin & Trust/routes/admin/moderation/route.ts",
+      "methods": [
+        "POST"
+      ],
+      "dynamic": false
+    },
+    {
+      "path": "/api/admin/payouts",
+      "frontendFile": "frontend/app/api/admin/payouts/route.ts",
+      "backendFile": "backend/Payments, Admin & Trust/routes/admin/payouts/route.ts",
+      "methods": [
+        "POST"
+      ],
+      "dynamic": false
+    },
+    {
+      "path": "/api/admin/withdrawals/[withdrawalRequestId]",
+      "frontendFile": "frontend/app/api/admin/withdrawals/[withdrawalRequestId]/route.ts",
+      "backendFile": "backend/Payments, Admin & Trust/routes/admin/withdrawals/[withdrawalRequestId]/route.ts",
+      "methods": [
+        "PATCH"
+      ],
+      "dynamic": true
+    },
+    {
+      "path": "/api/auth/callback",
+      "frontendFile": "frontend/app/api/auth/callback/route.ts",
+      "backendFile": "backend/Learner and Creator Product/routes/auth/callback/route.ts",
+      "methods": [
+        "GET"
+      ],
+      "dynamic": false
+    },
+    {
+      "path": "/api/auth/forgot-password",
+      "frontendFile": "frontend/app/api/auth/forgot-password/route.ts",
+      "backendFile": "backend/Learner and Creator Product/routes/auth/forgot-password/route.ts",
+      "methods": [
+        "POST"
+      ],
+      "dynamic": false
+    },
+    {
+      "path": "/api/auth/oauth/google",
+      "frontendFile": "frontend/app/api/auth/oauth/google/route.ts",
+      "backendFile": "backend/Learner and Creator Product/routes/auth/oauth/google/route.ts",
+      "methods": [
+        "GET"
+      ],
+      "dynamic": false
+    },
+    {
+      "path": "/api/auth/reset-password",
+      "frontendFile": "frontend/app/api/auth/reset-password/route.ts",
+      "backendFile": "backend/Learner and Creator Product/routes/auth/reset-password/route.ts",
+      "methods": [
+        "POST"
+      ],
+      "dynamic": false
+    },
+    {
+      "path": "/api/auth/signin",
+      "frontendFile": "frontend/app/api/auth/signin/route.ts",
+      "backendFile": "backend/Learner and Creator Product/routes/auth/signin/route.ts",
+      "methods": [
+        "POST"
+      ],
+      "dynamic": false
+    },
+    {
+      "path": "/api/auth/signout",
+      "frontendFile": "frontend/app/api/auth/signout/route.ts",
+      "backendFile": "backend/Learner and Creator Product/routes/auth/signout/route.ts",
+      "methods": [
+        "POST"
+      ],
+      "dynamic": false
+    },
+    {
+      "path": "/api/auth/signup",
+      "frontendFile": "frontend/app/api/auth/signup/route.ts",
+      "backendFile": "backend/Learner and Creator Product/routes/auth/signup/route.ts",
+      "methods": [
+        "POST"
+      ],
+      "dynamic": false
+    },
+    {
+      "path": "/api/courses",
+      "frontendFile": "frontend/app/api/courses/route.ts",
+      "backendFile": "backend/Learner and Creator Product/routes/courses/route.ts",
+      "methods": [
+        "GET"
+      ],
+      "dynamic": false
+    },
+    {
+      "path": "/api/courses/[courseId]",
+      "frontendFile": "frontend/app/api/courses/[courseId]/route.ts",
+      "backendFile": "backend/Learner and Creator Product/routes/courses/[courseId]/route.ts",
+      "methods": [
+        "GET"
+      ],
+      "dynamic": true
+    },
+    {
+      "path": "/api/courses/[courseId]/certificate",
+      "frontendFile": "frontend/app/api/courses/[courseId]/certificate/route.ts",
+      "backendFile": "backend/Learning Engine/routes/courses/[courseId]/certificate/route.ts",
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "dynamic": true
+    },
+    {
+      "path": "/api/courses/[courseId]/nodes/[nodeId]/bookmark",
+      "frontendFile": "frontend/app/api/courses/[courseId]/nodes/[nodeId]/bookmark/route.ts",
+      "backendFile": "backend/Learning Engine/routes/courses/[courseId]/nodes/[nodeId]/bookmark/route.ts",
+      "methods": [
+        "POST",
+        "DELETE"
+      ],
+      "dynamic": true
+    },
+    {
+      "path": "/api/courses/[courseId]/nodes/[nodeId]/progress/complete",
+      "frontendFile": "frontend/app/api/courses/[courseId]/nodes/[nodeId]/progress/complete/route.ts",
+      "backendFile": "backend/Learning Engine/routes/courses/[courseId]/nodes/[nodeId]/progress/complete/route.ts",
+      "methods": [
+        "POST",
+        "DELETE"
+      ],
+      "dynamic": true
+    },
+    {
+      "path": "/api/courses/[courseId]/nodes/[nodeId]/progress/visit",
+      "frontendFile": "frontend/app/api/courses/[courseId]/nodes/[nodeId]/progress/visit/route.ts",
+      "backendFile": "backend/Learning Engine/routes/courses/[courseId]/nodes/[nodeId]/progress/visit/route.ts",
+      "methods": [
+        "POST"
+      ],
+      "dynamic": true
+    },
+    {
+      "path": "/api/courses/[courseId]/premium/order",
+      "frontendFile": "frontend/app/api/courses/[courseId]/premium/order/route.ts",
+      "backendFile": "backend/Payments, Admin & Trust/routes/courses/[courseId]/premium/order/route.ts",
+      "methods": [
+        "POST"
+      ],
+      "dynamic": true
+    },
+    {
+      "path": "/api/courses/[courseId]/premium/verify",
+      "frontendFile": "frontend/app/api/courses/[courseId]/premium/verify/route.ts",
+      "backendFile": "backend/Payments, Admin & Trust/routes/courses/[courseId]/premium/verify/route.ts",
+      "methods": [
+        "POST"
+      ],
+      "dynamic": true
+    },
+    {
+      "path": "/api/courses/[courseId]/pricing-plans",
+      "frontendFile": "frontend/app/api/courses/[courseId]/pricing-plans/route.ts",
+      "backendFile": "backend/Learner and Creator Product/routes/courses/[courseId]/pricing-plans/route.ts",
+      "methods": [
+        "GET"
+      ],
+      "dynamic": true
+    },
+    {
+      "path": "/api/courses/[courseId]/quiz-attempts",
+      "frontendFile": "frontend/app/api/courses/[courseId]/quiz-attempts/route.ts",
+      "backendFile": "backend/Learning Engine/routes/courses/[courseId]/quiz-attempts/route.ts",
+      "methods": [
+        "POST"
+      ],
+      "dynamic": true
+    },
+    {
+      "path": "/api/courses/[courseId]/reviews",
+      "frontendFile": "frontend/app/api/courses/[courseId]/reviews/route.ts",
+      "backendFile": "backend/Data, Growth & Experience/routes/courses/[courseId]/reviews/route.ts",
+      "methods": [
+        "GET"
+      ],
+      "dynamic": true
+    },
+    {
+      "path": "/api/courses/[courseId]/reviews/me",
+      "frontendFile": "frontend/app/api/courses/[courseId]/reviews/me/route.ts",
+      "backendFile": "backend/Data, Growth & Experience/routes/courses/[courseId]/reviews/me/route.ts",
+      "methods": [
+        "PUT"
+      ],
+      "dynamic": true
+    },
+    {
+      "path": "/api/courses/reviews/[reviewId]",
+      "frontendFile": "frontend/app/api/courses/reviews/[reviewId]/route.ts",
+      "backendFile": "backend/Data, Growth & Experience/routes/courses/reviews/[reviewId]/route.ts",
+      "methods": [
+        "DELETE"
+      ],
+      "dynamic": true
+    },
+    {
+      "path": "/api/creator/collaboration-requests",
+      "frontendFile": "frontend/app/api/creator/collaboration-requests/route.ts",
+      "backendFile": "backend/Learner and Creator Product/routes/creator/collaboration-requests/route.ts",
+      "methods": [
+        "GET"
+      ],
+      "dynamic": false
+    },
+    {
+      "path": "/api/creator/collaboration-requests/[inviteId]/accept",
+      "frontendFile": "frontend/app/api/creator/collaboration-requests/[inviteId]/accept/route.ts",
+      "backendFile": "backend/Learner and Creator Product/routes/creator/collaboration-requests/[inviteId]/accept/route.ts",
+      "methods": [
+        "POST"
+      ],
+      "dynamic": true
+    },
+    {
+      "path": "/api/creator/collaboration-requests/[inviteId]/decline",
+      "frontendFile": "frontend/app/api/creator/collaboration-requests/[inviteId]/decline/route.ts",
+      "backendFile": "backend/Learner and Creator Product/routes/creator/collaboration-requests/[inviteId]/decline/route.ts",
+      "methods": [
+        "POST"
+      ],
+      "dynamic": true
+    },
+    {
+      "path": "/api/creator/collaborator-search",
+      "frontendFile": "frontend/app/api/creator/collaborator-search/route.ts",
+      "backendFile": "backend/Data, Growth & Experience/routes/creator/collaborator-search/route.ts",
+      "methods": [
+        "GET"
+      ],
+      "dynamic": false
+    },
+    {
+      "path": "/api/creator/courses",
+      "frontendFile": "frontend/app/api/creator/courses/route.ts",
+      "backendFile": "backend/Learner and Creator Product/routes/creator/courses/route.ts",
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "dynamic": false
+    },
+    {
+      "path": "/api/creator/courses/[courseId]",
+      "frontendFile": "frontend/app/api/creator/courses/[courseId]/route.ts",
+      "backendFile": "backend/Learner and Creator Product/routes/creator/courses/[courseId]/route.ts",
+      "methods": [
+        "GET",
+        "PATCH"
+      ],
+      "dynamic": true
+    },
+    {
+      "path": "/api/creator/courses/[courseId]/certificate-settings",
+      "frontendFile": "frontend/app/api/creator/courses/[courseId]/certificate-settings/route.ts",
+      "backendFile": "backend/Learning Engine/routes/creator/courses/[courseId]/certificate-settings/route.ts",
+      "methods": [
+        "GET",
+        "PUT"
+      ],
+      "dynamic": true
+    },
+    {
+      "path": "/api/creator/courses/[courseId]/collaborators",
+      "frontendFile": "frontend/app/api/creator/courses/[courseId]/collaborators/route.ts",
+      "backendFile": "backend/Learner and Creator Product/routes/creator/courses/[courseId]/collaborators/route.ts",
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "dynamic": true
+    },
+    {
+      "path": "/api/creator/courses/[courseId]/collaborators/[collaboratorUserId]",
+      "frontendFile": "frontend/app/api/creator/courses/[courseId]/collaborators/[collaboratorUserId]/route.ts",
+      "backendFile": "backend/Learner and Creator Product/routes/creator/courses/[courseId]/collaborators/[collaboratorUserId]/route.ts",
+      "methods": [
+        "DELETE"
+      ],
+      "dynamic": true
+    },
+    {
+      "path": "/api/creator/courses/[courseId]/collaborators/invites/[inviteId]",
+      "frontendFile": "frontend/app/api/creator/courses/[courseId]/collaborators/invites/[inviteId]/route.ts",
+      "backendFile": "backend/Learner and Creator Product/routes/creator/courses/[courseId]/collaborators/invites/[inviteId]/route.ts",
+      "methods": [
+        "DELETE"
+      ],
+      "dynamic": true
+    },
+    {
+      "path": "/api/creator/courses/[courseId]/modules",
+      "frontendFile": "frontend/app/api/creator/courses/[courseId]/modules/route.ts",
+      "backendFile": "backend/Learner and Creator Product/routes/creator/courses/[courseId]/modules/route.ts",
+      "methods": [
+        "POST"
+      ],
+      "dynamic": true
+    },
+    {
+      "path": "/api/creator/courses/[courseId]/modules/reorder",
+      "frontendFile": "frontend/app/api/creator/courses/[courseId]/modules/reorder/route.ts",
+      "backendFile": "backend/Learner and Creator Product/routes/creator/courses/[courseId]/modules/reorder/route.ts",
+      "methods": [
+        "POST"
+      ],
+      "dynamic": true
+    },
+    {
+      "path": "/api/creator/courses/[courseId]/pricing-plans",
+      "frontendFile": "frontend/app/api/creator/courses/[courseId]/pricing-plans/route.ts",
+      "backendFile": "backend/Learner and Creator Product/routes/creator/courses/[courseId]/pricing-plans/route.ts",
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "dynamic": true
+    },
+    {
+      "path": "/api/creator/courses/[courseId]/pricing-plans/[planId]",
+      "frontendFile": "frontend/app/api/creator/courses/[courseId]/pricing-plans/[planId]/route.ts",
+      "backendFile": "backend/Learner and Creator Product/routes/creator/courses/[courseId]/pricing-plans/[planId]/route.ts",
+      "methods": [
+        "PATCH",
+        "DELETE"
+      ],
+      "dynamic": true
+    },
+    {
+      "path": "/api/creator/learner-doubts",
+      "frontendFile": "frontend/app/api/creator/learner-doubts/route.ts",
+      "backendFile": "backend/Learner and Creator Product/routes/creator/learner-doubts/route.ts",
+      "methods": [
+        "GET"
+      ],
+      "dynamic": false
+    },
+    {
+      "path": "/api/creator/learner-doubts/[commentId]",
+      "frontendFile": "frontend/app/api/creator/learner-doubts/[commentId]/route.ts",
+      "backendFile": "backend/Learner and Creator Product/routes/creator/learner-doubts/[commentId]/route.ts",
+      "methods": [
+        "GET"
+      ],
+      "dynamic": true
+    },
+    {
+      "path": "/api/creator/modules/[moduleId]",
+      "frontendFile": "frontend/app/api/creator/modules/[moduleId]/route.ts",
+      "backendFile": "backend/Learner and Creator Product/routes/creator/modules/[moduleId]/route.ts",
+      "methods": [
+        "PATCH",
+        "DELETE"
+      ],
+      "dynamic": true
+    },
+    {
+      "path": "/api/creator/modules/[moduleId]/nodes",
+      "frontendFile": "frontend/app/api/creator/modules/[moduleId]/nodes/route.ts",
+      "backendFile": "backend/Learning Engine/routes/creator/modules/[moduleId]/nodes/route.ts",
+      "methods": [
+        "POST"
+      ],
+      "dynamic": true
+    },
+    {
+      "path": "/api/creator/modules/[moduleId]/nodes/reorder",
+      "frontendFile": "frontend/app/api/creator/modules/[moduleId]/nodes/reorder/route.ts",
+      "backendFile": "backend/Learning Engine/routes/creator/modules/[moduleId]/nodes/reorder/route.ts",
+      "methods": [
+        "POST"
+      ],
+      "dynamic": true
+    },
+    {
+      "path": "/api/creator/nodes/[nodeId]",
+      "frontendFile": "frontend/app/api/creator/nodes/[nodeId]/route.ts",
+      "backendFile": "backend/Learning Engine/routes/creator/nodes/[nodeId]/route.ts",
+      "methods": [
+        "PATCH",
+        "DELETE"
+      ],
+      "dynamic": true
+    },
+    {
+      "path": "/api/creator/payout-profile",
+      "frontendFile": "frontend/app/api/creator/payout-profile/route.ts",
+      "backendFile": "backend/Payments, Admin & Trust/routes/creator/payout-profile/route.ts",
+      "methods": [
+        "POST"
+      ],
+      "dynamic": false
+    },
+    {
+      "path": "/api/creator/withdrawals",
+      "frontendFile": "frontend/app/api/creator/withdrawals/route.ts",
+      "backendFile": "backend/Payments, Admin & Trust/routes/creator/withdrawals/route.ts",
+      "methods": [
+        "POST"
+      ],
+      "dynamic": false
+    },
+    {
+      "path": "/api/creators/[creatorId]/follow",
+      "frontendFile": "frontend/app/api/creators/[creatorId]/follow/route.ts",
+      "backendFile": "backend/Data, Growth & Experience/routes/creators/[creatorId]/follow/route.ts",
+      "methods": [
+        "POST",
+        "DELETE"
+      ],
+      "dynamic": true
+    },
+    {
+      "path": "/api/discussions/comments/[commentId]",
+      "frontendFile": "frontend/app/api/discussions/comments/[commentId]/route.ts",
+      "backendFile": "backend/Learning Engine/routes/discussions/comments/[commentId]/route.ts",
+      "methods": [
+        "PATCH",
+        "DELETE"
+      ],
+      "dynamic": true
+    },
+    {
+      "path": "/api/discussions/comments/[commentId]/likes/toggle",
+      "frontendFile": "frontend/app/api/discussions/comments/[commentId]/likes/toggle/route.ts",
+      "backendFile": "backend/Learning Engine/routes/discussions/comments/[commentId]/likes/toggle/route.ts",
+      "methods": [
+        "POST"
+      ],
+      "dynamic": true
+    },
+    {
+      "path": "/api/discussions/comments/[commentId]/reopen",
+      "frontendFile": "frontend/app/api/discussions/comments/[commentId]/reopen/route.ts",
+      "backendFile": "backend/Learning Engine/routes/discussions/comments/[commentId]/reopen/route.ts",
+      "methods": [
+        "POST"
+      ],
+      "dynamic": true
+    },
+    {
+      "path": "/api/discussions/comments/[commentId]/resolve",
+      "frontendFile": "frontend/app/api/discussions/comments/[commentId]/resolve/route.ts",
+      "backendFile": "backend/Learning Engine/routes/discussions/comments/[commentId]/resolve/route.ts",
+      "methods": [
+        "POST"
+      ],
+      "dynamic": true
+    },
+    {
+      "path": "/api/latex/preview",
+      "frontendFile": "frontend/app/api/latex/preview/route.ts",
+      "backendFile": "backend/Learning Engine/routes/latex/preview/route.ts",
+      "methods": [
+        "POST"
+      ],
+      "dynamic": false
+    },
+    {
+      "path": "/api/latex/preview/[previewKey]",
+      "frontendFile": "frontend/app/api/latex/preview/[previewKey]/route.ts",
+      "backendFile": "backend/Learning Engine/routes/latex/preview/[previewKey]/route.ts",
+      "methods": [
+        "GET"
+      ],
+      "dynamic": true
+    },
+    {
+      "path": "/api/nodes/[nodeId]/discussions/comments",
+      "frontendFile": "frontend/app/api/nodes/[nodeId]/discussions/comments/route.ts",
+      "backendFile": "backend/Learning Engine/routes/nodes/[nodeId]/discussions/comments/route.ts",
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "dynamic": true
+    },
+    {
+      "path": "/api/payments/razorpay/webhook",
+      "frontendFile": "frontend/app/api/payments/razorpay/webhook/route.ts",
+      "backendFile": "backend/Payments, Admin & Trust/routes/payments/razorpay/webhook/route.ts",
+      "methods": [
+        "POST"
+      ],
+      "dynamic": false
+    },
+    {
+      "path": "/api/payments/razorpayx/webhook",
+      "frontendFile": "frontend/app/api/payments/razorpayx/webhook/route.ts",
+      "backendFile": "backend/Payments, Admin & Trust/routes/payments/razorpayx/webhook/route.ts",
+      "methods": [
+        "POST"
+      ],
+      "dynamic": false
+    },
+    {
+      "path": "/api/premium/purchases/[purchaseId]/resume",
+      "frontendFile": "frontend/app/api/premium/purchases/[purchaseId]/resume/route.ts",
+      "backendFile": "backend/Payments, Admin & Trust/routes/premium/purchases/[purchaseId]/resume/route.ts",
+      "methods": [
+        "POST"
+      ],
+      "dynamic": true
+    },
+    {
+      "path": "/api/profile",
+      "frontendFile": "frontend/app/api/profile/route.ts",
+      "backendFile": "backend/Learner and Creator Product/routes/profile/route.ts",
+      "methods": [
+        "GET",
+        "PATCH"
+      ],
+      "dynamic": false
+    },
+    {
+      "path": "/api/support/threads",
+      "frontendFile": "frontend/app/api/support/threads/route.ts",
+      "backendFile": "backend/Data, Growth & Experience/routes/support/threads/route.ts",
+      "methods": [
+        "POST"
+      ],
+      "dynamic": false
+    },
+    {
+      "path": "/api/support/threads/[threadId]/messages",
+      "frontendFile": "frontend/app/api/support/threads/[threadId]/messages/route.ts",
+      "backendFile": "backend/Data, Growth & Experience/routes/support/threads/[threadId]/messages/route.ts",
+      "methods": [
+        "POST"
+      ],
+      "dynamic": true
+    },
+    {
+      "path": "/api/support/threads/[threadId]/messages/[messageId]",
+      "frontendFile": "frontend/app/api/support/threads/[threadId]/messages/[messageId]/route.ts",
+      "backendFile": "backend/Data, Growth & Experience/routes/support/threads/[threadId]/messages/[messageId]/route.ts",
+      "methods": [
+        "PATCH",
+        "DELETE"
+      ],
+      "dynamic": true
+    },
+    {
+      "path": "/api/support/threads/[threadId]/status",
+      "frontendFile": "frontend/app/api/support/threads/[threadId]/status/route.ts",
+      "backendFile": "backend/Data, Growth & Experience/routes/support/threads/[threadId]/status/route.ts",
+      "methods": [
+        "PATCH"
+      ],
+      "dynamic": true
+    },
+    {
+      "path": "/api/theme",
+      "frontendFile": "frontend/app/api/theme/route.ts",
+      "backendFile": "backend/Learner and Creator Product/routes/theme/route.ts",
+      "methods": [
+        "POST"
+      ],
+      "dynamic": false
+    }
+  ],
+  "results": [
+    {
+      "name": "Admin sign-in endpoint should issue session cookies",
+      "method": "POST",
+      "path": "/api/auth/signin",
+      "expectedStatuses": [
+        200,
+        400,
+        401,
+        403
+      ],
+      "body": {
+        "email": "admin@cs-ranger.local",
+        "password": "AdminPass123!",
+        "next": "/admin"
+      },
+      "skipBodyEnvReplacement": false,
+      "notes": "The runner performs admin login separately too. This endpoint is listed so the report always shows auth health.",
+      "url": "http://localhost:3000/api/auth/signin",
+      "status": 200,
+      "ok": true,
+      "skipped": false,
+      "durationMs": 439,
+      "responsePreview": "{\"redirectTo\":\"/admin\"}"
+    },
+    {
+      "name": "Theme preference update should not break UI",
+      "method": "POST",
+      "path": "/api/theme",
+      "expectedStatuses": [
+        200,
+        400,
+        401,
+        403
+      ],
+      "requiresAuth": true,
+      "body": {
+        "themeMode": "dark"
+      },
+      "notes": "Frontend catches failures, but backend should still return a controlled JSON response.",
+      "url": "http://localhost:3000/api/theme",
+      "status": 200,
+      "ok": true,
+      "skipped": false,
+      "durationMs": 1138,
+      "responsePreview": "{\"themeMode\":\"dark\",\"persisted\":true}"
+    },
+    {
+      "name": "Public course listing",
+      "method": "GET",
+      "path": "/api/courses",
+      "expectedStatuses": [
+        200,
+        401,
+        403
+      ],
+      "notes": "Frequent read API; v22 wraps it in local TTL cache.",
+      "url": "http://localhost:3000/api/courses",
+      "status": 200,
+      "ok": true,
+      "skipped": false,
+      "durationMs": 1960,
+      "responsePreview": "{\"courses\":[{\"id\":\"c9c9f690-c169-4ace-8b2a-1c256163bc6e\",\"creatorUserId\":\"8d77f06f-8735-4932-9dca-7eca0e006c32\",\"title\":\"Reinforcement Learning\",\"slug\":\"reinforcement-learning\",\"description\":\"A course for those who are beginner in Reinforcement Learning\",\"imageUrl\":null,\"courseDomainId\":null,\"priceAmount\":0,\"premiumEnabled\":false,\"premiumAccessDays\":null,\"premiumUpdatedAt\":\"2026-04-19T22:57:27.677+00:00\",\"status\":\"published\",\"createdAt\":\"2026-04-19T22:37:44.501472+00:00\",\"updatedAt\":\"2026-04-19T..."
+    },
+    {
+      "name": "Profile should work for signed-in admin",
+      "method": "GET",
+      "path": "/api/profile",
+      "expectedStatuses": [
+        200
+      ],
+      "requiresAuth": true,
+      "url": "http://localhost:3000/api/profile",
+      "status": 200,
+      "ok": true,
+      "skipped": false,
+      "durationMs": 644,
+      "responsePreview": "{\"viewer\":{\"id\":\"adcf1ed2-0a49-4872-9e13-693da9b007ef\",\"email\":\"admin@cs-ranger.local\",\"fullName\":\"CS Ranger Test Admin\",\"username\":\"admin_tester\",\"primaryRole\":\"creator\",\"themeMode\":\"dark\",\"profilePhotoUrl\":null,\"bio\":null,\"isAdmin\":true,\"isBanned\":false}}"
+    },
+    {
+      "name": "Creator courses should work for signed-in admin creator profile",
+      "method": "GET",
+      "path": "/api/creator/courses",
+      "expectedStatuses": [
+        200
+      ],
+      "requiresAuth": true,
+      "url": "http://localhost:3000/api/creator/courses",
+      "status": 200,
+      "ok": true,
+      "skipped": false,
+      "durationMs": 797,
+      "responsePreview": "{\"courses\":[]}"
+    },
+    {
+      "name": "Admin overview should work for signed-in admin",
+      "method": "GET",
+      "path": "/api/admin/moderation",
+      "expectedStatuses": [
+        200,
+        400,
+        404
+      ],
+      "requiresAuth": true,
+      "requiresAdmin": true,
+      "url": "http://localhost:3000/api/admin/moderation",
+      "status": 405,
+      "ok": false,
+      "skipped": false,
+      "durationMs": 233,
+      "responsePreview": ""
+    },
+    {
+      "name": "Admin finance settings should work for signed-in admin",
+      "method": "GET",
+      "path": "/api/admin/finance/settings",
+      "expectedStatuses": [
+        200
+      ],
+      "requiresAuth": true,
+      "requiresAdmin": true,
+      "url": "http://localhost:3000/api/admin/finance/settings",
+      "status": 405,
+      "ok": false,
+      "skipped": false,
+      "durationMs": 183,
+      "responsePreview": ""
+    },
+    {
+      "name": "Admin broadcasts should work for signed-in admin",
+      "method": "GET",
+      "path": "/api/admin/broadcasts",
+      "expectedStatuses": [
+        200
+      ],
+      "requiresAuth": true,
+      "requiresAdmin": true,
+      "url": "http://localhost:3000/api/admin/broadcasts",
+      "status": 405,
+      "ok": false,
+      "skipped": false,
+      "durationMs": 179,
+      "responsePreview": ""
+    },
+    {
+      "name": "Admin support messages should work for signed-in admin",
+      "method": "GET",
+      "path": "/api/admin/messages",
+      "expectedStatuses": [
+        200
+      ],
+      "requiresAuth": true,
+      "requiresAdmin": true,
+      "url": "http://localhost:3000/api/admin/messages",
+      "status": 405,
+      "ok": false,
+      "skipped": false,
+      "durationMs": 185,
+      "responsePreview": ""
+    },
+    {
+      "name": "Admin intro card should work for signed-in admin",
+      "method": "GET",
+      "path": "/api/admin/intro-card",
+      "expectedStatuses": [
+        200,
+        404
+      ],
+      "requiresAuth": true,
+      "requiresAdmin": true,
+      "url": "http://localhost:3000/api/admin/intro-card",
+      "status": 405,
+      "ok": false,
+      "skipped": false,
+      "durationMs": 188,
+      "responsePreview": ""
+    },
+    {
+      "name": "Admin payouts should work for signed-in admin",
+      "method": "GET",
+      "path": "/api/admin/payouts",
+      "expectedStatuses": [
+        200
+      ],
+      "requiresAuth": true,
+      "requiresAdmin": true,
+      "url": "http://localhost:3000/api/admin/payouts",
+      "status": 405,
+      "ok": false,
+      "skipped": false,
+      "durationMs": 189,
+      "responsePreview": ""
+    },
+    {
+      "name": "Discovered GET /api/auth/callback",
+      "method": "GET",
+      "path": "/api/auth/callback",
+      "expectedStatuses": [
+        200,
+        201,
+        204,
+        400,
+        401,
+        403,
+        404,
+        405
+      ],
+      "requiresAuth": false,
+      "requiresAdmin": false,
+      "notes": "Auto-discovered from backend/Learner and Creator Product/routes/auth/callback/route.ts",
+      "key": "GET /api/auth/callback",
+      "url": "http://localhost:3000/api/auth/callback",
+      "status": 307,
+      "ok": false,
+      "skipped": false,
+      "durationMs": 215,
+      "responsePreview": ""
+    },
+    {
+      "name": "Discovered GET /api/auth/oauth/google",
+      "method": "GET",
+      "path": "/api/auth/oauth/google",
+      "expectedStatuses": [
+        200,
+        201,
+        204,
+        400,
+        401,
+        403,
+        404,
+        405
+      ],
+      "requiresAuth": false,
+      "requiresAdmin": false,
+      "notes": "Auto-discovered from backend/Learner and Creator Product/routes/auth/oauth/google/route.ts",
+      "key": "GET /api/auth/oauth/google",
+      "url": "http://localhost:3000/api/auth/oauth/google",
+      "status": 307,
+      "ok": false,
+      "skipped": false,
+      "durationMs": 200,
+      "responsePreview": ""
+    },
+    {
+      "name": "Discovered GET /api/creator/collaboration-requests",
+      "method": "GET",
+      "path": "/api/creator/collaboration-requests",
+      "expectedStatuses": [
+        200,
+        201,
+        204,
+        400,
+        401,
+        403,
+        404,
+        405
+      ],
+      "requiresAuth": false,
+      "requiresAdmin": false,
+      "notes": "Auto-discovered from backend/Learner and Creator Product/routes/creator/collaboration-requests/route.ts",
+      "key": "GET /api/creator/collaboration-requests",
+      "url": "http://localhost:3000/api/creator/collaboration-requests",
+      "status": 200,
+      "ok": true,
+      "skipped": false,
+      "durationMs": 1725,
+      "responsePreview": "{\"invites\":[]}"
+    },
+    {
+      "name": "Discovered GET /api/creator/collaborator-search",
+      "method": "GET",
+      "path": "/api/creator/collaborator-search",
+      "expectedStatuses": [
+        200,
+        201,
+        204,
+        400,
+        401,
+        403,
+        404,
+        405
+      ],
+      "requiresAuth": false,
+      "requiresAdmin": false,
+      "notes": "Auto-discovered from backend/Data, Growth & Experience/routes/creator/collaborator-search/route.ts",
+      "key": "GET /api/creator/collaborator-search",
+      "url": "http://localhost:3000/api/creator/collaborator-search",
+      "status": 200,
+      "ok": true,
+      "skipped": false,
+      "durationMs": 781,
+      "responsePreview": "{\"creators\":[]}"
+    },
+    {
+      "name": "Discovered GET /api/creator/learner-doubts",
+      "method": "GET",
+      "path": "/api/creator/learner-doubts",
+      "expectedStatuses": [
+        200,
+        201,
+        204,
+        400,
+        401,
+        403,
+        404,
+        405
+      ],
+      "requiresAuth": false,
+      "requiresAdmin": false,
+      "notes": "Auto-discovered from backend/Learner and Creator Product/routes/creator/learner-doubts/route.ts",
+      "key": "GET /api/creator/learner-doubts",
+      "url": "http://localhost:3000/api/creator/learner-doubts",
+      "status": 200,
+      "ok": true,
+      "skipped": false,
+      "durationMs": 863,
+      "responsePreview": "{\"doubts\":[]}"
+    },
+    {
+      "name": "Discovered POST /api/admin/broadcasts",
+      "method": "POST",
+      "path": "/api/admin/broadcasts",
+      "expectedStatuses": [
+        200,
+        201,
+        204,
+        400,
+        401,
+        403,
+        404,
+        405
+      ],
+      "requiresAuth": true,
+      "requiresAdmin": true,
+      "notes": "Safe mode skips auto-discovered mutating API. Add it to api-endpoints.json if you intentionally want to test it. Source: backend/Payments, Admin & Trust/routes/admin/broadcasts/route.ts",
+      "key": "POST /api/admin/broadcasts",
+      "skipped": true,
+      "ok": true,
+      "status": null,
+      "durationMs": 0
+    },
+    {
+      "name": "Discovered POST /api/admin/bulk-payouts",
+      "method": "POST",
+      "path": "/api/admin/bulk-payouts",
+      "expectedStatuses": [
+        200,
+        201,
+        204,
+        400,
+        401,
+        403,
+        404,
+        405
+      ],
+      "requiresAuth": true,
+      "requiresAdmin": true,
+      "notes": "Safe mode skips auto-discovered mutating API. Add it to api-endpoints.json if you intentionally want to test it. Source: backend/Payments, Admin & Trust/routes/admin/bulk-payouts/route.ts",
+      "key": "POST /api/admin/bulk-payouts",
+      "skipped": true,
+      "ok": true,
+      "status": null,
+      "durationMs": 0
+    },
+    {
+      "name": "Discovered PATCH /api/admin/finance/settings",
+      "method": "PATCH",
+      "path": "/api/admin/finance/settings",
+      "expectedStatuses": [
+        200,
+        201,
+        204,
+        400,
+        401,
+        403,
+        404,
+        405
+      ],
+      "requiresAuth": true,
+      "requiresAdmin": true,
+      "notes": "Safe mode skips auto-discovered mutating API. Add it to api-endpoints.json if you intentionally want to test it. Source: backend/Payments, Admin & Trust/routes/admin/finance/settings/route.ts",
+      "key": "PATCH /api/admin/finance/settings",
+      "skipped": true,
+      "ok": true,
+      "status": null,
+      "durationMs": 0
+    },
+    {
+      "name": "Discovered POST /api/admin/intro-card",
+      "method": "POST",
+      "path": "/api/admin/intro-card",
+      "expectedStatuses": [
+        200,
+        201,
+        204,
+        400,
+        401,
+        403,
+        404,
+        405
+      ],
+      "requiresAuth": true,
+      "requiresAdmin": true,
+      "notes": "Safe mode skips auto-discovered mutating API. Add it to api-endpoints.json if you intentionally want to test it. Source: backend/Payments, Admin & Trust/routes/admin/intro-card/route.ts",
+      "key": "POST /api/admin/intro-card",
+      "skipped": true,
+      "ok": true,
+      "status": null,
+      "durationMs": 0
+    },
+    {
+      "name": "Discovered POST /api/admin/messages",
+      "method": "POST",
+      "path": "/api/admin/messages",
+      "expectedStatuses": [
+        200,
+        201,
+        204,
+        400,
+        401,
+        403,
+        404,
+        405
+      ],
+      "requiresAuth": true,
+      "requiresAdmin": true,
+      "notes": "Safe mode skips auto-discovered mutating API. Add it to api-endpoints.json if you intentionally want to test it. Source: backend/Payments, Admin & Trust/routes/admin/messages/route.ts",
+      "key": "POST /api/admin/messages",
+      "skipped": true,
+      "ok": true,
+      "status": null,
+      "durationMs": 0
+    },
+    {
+      "name": "Dynamic route needs sample params: PATCH /api/admin/messages/[messageId]",
+      "method": "PATCH",
+      "path": "/api/admin/messages/[messageId]",
+      "expectedStatuses": [],
+      "skipped": true,
+      "ok": true,
+      "status": null,
+      "durationMs": 0,
+      "notes": "Provide env vars like API_TEST_PARAM_courseId to test this route. Source: backend/Payments, Admin & Trust/routes/admin/messages/[messageId]/route.ts"
+    },
+    {
+      "name": "Discovered POST /api/admin/moderation",
+      "method": "POST",
+      "path": "/api/admin/moderation",
+      "expectedStatuses": [
+        200,
+        201,
+        204,
+        400,
+        401,
+        403,
+        404,
+        405
+      ],
+      "requiresAuth": true,
+      "requiresAdmin": true,
+      "notes": "Safe mode skips auto-discovered mutating API. Add it to api-endpoints.json if you intentionally want to test it. Source: backend/Payments, Admin & Trust/routes/admin/moderation/route.ts",
+      "key": "POST /api/admin/moderation",
+      "skipped": true,
+      "ok": true,
+      "status": null,
+      "durationMs": 0
+    },
+    {
+      "name": "Discovered POST /api/admin/payouts",
+      "method": "POST",
+      "path": "/api/admin/payouts",
+      "expectedStatuses": [
+        200,
+        201,
+        204,
+        400,
+        401,
+        403,
+        404,
+        405
+      ],
+      "requiresAuth": true,
+      "requiresAdmin": true,
+      "notes": "Safe mode skips auto-discovered mutating API. Add it to api-endpoints.json if you intentionally want to test it. Source: backend/Payments, Admin & Trust/routes/admin/payouts/route.ts",
+      "key": "POST /api/admin/payouts",
+      "skipped": true,
+      "ok": true,
+      "status": null,
+      "durationMs": 0
+    },
+    {
+      "name": "Dynamic route needs sample params: PATCH /api/admin/withdrawals/[withdrawalRequestId]",
+      "method": "PATCH",
+      "path": "/api/admin/withdrawals/[withdrawalRequestId]",
+      "expectedStatuses": [],
+      "skipped": true,
+      "ok": true,
+      "status": null,
+      "durationMs": 0,
+      "notes": "Provide env vars like API_TEST_PARAM_courseId to test this route. Source: backend/Payments, Admin & Trust/routes/admin/withdrawals/[withdrawalRequestId]/route.ts"
+    },
+    {
+      "name": "Discovered POST /api/auth/forgot-password",
+      "method": "POST",
+      "path": "/api/auth/forgot-password",
+      "expectedStatuses": [
+        200,
+        201,
+        204,
+        400,
+        401,
+        403,
+        404,
+        405
+      ],
+      "requiresAuth": false,
+      "requiresAdmin": false,
+      "notes": "Safe mode skips auto-discovered mutating API. Add it to api-endpoints.json if you intentionally want to test it. Source: backend/Learner and Creator Product/routes/auth/forgot-password/route.ts",
+      "key": "POST /api/auth/forgot-password",
+      "skipped": true,
+      "ok": true,
+      "status": null,
+      "durationMs": 0
+    },
+    {
+      "name": "Discovered POST /api/auth/reset-password",
+      "method": "POST",
+      "path": "/api/auth/reset-password",
+      "expectedStatuses": [
+        200,
+        201,
+        204,
+        400,
+        401,
+        403,
+        404,
+        405
+      ],
+      "requiresAuth": false,
+      "requiresAdmin": false,
+      "notes": "Safe mode skips auto-discovered mutating API. Add it to api-endpoints.json if you intentionally want to test it. Source: backend/Learner and Creator Product/routes/auth/reset-password/route.ts",
+      "key": "POST /api/auth/reset-password",
+      "skipped": true,
+      "ok": true,
+      "status": null,
+      "durationMs": 0
+    },
+    {
+      "name": "Discovered POST /api/auth/signout",
+      "method": "POST",
+      "path": "/api/auth/signout",
+      "expectedStatuses": [
+        200,
+        201,
+        204,
+        400,
+        401,
+        403,
+        404,
+        405
+      ],
+      "requiresAuth": false,
+      "requiresAdmin": false,
+      "notes": "Safe mode skips auto-discovered mutating API. Add it to api-endpoints.json if you intentionally want to test it. Source: backend/Learner and Creator Product/routes/auth/signout/route.ts",
+      "key": "POST /api/auth/signout",
+      "skipped": true,
+      "ok": true,
+      "status": null,
+      "durationMs": 0
+    },
+    {
+      "name": "Discovered POST /api/auth/signup",
+      "method": "POST",
+      "path": "/api/auth/signup",
+      "expectedStatuses": [
+        200,
+        201,
+        204,
+        400,
+        401,
+        403,
+        404,
+        405
+      ],
+      "requiresAuth": false,
+      "requiresAdmin": false,
+      "notes": "Safe mode skips auto-discovered mutating API. Add it to api-endpoints.json if you intentionally want to test it. Source: backend/Learner and Creator Product/routes/auth/signup/route.ts",
+      "key": "POST /api/auth/signup",
+      "skipped": true,
+      "ok": true,
+      "status": null,
+      "durationMs": 0
+    },
+    {
+      "name": "Dynamic route needs sample params: GET /api/courses/[courseId]",
+      "method": "GET",
+      "path": "/api/courses/[courseId]",
+      "expectedStatuses": [],
+      "skipped": true,
+      "ok": true,
+      "status": null,
+      "durationMs": 0,
+      "notes": "Provide env vars like API_TEST_PARAM_courseId to test this route. Source: backend/Learner and Creator Product/routes/courses/[courseId]/route.ts"
+    },
+    {
+      "name": "Dynamic route needs sample params: GET /api/courses/[courseId]/certificate",
+      "method": "GET",
+      "path": "/api/courses/[courseId]/certificate",
+      "expectedStatuses": [],
+      "skipped": true,
+      "ok": true,
+      "status": null,
+      "durationMs": 0,
+      "notes": "Provide env vars like API_TEST_PARAM_courseId to test this route. Source: backend/Learning Engine/routes/courses/[courseId]/certificate/route.ts"
+    },
+    {
+      "name": "Dynamic route needs sample params: POST /api/courses/[courseId]/certificate",
+      "method": "POST",
+      "path": "/api/courses/[courseId]/certificate",
+      "expectedStatuses": [],
+      "skipped": true,
+      "ok": true,
+      "status": null,
+      "durationMs": 0,
+      "notes": "Provide env vars like API_TEST_PARAM_courseId to test this route. Source: backend/Learning Engine/routes/courses/[courseId]/certificate/route.ts"
+    },
+    {
+      "name": "Dynamic route needs sample params: POST /api/courses/[courseId]/nodes/[nodeId]/bookmark",
+      "method": "POST",
+      "path": "/api/courses/[courseId]/nodes/[nodeId]/bookmark",
+      "expectedStatuses": [],
+      "skipped": true,
+      "ok": true,
+      "status": null,
+      "durationMs": 0,
+      "notes": "Provide env vars like API_TEST_PARAM_courseId to test this route. Source: backend/Learning Engine/routes/courses/[courseId]/nodes/[nodeId]/bookmark/route.ts"
+    },
+    {
+      "name": "Dynamic route needs sample params: DELETE /api/courses/[courseId]/nodes/[nodeId]/bookmark",
+      "method": "DELETE",
+      "path": "/api/courses/[courseId]/nodes/[nodeId]/bookmark",
+      "expectedStatuses": [],
+      "skipped": true,
+      "ok": true,
+      "status": null,
+      "durationMs": 0,
+      "notes": "Provide env vars like API_TEST_PARAM_courseId to test this route. Source: backend/Learning Engine/routes/courses/[courseId]/nodes/[nodeId]/bookmark/route.ts"
+    },
+    {
+      "name": "Dynamic route needs sample params: POST /api/courses/[courseId]/nodes/[nodeId]/progress/complete",
+      "method": "POST",
+      "path": "/api/courses/[courseId]/nodes/[nodeId]/progress/complete",
+      "expectedStatuses": [],
+      "skipped": true,
+      "ok": true,
+      "status": null,
+      "durationMs": 0,
+      "notes": "Provide env vars like API_TEST_PARAM_courseId to test this route. Source: backend/Learning Engine/routes/courses/[courseId]/nodes/[nodeId]/progress/complete/route.ts"
+    },
+    {
+      "name": "Dynamic route needs sample params: DELETE /api/courses/[courseId]/nodes/[nodeId]/progress/complete",
+      "method": "DELETE",
+      "path": "/api/courses/[courseId]/nodes/[nodeId]/progress/complete",
+      "expectedStatuses": [],
+      "skipped": true,
+      "ok": true,
+      "status": null,
+      "durationMs": 0,
+      "notes": "Provide env vars like API_TEST_PARAM_courseId to test this route. Source: backend/Learning Engine/routes/courses/[courseId]/nodes/[nodeId]/progress/complete/route.ts"
+    },
+    {
+      "name": "Dynamic route needs sample params: POST /api/courses/[courseId]/nodes/[nodeId]/progress/visit",
+      "method": "POST",
+      "path": "/api/courses/[courseId]/nodes/[nodeId]/progress/visit",
+      "expectedStatuses": [],
+      "skipped": true,
+      "ok": true,
+      "status": null,
+      "durationMs": 0,
+      "notes": "Provide env vars like API_TEST_PARAM_courseId to test this route. Source: backend/Learning Engine/routes/courses/[courseId]/nodes/[nodeId]/progress/visit/route.ts"
+    },
+    {
+      "name": "Dynamic route needs sample params: POST /api/courses/[courseId]/premium/order",
+      "method": "POST",
+      "path": "/api/courses/[courseId]/premium/order",
+      "expectedStatuses": [],
+      "skipped": true,
+      "ok": true,
+      "status": null,
+      "durationMs": 0,
+      "notes": "Provide env vars like API_TEST_PARAM_courseId to test this route. Source: backend/Payments, Admin & Trust/routes/courses/[courseId]/premium/order/route.ts"
+    },
+    {
+      "name": "Dynamic route needs sample params: POST /api/courses/[courseId]/premium/verify",
+      "method": "POST",
+      "path": "/api/courses/[courseId]/premium/verify",
+      "expectedStatuses": [],
+      "skipped": true,
+      "ok": true,
+      "status": null,
+      "durationMs": 0,
+      "notes": "Provide env vars like API_TEST_PARAM_courseId to test this route. Source: backend/Payments, Admin & Trust/routes/courses/[courseId]/premium/verify/route.ts"
+    },
+    {
+      "name": "Dynamic route needs sample params: GET /api/courses/[courseId]/pricing-plans",
+      "method": "GET",
+      "path": "/api/courses/[courseId]/pricing-plans",
+      "expectedStatuses": [],
+      "skipped": true,
+      "ok": true,
+      "status": null,
+      "durationMs": 0,
+      "notes": "Provide env vars like API_TEST_PARAM_courseId to test this route. Source: backend/Learner and Creator Product/routes/courses/[courseId]/pricing-plans/route.ts"
+    },
+    {
+      "name": "Dynamic route needs sample params: POST /api/courses/[courseId]/quiz-attempts",
+      "method": "POST",
+      "path": "/api/courses/[courseId]/quiz-attempts",
+      "expectedStatuses": [],
+      "skipped": true,
+      "ok": true,
+      "status": null,
+      "durationMs": 0,
+      "notes": "Provide env vars like API_TEST_PARAM_courseId to test this route. Source: backend/Learning Engine/routes/courses/[courseId]/quiz-attempts/route.ts"
+    },
+    {
+      "name": "Dynamic route needs sample params: GET /api/courses/[courseId]/reviews",
+      "method": "GET",
+      "path": "/api/courses/[courseId]/reviews",
+      "expectedStatuses": [],
+      "skipped": true,
+      "ok": true,
+      "status": null,
+      "durationMs": 0,
+      "notes": "Provide env vars like API_TEST_PARAM_courseId to test this route. Source: backend/Data, Growth & Experience/routes/courses/[courseId]/reviews/route.ts"
+    },
+    {
+      "name": "Dynamic route needs sample params: PUT /api/courses/[courseId]/reviews/me",
+      "method": "PUT",
+      "path": "/api/courses/[courseId]/reviews/me",
+      "expectedStatuses": [],
+      "skipped": true,
+      "ok": true,
+      "status": null,
+      "durationMs": 0,
+      "notes": "Provide env vars like API_TEST_PARAM_courseId to test this route. Source: backend/Data, Growth & Experience/routes/courses/[courseId]/reviews/me/route.ts"
+    },
+    {
+      "name": "Dynamic route needs sample params: DELETE /api/courses/reviews/[reviewId]",
+      "method": "DELETE",
+      "path": "/api/courses/reviews/[reviewId]",
+      "expectedStatuses": [],
+      "skipped": true,
+      "ok": true,
+      "status": null,
+      "durationMs": 0,
+      "notes": "Provide env vars like API_TEST_PARAM_courseId to test this route. Source: backend/Data, Growth & Experience/routes/courses/reviews/[reviewId]/route.ts"
+    },
+    {
+      "name": "Dynamic route needs sample params: POST /api/creator/collaboration-requests/[inviteId]/accept",
+      "method": "POST",
+      "path": "/api/creator/collaboration-requests/[inviteId]/accept",
+      "expectedStatuses": [],
+      "skipped": true,
+      "ok": true,
+      "status": null,
+      "durationMs": 0,
+      "notes": "Provide env vars like API_TEST_PARAM_courseId to test this route. Source: backend/Learner and Creator Product/routes/creator/collaboration-requests/[inviteId]/accept/route.ts"
+    },
+    {
+      "name": "Dynamic route needs sample params: POST /api/creator/collaboration-requests/[inviteId]/decline",
+      "method": "POST",
+      "path": "/api/creator/collaboration-requests/[inviteId]/decline",
+      "expectedStatuses": [],
+      "skipped": true,
+      "ok": true,
+      "status": null,
+      "durationMs": 0,
+      "notes": "Provide env vars like API_TEST_PARAM_courseId to test this route. Source: backend/Learner and Creator Product/routes/creator/collaboration-requests/[inviteId]/decline/route.ts"
+    },
+    {
+      "name": "Discovered POST /api/creator/courses",
+      "method": "POST",
+      "path": "/api/creator/courses",
+      "expectedStatuses": [
+        200,
+        201,
+        204,
+        400,
+        401,
+        403,
+        404,
+        405
+      ],
+      "requiresAuth": false,
+      "requiresAdmin": false,
+      "notes": "Safe mode skips auto-discovered mutating API. Add it to api-endpoints.json if you intentionally want to test it. Source: backend/Learner and Creator Product/routes/creator/courses/route.ts",
+      "key": "POST /api/creator/courses",
+      "skipped": true,
+      "ok": true,
+      "status": null,
+      "durationMs": 0
+    },
+    {
+      "name": "Dynamic route needs sample params: GET /api/creator/courses/[courseId]",
+      "method": "GET",
+      "path": "/api/creator/courses/[courseId]",
+      "expectedStatuses": [],
+      "skipped": true,
+      "ok": true,
+      "status": null,
+      "durationMs": 0,
+      "notes": "Provide env vars like API_TEST_PARAM_courseId to test this route. Source: backend/Learner and Creator Product/routes/creator/courses/[courseId]/route.ts"
+    },
+    {
+      "name": "Dynamic route needs sample params: PATCH /api/creator/courses/[courseId]",
+      "method": "PATCH",
+      "path": "/api/creator/courses/[courseId]",
+      "expectedStatuses": [],
+      "skipped": true,
+      "ok": true,
+      "status": null,
+      "durationMs": 0,
+      "notes": "Provide env vars like API_TEST_PARAM_courseId to test this route. Source: backend/Learner and Creator Product/routes/creator/courses/[courseId]/route.ts"
+    },
+    {
+      "name": "Dynamic route needs sample params: GET /api/creator/courses/[courseId]/certificate-settings",
+      "method": "GET",
+      "path": "/api/creator/courses/[courseId]/certificate-settings",
+      "expectedStatuses": [],
+      "skipped": true,
+      "ok": true,
+      "status": null,
+      "durationMs": 0,
+      "notes": "Provide env vars like API_TEST_PARAM_courseId to test this route. Source: backend/Learning Engine/routes/creator/courses/[courseId]/certificate-settings/route.ts"
+    },
+    {
+      "name": "Dynamic route needs sample params: PUT /api/creator/courses/[courseId]/certificate-settings",
+      "method": "PUT",
+      "path": "/api/creator/courses/[courseId]/certificate-settings",
+      "expectedStatuses": [],
+      "skipped": true,
+      "ok": true,
+      "status": null,
+      "durationMs": 0,
+      "notes": "Provide env vars like API_TEST_PARAM_courseId to test this route. Source: backend/Learning Engine/routes/creator/courses/[courseId]/certificate-settings/route.ts"
+    },
+    {
+      "name": "Dynamic route needs sample params: GET /api/creator/courses/[courseId]/collaborators",
+      "method": "GET",
+      "path": "/api/creator/courses/[courseId]/collaborators",
+      "expectedStatuses": [],
+      "skipped": true,
+      "ok": true,
+      "status": null,
+      "durationMs": 0,
+      "notes": "Provide env vars like API_TEST_PARAM_courseId to test this route. Source: backend/Learner and Creator Product/routes/creator/courses/[courseId]/collaborators/route.ts"
+    },
+    {
+      "name": "Dynamic route needs sample params: POST /api/creator/courses/[courseId]/collaborators",
+      "method": "POST",
+      "path": "/api/creator/courses/[courseId]/collaborators",
+      "expectedStatuses": [],
+      "skipped": true,
+      "ok": true,
+      "status": null,
+      "durationMs": 0,
+      "notes": "Provide env vars like API_TEST_PARAM_courseId to test this route. Source: backend/Learner and Creator Product/routes/creator/courses/[courseId]/collaborators/route.ts"
+    },
+    {
+      "name": "Dynamic route needs sample params: DELETE /api/creator/courses/[courseId]/collaborators/[collaboratorUserId]",
+      "method": "DELETE",
+      "path": "/api/creator/courses/[courseId]/collaborators/[collaboratorUserId]",
+      "expectedStatuses": [],
+      "skipped": true,
+      "ok": true,
+      "status": null,
+      "durationMs": 0,
+      "notes": "Provide env vars like API_TEST_PARAM_courseId to test this route. Source: backend/Learner and Creator Product/routes/creator/courses/[courseId]/collaborators/[collaboratorUserId]/route.ts"
+    },
+    {
+      "name": "Dynamic route needs sample params: DELETE /api/creator/courses/[courseId]/collaborators/invites/[inviteId]",
+      "method": "DELETE",
+      "path": "/api/creator/courses/[courseId]/collaborators/invites/[inviteId]",
+      "expectedStatuses": [],
+      "skipped": true,
+      "ok": true,
+      "status": null,
+      "durationMs": 0,
+      "notes": "Provide env vars like API_TEST_PARAM_courseId to test this route. Source: backend/Learner and Creator Product/routes/creator/courses/[courseId]/collaborators/invites/[inviteId]/route.ts"
+    },
+    {
+      "name": "Dynamic route needs sample params: POST /api/creator/courses/[courseId]/modules",
+      "method": "POST",
+      "path": "/api/creator/courses/[courseId]/modules",
+      "expectedStatuses": [],
+      "skipped": true,
+      "ok": true,
+      "status": null,
+      "durationMs": 0,
+      "notes": "Provide env vars like API_TEST_PARAM_courseId to test this route. Source: backend/Learner and Creator Product/routes/creator/courses/[courseId]/modules/route.ts"
+    },
+    {
+      "name": "Dynamic route needs sample params: POST /api/creator/courses/[courseId]/modules/reorder",
+      "method": "POST",
+      "path": "/api/creator/courses/[courseId]/modules/reorder",
+      "expectedStatuses": [],
+      "skipped": true,
+      "ok": true,
+      "status": null,
+      "durationMs": 0,
+      "notes": "Provide env vars like API_TEST_PARAM_courseId to test this route. Source: backend/Learner and Creator Product/routes/creator/courses/[courseId]/modules/reorder/route.ts"
+    },
+    {
+      "name": "Dynamic route needs sample params: GET /api/creator/courses/[courseId]/pricing-plans",
+      "method": "GET",
+      "path": "/api/creator/courses/[courseId]/pricing-plans",
+      "expectedStatuses": [],
+      "skipped": true,
+      "ok": true,
+      "status": null,
+      "durationMs": 0,
+      "notes": "Provide env vars like API_TEST_PARAM_courseId to test this route. Source: backend/Learner and Creator Product/routes/creator/courses/[courseId]/pricing-plans/route.ts"
+    },
+    {
+      "name": "Dynamic route needs sample params: POST /api/creator/courses/[courseId]/pricing-plans",
+      "method": "POST",
+      "path": "/api/creator/courses/[courseId]/pricing-plans",
+      "expectedStatuses": [],
+      "skipped": true,
+      "ok": true,
+      "status": null,
+      "durationMs": 0,
+      "notes": "Provide env vars like API_TEST_PARAM_courseId to test this route. Source: backend/Learner and Creator Product/routes/creator/courses/[courseId]/pricing-plans/route.ts"
+    },
+    {
+      "name": "Dynamic route needs sample params: PATCH /api/creator/courses/[courseId]/pricing-plans/[planId]",
+      "method": "PATCH",
+      "path": "/api/creator/courses/[courseId]/pricing-plans/[planId]",
+      "expectedStatuses": [],
+      "skipped": true,
+      "ok": true,
+      "status": null,
+      "durationMs": 0,
+      "notes": "Provide env vars like API_TEST_PARAM_courseId to test this route. Source: backend/Learner and Creator Product/routes/creator/courses/[courseId]/pricing-plans/[planId]/route.ts"
+    },
+    {
+      "name": "Dynamic route needs sample params: DELETE /api/creator/courses/[courseId]/pricing-plans/[planId]",
+      "method": "DELETE",
+      "path": "/api/creator/courses/[courseId]/pricing-plans/[planId]",
+      "expectedStatuses": [],
+      "skipped": true,
+      "ok": true,
+      "status": null,
+      "durationMs": 0,
+      "notes": "Provide env vars like API_TEST_PARAM_courseId to test this route. Source: backend/Learner and Creator Product/routes/creator/courses/[courseId]/pricing-plans/[planId]/route.ts"
+    },
+    {
+      "name": "Dynamic route needs sample params: GET /api/creator/learner-doubts/[commentId]",
+      "method": "GET",
+      "path": "/api/creator/learner-doubts/[commentId]",
+      "expectedStatuses": [],
+      "skipped": true,
+      "ok": true,
+      "status": null,
+      "durationMs": 0,
+      "notes": "Provide env vars like API_TEST_PARAM_courseId to test this route. Source: backend/Learner and Creator Product/routes/creator/learner-doubts/[commentId]/route.ts"
+    },
+    {
+      "name": "Dynamic route needs sample params: PATCH /api/creator/modules/[moduleId]",
+      "method": "PATCH",
+      "path": "/api/creator/modules/[moduleId]",
+      "expectedStatuses": [],
+      "skipped": true,
+      "ok": true,
+      "status": null,
+      "durationMs": 0,
+      "notes": "Provide env vars like API_TEST_PARAM_courseId to test this route. Source: backend/Learner and Creator Product/routes/creator/modules/[moduleId]/route.ts"
+    },
+    {
+      "name": "Dynamic route needs sample params: DELETE /api/creator/modules/[moduleId]",
+      "method": "DELETE",
+      "path": "/api/creator/modules/[moduleId]",
+      "expectedStatuses": [],
+      "skipped": true,
+      "ok": true,
+      "status": null,
+      "durationMs": 0,
+      "notes": "Provide env vars like API_TEST_PARAM_courseId to test this route. Source: backend/Learner and Creator Product/routes/creator/modules/[moduleId]/route.ts"
+    },
+    {
+      "name": "Dynamic route needs sample params: POST /api/creator/modules/[moduleId]/nodes",
+      "method": "POST",
+      "path": "/api/creator/modules/[moduleId]/nodes",
+      "expectedStatuses": [],
+      "skipped": true,
+      "ok": true,
+      "status": null,
+      "durationMs": 0,
+      "notes": "Provide env vars like API_TEST_PARAM_courseId to test this route. Source: backend/Learning Engine/routes/creator/modules/[moduleId]/nodes/route.ts"
+    },
+    {
+      "name": "Dynamic route needs sample params: POST /api/creator/modules/[moduleId]/nodes/reorder",
+      "method": "POST",
+      "path": "/api/creator/modules/[moduleId]/nodes/reorder",
+      "expectedStatuses": [],
+      "skipped": true,
+      "ok": true,
+      "status": null,
+      "durationMs": 0,
+      "notes": "Provide env vars like API_TEST_PARAM_courseId to test this route. Source: backend/Learning Engine/routes/creator/modules/[moduleId]/nodes/reorder/route.ts"
+    },
+    {
+      "name": "Dynamic route needs sample params: PATCH /api/creator/nodes/[nodeId]",
+      "method": "PATCH",
+      "path": "/api/creator/nodes/[nodeId]",
+      "expectedStatuses": [],
+      "skipped": true,
+      "ok": true,
+      "status": null,
+      "durationMs": 0,
+      "notes": "Provide env vars like API_TEST_PARAM_courseId to test this route. Source: backend/Learning Engine/routes/creator/nodes/[nodeId]/route.ts"
+    },
+    {
+      "name": "Dynamic route needs sample params: DELETE /api/creator/nodes/[nodeId]",
+      "method": "DELETE",
+      "path": "/api/creator/nodes/[nodeId]",
+      "expectedStatuses": [],
+      "skipped": true,
+      "ok": true,
+      "status": null,
+      "durationMs": 0,
+      "notes": "Provide env vars like API_TEST_PARAM_courseId to test this route. Source: backend/Learning Engine/routes/creator/nodes/[nodeId]/route.ts"
+    },
+    {
+      "name": "Discovered POST /api/creator/payout-profile",
+      "method": "POST",
+      "path": "/api/creator/payout-profile",
+      "expectedStatuses": [
+        200,
+        201,
+        204,
+        400,
+        401,
+        403,
+        404,
+        405
+      ],
+      "requiresAuth": false,
+      "requiresAdmin": false,
+      "notes": "Safe mode skips auto-discovered mutating API. Add it to api-endpoints.json if you intentionally want to test it. Source: backend/Payments, Admin & Trust/routes/creator/payout-profile/route.ts",
+      "key": "POST /api/creator/payout-profile",
+      "skipped": true,
+      "ok": true,
+      "status": null,
+      "durationMs": 0
+    },
+    {
+      "name": "Discovered POST /api/creator/withdrawals",
+      "method": "POST",
+      "path": "/api/creator/withdrawals",
+      "expectedStatuses": [
+        200,
+        201,
+        204,
+        400,
+        401,
+        403,
+        404,
+        405
+      ],
+      "requiresAuth": false,
+      "requiresAdmin": false,
+      "notes": "Safe mode skips auto-discovered mutating API. Add it to api-endpoints.json if you intentionally want to test it. Source: backend/Payments, Admin & Trust/routes/creator/withdrawals/route.ts",
+      "key": "POST /api/creator/withdrawals",
+      "skipped": true,
+      "ok": true,
+      "status": null,
+      "durationMs": 0
+    },
+    {
+      "name": "Dynamic route needs sample params: POST /api/creators/[creatorId]/follow",
+      "method": "POST",
+      "path": "/api/creators/[creatorId]/follow",
+      "expectedStatuses": [],
+      "skipped": true,
+      "ok": true,
+      "status": null,
+      "durationMs": 0,
+      "notes": "Provide env vars like API_TEST_PARAM_courseId to test this route. Source: backend/Data, Growth & Experience/routes/creators/[creatorId]/follow/route.ts"
+    },
+    {
+      "name": "Dynamic route needs sample params: DELETE /api/creators/[creatorId]/follow",
+      "method": "DELETE",
+      "path": "/api/creators/[creatorId]/follow",
+      "expectedStatuses": [],
+      "skipped": true,
+      "ok": true,
+      "status": null,
+      "durationMs": 0,
+      "notes": "Provide env vars like API_TEST_PARAM_courseId to test this route. Source: backend/Data, Growth & Experience/routes/creators/[creatorId]/follow/route.ts"
+    },
+    {
+      "name": "Dynamic route needs sample params: PATCH /api/discussions/comments/[commentId]",
+      "method": "PATCH",
+      "path": "/api/discussions/comments/[commentId]",
+      "expectedStatuses": [],
+      "skipped": true,
+      "ok": true,
+      "status": null,
+      "durationMs": 0,
+      "notes": "Provide env vars like API_TEST_PARAM_courseId to test this route. Source: backend/Learning Engine/routes/discussions/comments/[commentId]/route.ts"
+    },
+    {
+      "name": "Dynamic route needs sample params: DELETE /api/discussions/comments/[commentId]",
+      "method": "DELETE",
+      "path": "/api/discussions/comments/[commentId]",
+      "expectedStatuses": [],
+      "skipped": true,
+      "ok": true,
+      "status": null,
+      "durationMs": 0,
+      "notes": "Provide env vars like API_TEST_PARAM_courseId to test this route. Source: backend/Learning Engine/routes/discussions/comments/[commentId]/route.ts"
+    },
+    {
+      "name": "Dynamic route needs sample params: POST /api/discussions/comments/[commentId]/likes/toggle",
+      "method": "POST",
+      "path": "/api/discussions/comments/[commentId]/likes/toggle",
+      "expectedStatuses": [],
+      "skipped": true,
+      "ok": true,
+      "status": null,
+      "durationMs": 0,
+      "notes": "Provide env vars like API_TEST_PARAM_courseId to test this route. Source: backend/Learning Engine/routes/discussions/comments/[commentId]/likes/toggle/route.ts"
+    },
+    {
+      "name": "Dynamic route needs sample params: POST /api/discussions/comments/[commentId]/reopen",
+      "method": "POST",
+      "path": "/api/discussions/comments/[commentId]/reopen",
+      "expectedStatuses": [],
+      "skipped": true,
+      "ok": true,
+      "status": null,
+      "durationMs": 0,
+      "notes": "Provide env vars like API_TEST_PARAM_courseId to test this route. Source: backend/Learning Engine/routes/discussions/comments/[commentId]/reopen/route.ts"
+    },
+    {
+      "name": "Dynamic route needs sample params: POST /api/discussions/comments/[commentId]/resolve",
+      "method": "POST",
+      "path": "/api/discussions/comments/[commentId]/resolve",
+      "expectedStatuses": [],
+      "skipped": true,
+      "ok": true,
+      "status": null,
+      "durationMs": 0,
+      "notes": "Provide env vars like API_TEST_PARAM_courseId to test this route. Source: backend/Learning Engine/routes/discussions/comments/[commentId]/resolve/route.ts"
+    },
+    {
+      "name": "Discovered POST /api/latex/preview",
+      "method": "POST",
+      "path": "/api/latex/preview",
+      "expectedStatuses": [
+        200,
+        201,
+        204,
+        400,
+        401,
+        403,
+        404,
+        405
+      ],
+      "requiresAuth": false,
+      "requiresAdmin": false,
+      "notes": "Safe mode skips auto-discovered mutating API. Add it to api-endpoints.json if you intentionally want to test it. Source: backend/Learning Engine/routes/latex/preview/route.ts",
+      "key": "POST /api/latex/preview",
+      "skipped": true,
+      "ok": true,
+      "status": null,
+      "durationMs": 0
+    },
+    {
+      "name": "Dynamic route needs sample params: GET /api/latex/preview/[previewKey]",
+      "method": "GET",
+      "path": "/api/latex/preview/[previewKey]",
+      "expectedStatuses": [],
+      "skipped": true,
+      "ok": true,
+      "status": null,
+      "durationMs": 0,
+      "notes": "Provide env vars like API_TEST_PARAM_courseId to test this route. Source: backend/Learning Engine/routes/latex/preview/[previewKey]/route.ts"
+    },
+    {
+      "name": "Dynamic route needs sample params: GET /api/nodes/[nodeId]/discussions/comments",
+      "method": "GET",
+      "path": "/api/nodes/[nodeId]/discussions/comments",
+      "expectedStatuses": [],
+      "skipped": true,
+      "ok": true,
+      "status": null,
+      "durationMs": 0,
+      "notes": "Provide env vars like API_TEST_PARAM_courseId to test this route. Source: backend/Learning Engine/routes/nodes/[nodeId]/discussions/comments/route.ts"
+    },
+    {
+      "name": "Dynamic route needs sample params: POST /api/nodes/[nodeId]/discussions/comments",
+      "method": "POST",
+      "path": "/api/nodes/[nodeId]/discussions/comments",
+      "expectedStatuses": [],
+      "skipped": true,
+      "ok": true,
+      "status": null,
+      "durationMs": 0,
+      "notes": "Provide env vars like API_TEST_PARAM_courseId to test this route. Source: backend/Learning Engine/routes/nodes/[nodeId]/discussions/comments/route.ts"
+    },
+    {
+      "name": "Discovered POST /api/payments/razorpay/webhook",
+      "method": "POST",
+      "path": "/api/payments/razorpay/webhook",
+      "expectedStatuses": [
+        200,
+        201,
+        204,
+        400,
+        401,
+        403,
+        404,
+        405
+      ],
+      "requiresAuth": false,
+      "requiresAdmin": false,
+      "notes": "Safe mode skips auto-discovered mutating API. Add it to api-endpoints.json if you intentionally want to test it. Source: backend/Payments, Admin & Trust/routes/payments/razorpay/webhook/route.ts",
+      "key": "POST /api/payments/razorpay/webhook",
+      "skipped": true,
+      "ok": true,
+      "status": null,
+      "durationMs": 0
+    },
+    {
+      "name": "Discovered POST /api/payments/razorpayx/webhook",
+      "method": "POST",
+      "path": "/api/payments/razorpayx/webhook",
+      "expectedStatuses": [
+        200,
+        201,
+        204,
+        400,
+        401,
+        403,
+        404,
+        405
+      ],
+      "requiresAuth": false,
+      "requiresAdmin": false,
+      "notes": "Safe mode skips auto-discovered mutating API. Add it to api-endpoints.json if you intentionally want to test it. Source: backend/Payments, Admin & Trust/routes/payments/razorpayx/webhook/route.ts",
+      "key": "POST /api/payments/razorpayx/webhook",
+      "skipped": true,
+      "ok": true,
+      "status": null,
+      "durationMs": 0
+    },
+    {
+      "name": "Dynamic route needs sample params: POST /api/premium/purchases/[purchaseId]/resume",
+      "method": "POST",
+      "path": "/api/premium/purchases/[purchaseId]/resume",
+      "expectedStatuses": [],
+      "skipped": true,
+      "ok": true,
+      "status": null,
+      "durationMs": 0,
+      "notes": "Provide env vars like API_TEST_PARAM_courseId to test this route. Source: backend/Payments, Admin & Trust/routes/premium/purchases/[purchaseId]/resume/route.ts"
+    },
+    {
+      "name": "Discovered PATCH /api/profile",
+      "method": "PATCH",
+      "path": "/api/profile",
+      "expectedStatuses": [
+        200,
+        201,
+        204,
+        400,
+        401,
+        403,
+        404,
+        405
+      ],
+      "requiresAuth": false,
+      "requiresAdmin": false,
+      "notes": "Safe mode skips auto-discovered mutating API. Add it to api-endpoints.json if you intentionally want to test it. Source: backend/Learner and Creator Product/routes/profile/route.ts",
+      "key": "PATCH /api/profile",
+      "skipped": true,
+      "ok": true,
+      "status": null,
+      "durationMs": 0
+    },
+    {
+      "name": "Discovered POST /api/support/threads",
+      "method": "POST",
+      "path": "/api/support/threads",
+      "expectedStatuses": [
+        200,
+        201,
+        204,
+        400,
+        401,
+        403,
+        404,
+        405
+      ],
+      "requiresAuth": false,
+      "requiresAdmin": false,
+      "notes": "Safe mode skips auto-discovered mutating API. Add it to api-endpoints.json if you intentionally want to test it. Source: backend/Data, Growth & Experience/routes/support/threads/route.ts",
+      "key": "POST /api/support/threads",
+      "skipped": true,
+      "ok": true,
+      "status": null,
+      "durationMs": 0
+    },
+    {
+      "name": "Dynamic route needs sample params: POST /api/support/threads/[threadId]/messages",
+      "method": "POST",
+      "path": "/api/support/threads/[threadId]/messages",
+      "expectedStatuses": [],
+      "skipped": true,
+      "ok": true,
+      "status": null,
+      "durationMs": 0,
+      "notes": "Provide env vars like API_TEST_PARAM_courseId to test this route. Source: backend/Data, Growth & Experience/routes/support/threads/[threadId]/messages/route.ts"
+    },
+    {
+      "name": "Dynamic route needs sample params: PATCH /api/support/threads/[threadId]/messages/[messageId]",
+      "method": "PATCH",
+      "path": "/api/support/threads/[threadId]/messages/[messageId]",
+      "expectedStatuses": [],
+      "skipped": true,
+      "ok": true,
+      "status": null,
+      "durationMs": 0,
+      "notes": "Provide env vars like API_TEST_PARAM_courseId to test this route. Source: backend/Data, Growth & Experience/routes/support/threads/[threadId]/messages/[messageId]/route.ts"
+    },
+    {
+      "name": "Dynamic route needs sample params: DELETE /api/support/threads/[threadId]/messages/[messageId]",
+      "method": "DELETE",
+      "path": "/api/support/threads/[threadId]/messages/[messageId]",
+      "expectedStatuses": [],
+      "skipped": true,
+      "ok": true,
+      "status": null,
+      "durationMs": 0,
+      "notes": "Provide env vars like API_TEST_PARAM_courseId to test this route. Source: backend/Data, Growth & Experience/routes/support/threads/[threadId]/messages/[messageId]/route.ts"
+    },
+    {
+      "name": "Dynamic route needs sample params: PATCH /api/support/threads/[threadId]/status",
+      "method": "PATCH",
+      "path": "/api/support/threads/[threadId]/status",
+      "expectedStatuses": [],
+      "skipped": true,
+      "ok": true,
+      "status": null,
+      "durationMs": 0,
+      "notes": "Provide env vars like API_TEST_PARAM_courseId to test this route. Source: backend/Data, Growth & Experience/routes/support/threads/[threadId]/status/route.ts"
+    }
+  ]
+}
+
+

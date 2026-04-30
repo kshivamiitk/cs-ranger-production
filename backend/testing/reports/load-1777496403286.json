@@ -1,0 +1,35 @@
+{
+  "kind": "load",
+  "baseUrl": "http://localhost:3000",
+  "durationMs": 30000,
+  "concurrency": 120,
+  "routes": [
+    "/",
+    "/courses",
+    "/dashboard"
+  ],
+  "totalRequests": 365,
+  "okRequests": 325,
+  "failedRequests": 40,
+  "p50Ms": 6678,
+  "p95Ms": 80725,
+  "p99Ms": 80743,
+  "maxMs": 80746,
+  "byRoute": {
+    "/": {
+      "count": 260,
+      "p95Ms": 11671,
+      "failed": 0
+    },
+    "/courses": {
+      "count": 65,
+      "p95Ms": 68570,
+      "failed": 40
+    },
+    "/dashboard": {
+      "count": 40,
+      "p95Ms": 80743,
+      "failed": 0
+    }
+  }
+}

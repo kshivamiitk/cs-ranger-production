@@ -1,0 +1,8 @@
+{
+  "teamName": "Learning Engine",
+  "slug": "learning-engine",
+  "owns": "Owns the academic engine: nodes, quizzes, attempts, progress, discussions, certificates, bookmarks, learning reports.",
+  "scaleRule": "Quiz/progress writes should be append-first and async; certificate generation and analytics must run through queues."
+}
+
+

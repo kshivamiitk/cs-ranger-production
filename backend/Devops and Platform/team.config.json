@@ -1,0 +1,8 @@
+{
+  "teamName": "Devops and Platform",
+  "slug": "devops-and-platform",
+  "owns": "Owns deployment, Redis, queues, DB infra, CDN, observability, CI/CD, rate limiting, backups, incident response, and scaling playbooks.",
+  "scaleRule": "100k API calls/sec must pass through CDN, Redis, rate limiting, read replicas, and async workers before touching the primary DB."
+}
+
+

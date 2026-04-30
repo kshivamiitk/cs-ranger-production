@@ -1,0 +1,88 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "es2022"
+    ],
+    "allowJs": false,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "allowImportingTsExtensions": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "./*"
+      ],
+      "next": [
+        "./node_modules/next"
+      ],
+      "next/*": [
+        "./node_modules/next/*"
+      ],
+      "@supabase/ssr": [
+        "./node_modules/@supabase/ssr/dist/main/index.d.ts"
+      ],
+      "zod": [
+        "./node_modules/zod/index.d.ts"
+      ],
+      "@/src/application/*": [
+        "../backend/Learner and Creator Product/application/*",
+        "../backend/Learning Engine/application/*",
+        "../backend/Payments, Admin & Trust/application/*",
+        "../backend/Data, Growth & Experience/application/*"
+      ],
+      "@/src/domain/*": [
+        "../backend/Learner and Creator Product/domain/*",
+        "../backend/Learning Engine/domain/*",
+        "../backend/Payments, Admin & Trust/domain/*",
+        "../backend/Data, Growth & Experience/domain/*",
+        "../shared/contracts/*"
+      ],
+      "@/src/infrastructure/*": [
+        "../backend/Learner and Creator Product/infrastructure/*",
+        "../backend/Learning Engine/infrastructure/*",
+        "../backend/Payments, Admin & Trust/infrastructure/*",
+        "../backend/Data, Growth & Experience/infrastructure/*",
+        "../backend/Devops and Platform/platform-runtime/*"
+      ],
+      "@/src/server/*": [
+        "../backend/Learner and Creator Product/server/*",
+        "../backend/Payments, Admin & Trust/server/*",
+        "../backend/Data, Growth & Experience/server/*"
+      ],
+      "@/shared/*": [
+        "../shared/*"
+      ],
+      "@/src/performance/*": [
+        "../backend/Learner and Creator Product/performance/*"
+      ]
+    }
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    ".next/dev/types/**/*.ts",
+    "../backend/**/*.ts",
+    "../shared/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

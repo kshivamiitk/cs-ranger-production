@@ -1,0 +1,8 @@
+{
+  "teamName": "Learner and Creator Product",
+  "slug": "learner-and-creator-product",
+  "owns": "Owns learner-facing and creator-facing product workflows: course builder, dashboards, catalog, profile, collaboration, auth-adjacent product flows.",
+  "scaleRule": "Build coarse-grained endpoints and read models so dashboards and course pages do not fan out into dozens of DB calls."
+}
+
+

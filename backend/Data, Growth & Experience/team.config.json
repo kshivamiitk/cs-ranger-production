@@ -1,0 +1,8 @@
+{
+  "teamName": "Data, Growth & Experience",
+  "slug": "data-growth-and-experience",
+  "owns": "Owns search, discovery, recommendations, reviews, follows, feed/notifications, support engagement, analytics, and growth loops.",
+  "scaleRule": "Use precomputed read models and event streams; do not compute feed/search/analytics directly from transactional tables on every request."
+}
+
+

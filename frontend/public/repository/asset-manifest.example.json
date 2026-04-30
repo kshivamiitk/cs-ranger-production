@@ -1,0 +1,12 @@
+{
+  "courseCovers": {
+    "default": "/repository/placeholders/course-cover.svg"
+  },
+  "avatars": {
+    "defaultCreator": "/repository/placeholders/default-creator.svg",
+    "defaultLearner": "/repository/placeholders/default-learner.svg"
+  }
+}
+
+
+

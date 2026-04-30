@@ -1,0 +1,8 @@
+{
+  "teamName": "Payments, Admin & Trust",
+  "slug": "payments-admin-and-trust",
+  "owns": "Owns payments, premium access, payouts, admin moderation, support, platform trust, ledgers, and financial settings.",
+  "scaleRule": "Every webhook must be idempotent; money movement must be auditable; premium entitlement checks must be cached."
+}
+
+

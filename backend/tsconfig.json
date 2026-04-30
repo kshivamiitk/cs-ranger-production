@@ -1,0 +1,55 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "strict": true,
+    "skipLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "../frontend/*"
+      ],
+      "@/src/application/*": [
+        "./Learner and Creator Product/application/*",
+        "./Learning Engine/application/*",
+        "./Payments, Admin & Trust/application/*",
+        "./Data, Growth & Experience/application/*"
+      ],
+      "@/src/domain/*": [
+        "./Learner and Creator Product/domain/*",
+        "./Learning Engine/domain/*",
+        "./Payments, Admin & Trust/domain/*",
+        "./Data, Growth & Experience/domain/*",
+        "../shared/contracts/*"
+      ],
+      "@/src/infrastructure/*": [
+        "./Learner and Creator Product/infrastructure/*",
+        "./Learning Engine/infrastructure/*",
+        "./Payments, Admin & Trust/infrastructure/*",
+        "./Data, Growth & Experience/infrastructure/*",
+        "./Devops and Platform/platform-runtime/*"
+      ],
+      "@/src/server/*": [
+        "./Learner and Creator Product/server/*",
+        "./Payments, Admin & Trust/server/*",
+        "./Data, Growth & Experience/server/*"
+      ],
+      "@/lib/*": [
+        "../frontend/lib/*"
+      ],
+      "@/types/*": [
+        "../frontend/types/*",
+        "../database/generated/*"
+      ],
+      "@/src/performance/*": [
+        "./Learner and Creator Product/performance/*"
+      ]
+    }
+  },
+  "include": [
+    "**/*.ts",
+    "../shared/**/*.ts",
+    "../database/generated/**/*.ts"
+  ]
+}

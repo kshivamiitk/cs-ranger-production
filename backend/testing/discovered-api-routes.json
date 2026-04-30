@@ -1,0 +1,546 @@
+[
+  {
+    "path": "/api/admin/broadcasts",
+    "file": "frontend/app/api/admin/broadcasts/route.ts",
+    "methods": [
+      "GET"
+    ],
+    "dynamic": false
+  },
+  {
+    "path": "/api/admin/bulk-payouts",
+    "file": "frontend/app/api/admin/bulk-payouts/route.ts",
+    "methods": [
+      "GET"
+    ],
+    "dynamic": false
+  },
+  {
+    "path": "/api/admin/finance/settings",
+    "file": "frontend/app/api/admin/finance/settings/route.ts",
+    "methods": [
+      "GET"
+    ],
+    "dynamic": false
+  },
+  {
+    "path": "/api/admin/intro-card",
+    "file": "frontend/app/api/admin/intro-card/route.ts",
+    "methods": [
+      "GET"
+    ],
+    "dynamic": false
+  },
+  {
+    "path": "/api/admin/messages",
+    "file": "frontend/app/api/admin/messages/route.ts",
+    "methods": [
+      "GET"
+    ],
+    "dynamic": false
+  },
+  {
+    "path": "/api/admin/messages/[messageId]",
+    "file": "frontend/app/api/admin/messages/[messageId]/route.ts",
+    "methods": [
+      "GET"
+    ],
+    "dynamic": true
+  },
+  {
+    "path": "/api/admin/moderation",
+    "file": "frontend/app/api/admin/moderation/route.ts",
+    "methods": [
+      "GET"
+    ],
+    "dynamic": false
+  },
+  {
+    "path": "/api/admin/payouts",
+    "file": "frontend/app/api/admin/payouts/route.ts",
+    "methods": [
+      "GET"
+    ],
+    "dynamic": false
+  },
+  {
+    "path": "/api/admin/withdrawals/[withdrawalRequestId]",
+    "file": "frontend/app/api/admin/withdrawals/[withdrawalRequestId]/route.ts",
+    "methods": [
+      "GET"
+    ],
+    "dynamic": true
+  },
+  {
+    "path": "/api/auth/callback",
+    "file": "frontend/app/api/auth/callback/route.ts",
+    "methods": [
+      "GET"
+    ],
+    "dynamic": false
+  },
+  {
+    "path": "/api/auth/forgot-password",
+    "file": "frontend/app/api/auth/forgot-password/route.ts",
+    "methods": [
+      "GET"
+    ],
+    "dynamic": false
+  },
+  {
+    "path": "/api/auth/oauth/google",
+    "file": "frontend/app/api/auth/oauth/google/route.ts",
+    "methods": [
+      "GET"
+    ],
+    "dynamic": false
+  },
+  {
+    "path": "/api/auth/reset-password",
+    "file": "frontend/app/api/auth/reset-password/route.ts",
+    "methods": [
+      "GET"
+    ],
+    "dynamic": false
+  },
+  {
+    "path": "/api/auth/signin",
+    "file": "frontend/app/api/auth/signin/route.ts",
+    "methods": [
+      "GET"
+    ],
+    "dynamic": false
+  },
+  {
+    "path": "/api/auth/signout",
+    "file": "frontend/app/api/auth/signout/route.ts",
+    "methods": [
+      "GET"
+    ],
+    "dynamic": false
+  },
+  {
+    "path": "/api/auth/signup",
+    "file": "frontend/app/api/auth/signup/route.ts",
+    "methods": [
+      "GET"
+    ],
+    "dynamic": false
+  },
+  {
+    "path": "/api/courses",
+    "file": "frontend/app/api/courses/route.ts",
+    "methods": [
+      "GET"
+    ],
+    "dynamic": false
+  },
+  {
+    "path": "/api/courses/[courseId]",
+    "file": "frontend/app/api/courses/[courseId]/route.ts",
+    "methods": [
+      "GET"
+    ],
+    "dynamic": true
+  },
+  {
+    "path": "/api/courses/[courseId]/certificate",
+    "file": "frontend/app/api/courses/[courseId]/certificate/route.ts",
+    "methods": [
+      "GET"
+    ],
+    "dynamic": true
+  },
+  {
+    "path": "/api/courses/[courseId]/nodes/[nodeId]/bookmark",
+    "file": "frontend/app/api/courses/[courseId]/nodes/[nodeId]/bookmark/route.ts",
+    "methods": [
+      "GET"
+    ],
+    "dynamic": true
+  },
+  {
+    "path": "/api/courses/[courseId]/nodes/[nodeId]/progress/complete",
+    "file": "frontend/app/api/courses/[courseId]/nodes/[nodeId]/progress/complete/route.ts",
+    "methods": [
+      "GET"
+    ],
+    "dynamic": true
+  },
+  {
+    "path": "/api/courses/[courseId]/nodes/[nodeId]/progress/visit",
+    "file": "frontend/app/api/courses/[courseId]/nodes/[nodeId]/progress/visit/route.ts",
+    "methods": [
+      "GET"
+    ],
+    "dynamic": true
+  },
+  {
+    "path": "/api/courses/[courseId]/premium/order",
+    "file": "frontend/app/api/courses/[courseId]/premium/order/route.ts",
+    "methods": [
+      "GET"
+    ],
+    "dynamic": true
+  },
+  {
+    "path": "/api/courses/[courseId]/premium/verify",
+    "file": "frontend/app/api/courses/[courseId]/premium/verify/route.ts",
+    "methods": [
+      "GET"
+    ],
+    "dynamic": true
+  },
+  {
+    "path": "/api/courses/[courseId]/pricing-plans",
+    "file": "frontend/app/api/courses/[courseId]/pricing-plans/route.ts",
+    "methods": [
+      "GET"
+    ],
+    "dynamic": true
+  },
+  {
+    "path": "/api/courses/[courseId]/quiz-attempts",
+    "file": "frontend/app/api/courses/[courseId]/quiz-attempts/route.ts",
+    "methods": [
+      "GET"
+    ],
+    "dynamic": true
+  },
+  {
+    "path": "/api/courses/[courseId]/reviews",
+    "file": "frontend/app/api/courses/[courseId]/reviews/route.ts",
+    "methods": [
+      "GET"
+    ],
+    "dynamic": true
+  },
+  {
+    "path": "/api/courses/[courseId]/reviews/me",
+    "file": "frontend/app/api/courses/[courseId]/reviews/me/route.ts",
+    "methods": [
+      "GET"
+    ],
+    "dynamic": true
+  },
+  {
+    "path": "/api/courses/reviews/[reviewId]",
+    "file": "frontend/app/api/courses/reviews/[reviewId]/route.ts",
+    "methods": [
+      "GET"
+    ],
+    "dynamic": true
+  },
+  {
+    "path": "/api/creator/collaboration-requests",
+    "file": "frontend/app/api/creator/collaboration-requests/route.ts",
+    "methods": [
+      "GET"
+    ],
+    "dynamic": false
+  },
+  {
+    "path": "/api/creator/collaboration-requests/[inviteId]/accept",
+    "file": "frontend/app/api/creator/collaboration-requests/[inviteId]/accept/route.ts",
+    "methods": [
+      "GET"
+    ],
+    "dynamic": true
+  },
+  {
+    "path": "/api/creator/collaboration-requests/[inviteId]/decline",
+    "file": "frontend/app/api/creator/collaboration-requests/[inviteId]/decline/route.ts",
+    "methods": [
+      "GET"
+    ],
+    "dynamic": true
+  },
+  {
+    "path": "/api/creator/collaborator-search",
+    "file": "frontend/app/api/creator/collaborator-search/route.ts",
+    "methods": [
+      "GET"
+    ],
+    "dynamic": false
+  },
+  {
+    "path": "/api/creator/courses",
+    "file": "frontend/app/api/creator/courses/route.ts",
+    "methods": [
+      "GET"
+    ],
+    "dynamic": false
+  },
+  {
+    "path": "/api/creator/courses/[courseId]",
+    "file": "frontend/app/api/creator/courses/[courseId]/route.ts",
+    "methods": [
+      "GET"
+    ],
+    "dynamic": true
+  },
+  {
+    "path": "/api/creator/courses/[courseId]/certificate-settings",
+    "file": "frontend/app/api/creator/courses/[courseId]/certificate-settings/route.ts",
+    "methods": [
+      "GET"
+    ],
+    "dynamic": true
+  },
+  {
+    "path": "/api/creator/courses/[courseId]/collaborators",
+    "file": "frontend/app/api/creator/courses/[courseId]/collaborators/route.ts",
+    "methods": [
+      "GET"
+    ],
+    "dynamic": true
+  },
+  {
+    "path": "/api/creator/courses/[courseId]/collaborators/[collaboratorUserId]",
+    "file": "frontend/app/api/creator/courses/[courseId]/collaborators/[collaboratorUserId]/route.ts",
+    "methods": [
+      "GET"
+    ],
+    "dynamic": true
+  },
+  {
+    "path": "/api/creator/courses/[courseId]/collaborators/invites/[inviteId]",
+    "file": "frontend/app/api/creator/courses/[courseId]/collaborators/invites/[inviteId]/route.ts",
+    "methods": [
+      "GET"
+    ],
+    "dynamic": true
+  },
+  {
+    "path": "/api/creator/courses/[courseId]/modules",
+    "file": "frontend/app/api/creator/courses/[courseId]/modules/route.ts",
+    "methods": [
+      "GET"
+    ],
+    "dynamic": true
+  },
+  {
+    "path": "/api/creator/courses/[courseId]/modules/reorder",
+    "file": "frontend/app/api/creator/courses/[courseId]/modules/reorder/route.ts",
+    "methods": [
+      "GET"
+    ],
+    "dynamic": true
+  },
+  {
+    "path": "/api/creator/courses/[courseId]/pricing-plans",
+    "file": "frontend/app/api/creator/courses/[courseId]/pricing-plans/route.ts",
+    "methods": [
+      "GET"
+    ],
+    "dynamic": true
+  },
+  {
+    "path": "/api/creator/courses/[courseId]/pricing-plans/[planId]",
+    "file": "frontend/app/api/creator/courses/[courseId]/pricing-plans/[planId]/route.ts",
+    "methods": [
+      "GET"
+    ],
+    "dynamic": true
+  },
+  {
+    "path": "/api/creator/learner-doubts",
+    "file": "frontend/app/api/creator/learner-doubts/route.ts",
+    "methods": [
+      "GET"
+    ],
+    "dynamic": false
+  },
+  {
+    "path": "/api/creator/learner-doubts/[commentId]",
+    "file": "frontend/app/api/creator/learner-doubts/[commentId]/route.ts",
+    "methods": [
+      "GET"
+    ],
+    "dynamic": true
+  },
+  {
+    "path": "/api/creator/modules/[moduleId]",
+    "file": "frontend/app/api/creator/modules/[moduleId]/route.ts",
+    "methods": [
+      "GET"
+    ],
+    "dynamic": true
+  },
+  {
+    "path": "/api/creator/modules/[moduleId]/nodes",
+    "file": "frontend/app/api/creator/modules/[moduleId]/nodes/route.ts",
+    "methods": [
+      "GET"
+    ],
+    "dynamic": true
+  },
+  {
+    "path": "/api/creator/modules/[moduleId]/nodes/reorder",
+    "file": "frontend/app/api/creator/modules/[moduleId]/nodes/reorder/route.ts",
+    "methods": [
+      "GET"
+    ],
+    "dynamic": true
+  },
+  {
+    "path": "/api/creator/nodes/[nodeId]",
+    "file": "frontend/app/api/creator/nodes/[nodeId]/route.ts",
+    "methods": [
+      "GET"
+    ],
+    "dynamic": true
+  },
+  {
+    "path": "/api/creator/payout-profile",
+    "file": "frontend/app/api/creator/payout-profile/route.ts",
+    "methods": [
+      "GET"
+    ],
+    "dynamic": false
+  },
+  {
+    "path": "/api/creator/withdrawals",
+    "file": "frontend/app/api/creator/withdrawals/route.ts",
+    "methods": [
+      "GET"
+    ],
+    "dynamic": false
+  },
+  {
+    "path": "/api/creators/[creatorId]/follow",
+    "file": "frontend/app/api/creators/[creatorId]/follow/route.ts",
+    "methods": [
+      "GET"
+    ],
+    "dynamic": true
+  },
+  {
+    "path": "/api/discussions/comments/[commentId]",
+    "file": "frontend/app/api/discussions/comments/[commentId]/route.ts",
+    "methods": [
+      "GET"
+    ],
+    "dynamic": true
+  },
+  {
+    "path": "/api/discussions/comments/[commentId]/likes/toggle",
+    "file": "frontend/app/api/discussions/comments/[commentId]/likes/toggle/route.ts",
+    "methods": [
+      "GET"
+    ],
+    "dynamic": true
+  },
+  {
+    "path": "/api/discussions/comments/[commentId]/reopen",
+    "file": "frontend/app/api/discussions/comments/[commentId]/reopen/route.ts",
+    "methods": [
+      "GET"
+    ],
+    "dynamic": true
+  },
+  {
+    "path": "/api/discussions/comments/[commentId]/resolve",
+    "file": "frontend/app/api/discussions/comments/[commentId]/resolve/route.ts",
+    "methods": [
+      "GET"
+    ],
+    "dynamic": true
+  },
+  {
+    "path": "/api/latex/preview",
+    "file": "frontend/app/api/latex/preview/route.ts",
+    "methods": [
+      "GET"
+    ],
+    "dynamic": false
+  },
+  {
+    "path": "/api/latex/preview/[previewKey]",
+    "file": "frontend/app/api/latex/preview/[previewKey]/route.ts",
+    "methods": [
+      "GET"
+    ],
+    "dynamic": true
+  },
+  {
+    "path": "/api/nodes/[nodeId]/discussions/comments",
+    "file": "frontend/app/api/nodes/[nodeId]/discussions/comments/route.ts",
+    "methods": [
+      "GET"
+    ],
+    "dynamic": true
+  },
+  {
+    "path": "/api/payments/razorpay/webhook",
+    "file": "frontend/app/api/payments/razorpay/webhook/route.ts",
+    "methods": [
+      "GET"
+    ],
+    "dynamic": false
+  },
+  {
+    "path": "/api/payments/razorpayx/webhook",
+    "file": "frontend/app/api/payments/razorpayx/webhook/route.ts",
+    "methods": [
+      "GET"
+    ],
+    "dynamic": false
+  },
+  {
+    "path": "/api/premium/purchases/[purchaseId]/resume",
+    "file": "frontend/app/api/premium/purchases/[purchaseId]/resume/route.ts",
+    "methods": [
+      "GET"
+    ],
+    "dynamic": true
+  },
+  {
+    "path": "/api/profile",
+    "file": "frontend/app/api/profile/route.ts",
+    "methods": [
+      "GET"
+    ],
+    "dynamic": false
+  },
+  {
+    "path": "/api/support/threads",
+    "file": "frontend/app/api/support/threads/route.ts",
+    "methods": [
+      "GET"
+    ],
+    "dynamic": false
+  },
+  {
+    "path": "/api/support/threads/[threadId]/messages",
+    "file": "frontend/app/api/support/threads/[threadId]/messages/route.ts",
+    "methods": [
+      "GET"
+    ],
+    "dynamic": true
+  },
+  {
+    "path": "/api/support/threads/[threadId]/messages/[messageId]",
+    "file": "frontend/app/api/support/threads/[threadId]/messages/[messageId]/route.ts",
+    "methods": [
+      "GET"
+    ],
+    "dynamic": true
+  },
+  {
+    "path": "/api/support/threads/[threadId]/status",
+    "file": "frontend/app/api/support/threads/[threadId]/status/route.ts",
+    "methods": [
+      "GET"
+    ],
+    "dynamic": true
+  },
+  {
+    "path": "/api/theme",
+    "file": "frontend/app/api/theme/route.ts",
+    "methods": [
+      "GET"
+    ],
+    "dynamic": false
+  }
+]

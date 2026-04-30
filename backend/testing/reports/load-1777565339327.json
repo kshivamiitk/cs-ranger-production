@@ -1,0 +1,41 @@
+{
+  "kind": "load",
+  "baseUrl": "https://cs-ranger.in",
+  "durationMs": 120000,
+  "concurrency": 5000,
+  "routes": [
+    "/",
+    "/courses",
+    "/search",
+    "/dashboard"
+  ],
+  "totalRequests": 54452,
+  "okRequests": 3891,
+  "failedRequests": 50561,
+  "p50Ms": 11788,
+  "p95Ms": 13630,
+  "p99Ms": 13966,
+  "maxMs": 22226,
+  "byRoute": {
+    "/": {
+      "count": 13383,
+      "p95Ms": 13631,
+      "failed": 12630
+    },
+    "/courses": {
+      "count": 14007,
+      "p95Ms": 13613,
+      "failed": 12638
+    },
+    "/search": {
+      "count": 13801,
+      "p95Ms": 13621,
+      "failed": 12644
+    },
+    "/dashboard": {
+      "count": 13261,
+      "p95Ms": 13654,
+      "failed": 12649
+    }
+  }
+}

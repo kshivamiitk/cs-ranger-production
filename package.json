@@ -1,0 +1,43 @@
+{
+  "name": "cs-ranger",
+  "private": true,
+  "version": "1.0.0",
+  "description": "CS Ranger v1.0: production-ready premium learning and creator platform with fast course APIs, polished learner workspaces, and creator controls.",
+  "scripts": {
+    "setup": "npm install && npm --prefix frontend install && node tools/verify-frontend-deps.mjs && node tools/verify-react-runtime.mjs",
+    "install:frontend": "npm --prefix frontend install",
+    "clean:deps": "node tools/clean-deps.mjs",
+    "dev:frontend": "npm --prefix frontend run dev",
+    "build:frontend": "npm --prefix frontend run build",
+    "typecheck:frontend": "npm --prefix frontend run typecheck",
+    "lint:frontend": "npm --prefix frontend run lint",
+    "doctor": "node tools/architecture-doctor.mjs",
+    "map:ownership": "node tools/print-ownership-summary.mjs",
+    "test:api": "node backend/testing/run-api-smoke-tests.mjs",
+    "test:api:latency": "node backend/testing/api-latency-check.mjs",
+    "test:api:discover": "node backend/testing/discover-api-routes.mjs",
+    "test:api:report": "node backend/testing/print-latest-report.mjs",
+    "seed:test-admin": "node backend/testing/seed-test-admin.mjs",
+    "test:api:admin": "API_TEST_AUTH_MODE=admin node backend/testing/run-api-smoke-tests.mjs",
+    "test:api:safe": "API_TEST_AUTO_DISCOVER=safe node backend/testing/run-api-smoke-tests.mjs",
+    "verify:frontend-deps": "node tools/verify-frontend-deps.mjs",
+    "debug:test-env": "node backend/testing/debug-test-env.mjs",
+    "test:load:local": "node backend/testing/load-test.mjs",
+    "test:load": "node backend/testing/load-test.mjs",
+    "test:db:indexes": "node backend/testing/check-index-migration.mjs",
+    "test:v1": "npm run test:db:indexes && npm run test:api:safe && npm run test:load:local",
+    "doctor:react": "node tools/verify-react-runtime.mjs"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.49.8"
+  },
+  "engines": {
+    "node": "22.x",
+    "npm": ">=10"
+  },
+  "overrides": {
+    "react": "19.2.0",
+    "react-dom": "19.2.0",
+    "next": "15.5.14"
+  }
+}

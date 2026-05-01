@@ -1,0 +1,59 @@
+name: Deploy CS-Ranger to EC2
+
+on:
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: cs-ranger-production-deploy
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    name: Deploy production
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy on EC2 through SSH
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            set -e
+
+            echo "Moving to app directory..."
+            cd ${{ secrets.EC2_APP_DIR }}
+
+            echo "Fetching latest code..."
+            git fetch origin main
+            git reset --hard origin/main
+
+            echo "Using Node..."
+            node -v
+            npm -v
+
+            echo "Installing dependencies..."
+            npm run setup
+
+            echo "Building frontend..."
+            npm run build:frontend
+
+            echo "Restarting PM2..."
+            pm2 delete cs-ranger || true
+            pm2 start "npm --prefix frontend run start -- -p 3000" --name cs-ranger
+            pm2 save
+
+            echo "Testing local app..."
+            sleep 5
+            curl -I http://127.0.0.1:3000
+
+            echo "Testing Nginx config..."
+            sudo nginx -t
+
+            echo "Reloading Nginx..."
+            sudo systemctl reload nginx
+
+            echo "Deployment completed."

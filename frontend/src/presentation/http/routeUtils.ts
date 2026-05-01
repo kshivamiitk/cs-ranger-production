@@ -9,6 +9,24 @@ export function ok<T>(payload: T, init?: ResponseInit) {
   return NextResponse.json(payload, init);
 }
 
+export function publicApiCacheHeaders(input?: { sMaxAge?: number; staleWhileRevalidate?: number }) {
+  const sMaxAge = input?.sMaxAge ?? 120;
+  const staleWhileRevalidate = input?.staleWhileRevalidate ?? 300;
+
+  return {
+    'Cache-Control': `public, max-age=0, s-maxage=${sMaxAge}, stale-while-revalidate=${staleWhileRevalidate}`,
+  };
+}
+
+export function privateApiCacheHeaders(input?: { maxAge?: number; staleWhileRevalidate?: number }) {
+  const maxAge = input?.maxAge ?? 15;
+  const staleWhileRevalidate = input?.staleWhileRevalidate ?? 30;
+
+  return {
+    'Cache-Control': `private, max-age=${maxAge}, stale-while-revalidate=${staleWhileRevalidate}`,
+  };
+}
+
 export function failure(error: unknown) {
   if (error instanceof ZodError) {
     return NextResponse.json(
@@ -60,6 +78,5 @@ function formatZodIssue(issue: ZodIssue | undefined) {
 
   return issue.message || messages.api.validationFailed;
 }
-
 
 

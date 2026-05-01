@@ -37,6 +37,7 @@ export function CatalogCourseCard(props: { course: CatalogCourseSummary }) {
   const premiumAccessible = !isFree && course.access.viewerCanAccessPremium;
   const premiumLocked = !isFree && !course.access.viewerCanAccessPremium;
   const progressPercent = course.progress?.completionPercent ?? 0;
+  const progressValue = Math.min(100, Math.max(0, progressPercent));
   const hasProgress = Boolean(course.progress?.continueLearning || progressPercent > 0);
   const continueHref = course.progress?.continueLearning
     ? `/courses/${course.id}/nodes/${course.progress.continueLearning.nodeId}`
@@ -117,9 +118,9 @@ export function CatalogCourseCard(props: { course: CatalogCourseSummary }) {
               <span>{progressPercent}% complete</span>
               <span>{course.progress?.continueLearning?.nodeTitle ?? 'Next node ready'}</span>
             </div>
-            <div className="v226-course-progress-track">
-              <span className="v226-course-progress-fill" style={{ width: `${Math.min(100, Math.max(0, progressPercent))}%` }} />
-            </div>
+            <progress className="v226-course-progress-track" max={100} value={progressValue}>
+              {progressValue}%
+            </progress>
           </div>
         ) : null}
 
@@ -142,5 +143,4 @@ export function CatalogCourseCard(props: { course: CatalogCourseSummary }) {
     </article>
   );
 }
-
 

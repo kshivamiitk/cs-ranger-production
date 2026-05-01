@@ -13,7 +13,12 @@ function compactNumber(value: number) {
   return String(value);
 }
 
-export default async function CoursesPage() {
+export default async function CoursesPage({
+  searchParams,
+}: {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+}) {
+  const resolvedSearchParams = await searchParams;
   const { viewer, themeMode, container } = await getServerPageContext();
   const { catalogService } = container;
   const courses = await catalogService.listPublishedCourses(viewer);
@@ -99,7 +104,14 @@ export default async function CoursesPage() {
         {courses.length === 0 ? (
           <div className="empty-state">No published courses exist yet.</div>
         ) : (
-          <CatalogCourseSections courses={courses} />
+          <CatalogCourseSections
+            courses={courses}
+            pathname="/courses"
+            searchParams={resolvedSearchParams}
+            viewerIsLoggedIn={Boolean(viewer)}
+            title="All courses"
+            description="Use the filters to narrow courses instantly by domain, pricing, access, and ranking."
+          />
         )}
       </section>
     </AppShell>

@@ -1,5 +1,5 @@
 import { createServiceRoleSupabaseClient } from '@/src/infrastructure/supabase/serverClient';
-import { ok, failure } from '@/src/presentation/http/routeUtils';
+import { ok, failure, publicApiCacheHeaders } from '@/src/presentation/http/routeUtils';
 import { cachedValue } from '@/shared/performance/apiCache';
 import { learnerCreatorCacheKey, learnerCreatorCacheTtlMs } from '@/src/performance/learnerCreatorCache';
 
@@ -26,7 +26,9 @@ export async function GET(
       return { plans: data ?? [] };
     });
 
-    return ok(payload);
+    return ok(payload, {
+      headers: publicApiCacheHeaders({ sMaxAge: 300, staleWhileRevalidate: 900 }),
+    });
   } catch (error) {
     return failure(error);
   }

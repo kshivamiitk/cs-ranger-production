@@ -10,6 +10,8 @@ const checks = [
   ['database/supabase/migrations/033_v22_8_2_learner_creator_fast_reads.sql', 'courses_status_created_idx'],
   ['database/supabase/migrations/034_v22_8_3_creator_free_content_policy.sql', 'courses_creator_free_policy_idx'],
   ['database/supabase/migrations/035_v22_8_4_api_latency_hot_path_indexes.sql', 'create index if not exists'],
+  ['database/supabase/migrations/036_v1_0_1_api_hot_path_read_models.sql', 'creator_public_stats_read_model'],
+  ['database/supabase/migrations/036_v1_0_1_api_hot_path_read_models.sql', 'course_nodes_title_trgm_idx'],
 ];
 
 let failed = false;

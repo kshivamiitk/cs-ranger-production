@@ -26,6 +26,10 @@ export class CatalogCourseSummaryQueryService {
       return [];
     }
 
+    if (!viewer || viewer.profile.isAdmin || viewer.profile.primaryRole !== 'learner') {
+      return courseOverviews.map((course) => this.buildSummaryWithoutLearnerState(viewer, course));
+    }
+
     const courseIds = courseOverviews.map((course) => course.id);
     const [entitlementMap, trees, wishlistStateMap] = await Promise.all([
       this.loadEntitlementMap(viewer, courseIds),
@@ -64,6 +68,20 @@ export class CatalogCourseSummaryQueryService {
         },
       } satisfies CatalogCourseSummary;
     });
+  }
+
+  private buildSummaryWithoutLearnerState(viewer: Viewer | null, course: CourseOverview): CatalogCourseSummary {
+    return {
+      ...course,
+      access: resolveCourseAccess(viewer, course, null),
+      progress: null,
+      wishlist: {
+        courseId: course.id,
+        isWishlisted: false,
+        wishlistCount: course.engagement.wishlistCount,
+        canWishlist: false,
+      },
+    } satisfies CatalogCourseSummary;
   }
 
   private async loadEntitlementMap(viewer: Viewer | null, courseIds: string[]) {
@@ -117,5 +135,4 @@ export class CatalogCourseSummaryQueryService {
     }));
   }
 }
-
 

@@ -45,11 +45,16 @@ export default async function CreatorPublicProfilePage({
           {profile.courses.length === 0 ? (
             <div className="empty-state">This creator has no published courses yet.</div>
           ) : (
-            <CatalogCourseSections courses={profile.courses} />
+            <CatalogCourseSections
+              courses={profile.courses}
+              pathname={`/creators/${creatorId}`}
+              viewerIsLoggedIn={Boolean(viewer)}
+              title="Published courses"
+              description="Filter this creator’s courses by domain, pricing, and your current access."
+            />
           )}
         </section>
       </section>
     </AppShell>
   );
 }
-

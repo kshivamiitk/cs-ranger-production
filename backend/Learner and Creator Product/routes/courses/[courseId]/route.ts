@@ -1,4 +1,4 @@
-import { ok, failure } from '@/src/presentation/http/routeUtils';
+import { ok, failure, privateApiCacheHeaders, publicApiCacheHeaders } from '@/src/presentation/http/routeUtils';
 import { createServerContainer } from '@/src/infrastructure/container/server';
 import { defaultTheme } from '@/lib/constants';
 import { cachedValue } from '@/shared/performance/apiCache';
@@ -17,7 +17,9 @@ export async function GET(
       const courseView = await catalogService.getCourseTreeView(viewer, courseId);
       return { course: courseView.course, overview: courseView.overview, access: courseView.access };
     });
-    return ok(payload);
+    return ok(payload, {
+      headers: viewer ? privateApiCacheHeaders() : publicApiCacheHeaders({ sMaxAge: 120, staleWhileRevalidate: 300 }),
+    });
   } catch (error) {
     return failure(error);
   }

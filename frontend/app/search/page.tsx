@@ -31,9 +31,13 @@ export default async function SearchPage({
   const { searchService } = container;
   const results = q ? await searchService.searchEverything(q, viewer) : { query: '', courses: [], modules: [], nodes: [], creators: [] };
   const pagination = resolveListPagination(resolvedSearchParams, { size: 25 });
+  const totalSearchResults = results.courses.length + results.modules.length + results.nodes.length + results.creators.length;
+  const showCourseDiscovery = (filter === 'all' || filter === 'courses') && results.courses.length > 0;
 
   const flatResults = [
-    ...results.courses.map((course) => ({ type: 'courses' as const, id: course.id })),
+    ...(filter === 'courses' || filter === 'all'
+      ? []
+      : results.courses.map((course) => ({ type: 'courses' as const, id: course.id }))),
     ...results.modules.map((module) => ({ type: 'modules' as const, id: module.id })),
     ...results.nodes.map((node) => ({ type: 'nodes' as const, id: node.id })),
     ...results.creators.map((creator) => ({ type: 'creators' as const, id: creator.userId })),
@@ -41,10 +45,10 @@ export default async function SearchPage({
   const paged = paginateList(flatResults, pagination.page, pagination.size);
   const pagedSet = new Set(paged.items.map((entry) => `${entry.type}:${entry.id}`));
 
-  const pagedCourses = results.courses.filter((entry) => pagedSet.has(`courses:${entry.id}`));
   const pagedModules = results.modules.filter((entry) => pagedSet.has(`modules:${entry.id}`));
   const pagedNodes = results.nodes.filter((entry) => pagedSet.has(`nodes:${entry.id}`));
   const pagedCreators = results.creators.filter((entry) => pagedSet.has(`creators:${entry.userId}`));
+  const visibleResultCount = filter === 'courses' ? results.courses.length : filter === 'all' ? totalSearchResults : flatResults.length;
 
   return (
     <AppShell
@@ -60,7 +64,7 @@ export default async function SearchPage({
               <SearchIcon size={14} />
               Unified search
             </span>
-            {q ? <span className="studio-badge studio-badge-muted">{flatResults.length} result{flatResults.length === 1 ? '' : 's'}</span> : null}
+            {q ? <span className="studio-badge studio-badge-muted">{visibleResultCount} result{visibleResultCount === 1 ? '' : 's'}</span> : null}
           </div>
 
           <form action="/search" method="get" className="search-toolbar">
@@ -92,31 +96,35 @@ export default async function SearchPage({
 
         {!q ? (
           <div className="empty-state">Type a query above to search courses, modules, nodes, or creators.</div>
-        ) : flatResults.length === 0 ? (
+        ) : visibleResultCount === 0 ? (
           <div className="empty-state">No results matched “{q}”. Try a broader query or switch filters.</div>
         ) : (
           <>
-            <ListPaginationControls
-              pathname="/search"
-              searchParams={resolvedSearchParams}
-              page={paged.page}
-              size={paged.size}
-              totalItems={paged.totalItems}
-              totalPages={paged.totalPages}
-              startIndex={paged.startIndex}
-              endIndex={paged.endIndex}
-              noun="results"
-            />
+            {flatResults.length > 0 ? (
+              <ListPaginationControls
+                pathname="/search"
+                searchParams={resolvedSearchParams}
+                page={paged.page}
+                size={paged.size}
+                totalItems={paged.totalItems}
+                totalPages={paged.totalPages}
+                startIndex={paged.startIndex}
+                endIndex={paged.endIndex}
+                noun="results"
+              />
+            ) : null}
 
             <div className="stack-lg">
-              {(filter === 'all' || filter === 'courses') && pagedCourses.length > 0 ? (
-                <section className="panel stack-lg">
-                  <div>
-                    <h2 className="panel-title">Courses</h2>
-                    <p className="muted">Published catalog results with access-aware tree entry points.</p>
-                  </div>
-                  <CatalogCourseSections courses={pagedCourses} />
-                </section>
+              {showCourseDiscovery ? (
+                <CatalogCourseSections
+                  courses={results.courses}
+                  pathname="/search"
+                  searchParams={resolvedSearchParams}
+                  viewerIsLoggedIn={Boolean(viewer)}
+                  title="Courses"
+                  description="Filter course matches instantly without issuing another search request."
+                  className="search-course-discovery"
+                />
               ) : null}
 
               {(filter === 'all' || filter === 'modules') && pagedModules.length > 0 ? (
@@ -132,8 +140,8 @@ export default async function SearchPage({
                           <span className="studio-badge studio-badge-primary">Module {module.position}</span>
                           <span className="studio-badge studio-badge-muted">{module.courseTitle}</span>
                         </div>
-                        <h3 className="panel-title" style={{ margin: '12px 0 0' }}>{module.title}</h3>
-                        <p className="muted" style={{ margin: '8px 0 0' }}>{module.summary}</p>
+                        <h3 className="panel-title search-result-title">{module.title}</h3>
+                        <p className="muted search-result-copy">{module.summary}</p>
                       </Link>
                     ))}
                   </div>
@@ -154,8 +162,8 @@ export default async function SearchPage({
                           <span className="studio-badge studio-badge-muted">{node.courseTitle}</span>
                           <span className="studio-badge studio-badge-muted">Module {node.modulePosition}</span>
                         </div>
-                        <h3 className="panel-title" style={{ margin: '12px 0 0' }}>{node.title}</h3>
-                        <p className="muted" style={{ margin: '8px 0 0' }}>{node.snippet}</p>
+                        <h3 className="panel-title search-result-title">{node.title}</h3>
+                        <p className="muted search-result-copy">{node.snippet}</p>
                       </Link>
                     ))}
                   </div>
@@ -202,4 +210,3 @@ export default async function SearchPage({
     </AppShell>
   );
 }
-

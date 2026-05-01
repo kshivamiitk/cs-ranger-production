@@ -1,4 +1,4 @@
-import { ok, failure } from '@/src/presentation/http/routeUtils';
+import { ok, failure, privateApiCacheHeaders, publicApiCacheHeaders } from '@/src/presentation/http/routeUtils';
 import { createServerContainer } from '@/src/infrastructure/container/server';
 import { defaultTheme } from '@/lib/constants';
 import { cachedValue } from '@/shared/performance/apiCache';
@@ -9,6 +9,7 @@ function parseCourseQuery(request: Request) {
   const premiumFilter = url.searchParams.get('premiumFilter');
   const sort = url.searchParams.get('sort');
   const minRating = url.searchParams.get('minRating');
+  const limit = Number(url.searchParams.get('limit') ?? '');
 
   return {
     query: url.searchParams.get('query') || null,
@@ -16,6 +17,7 @@ function parseCourseQuery(request: Request) {
     premiumFilter: premiumFilter === 'free' || premiumFilter === 'premium' ? premiumFilter : 'all',
     sort: sort === 'most_popular' || sort === 'best_rated' ? sort : 'newest',
     minRating: minRating ? Number(minRating) : null,
+    limit: Number.isFinite(limit) && limit > 0 ? Math.min(Math.trunc(limit), 120) : null,
   } as const;
 }
 
@@ -39,7 +41,9 @@ export async function GET(request: Request) {
       viewer ? learnerCreatorCacheTtlMs.signedCourseList : learnerCreatorCacheTtlMs.publicCourseList,
       async () => ({ courses: await catalogService.listPublishedCourses(viewer, input) })
     );
-    return ok(payload);
+    return ok(payload, {
+      headers: viewer ? privateApiCacheHeaders() : publicApiCacheHeaders({ sMaxAge: 180, staleWhileRevalidate: 600 }),
+    });
   } catch (error) {
     return failure(error);
   }

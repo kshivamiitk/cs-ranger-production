@@ -431,6 +431,7 @@ export interface CatalogCourseQuery {
   minRating?: number | null;
   sort?: CatalogSortKey;
   domainSlug?: string | null;
+  limit?: number | null;
 }
 
 export interface CatalogCourseSummary extends CourseOverview {

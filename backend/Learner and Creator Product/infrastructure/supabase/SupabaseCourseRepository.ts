@@ -104,6 +104,10 @@ function sanitizeSearchQuery(query: string) {
   return query.trim().toLowerCase();
 }
 
+function ilikePattern(query: string) {
+  return `%${query.trim().replace(/[%,()]/g, ' ').replace(/\s+/g, ' ')}%`;
+}
+
 function normalizeDomainName(value: string) {
   return value.trim().toLowerCase().replace(/[-_]+/g, ' ').replace(/\s+/g, ' ');
 }
@@ -187,26 +191,67 @@ export class SupabaseCourseRepository implements CourseRepository {
     minRating?: number | null;
     sort?: 'newest' | 'most_popular' | 'best_rated';
     domainSlug?: string | null;
+    limit?: number | null;
   } = {}) {
-    let query: any = this.serviceSupabase
+    const limit = Math.max(1, Math.min(input.limit ?? Number(process.env.LCP_COURSE_LIST_LIMIT ?? 120), 200));
+    let dbQuery: any = this.serviceSupabase
       .from('v_course_overview_read_model' as any)
       .select('*');
 
     if (input.courseIds?.length) {
-      query = query.in('id', Array.from(new Set(input.courseIds)) as any);
+      dbQuery = dbQuery.in('id', Array.from(new Set(input.courseIds)) as any);
     }
 
     if (input.creatorUserId) {
-      query = query.eq('creator_user_id', input.creatorUserId as any);
+      dbQuery = dbQuery.eq('creator_user_id', input.creatorUserId as any);
     }
 
     if (input.publishedOnly) {
-      query = query.eq('status', 'published' as any);
+      dbQuery = dbQuery.eq('status', 'published' as any);
     }
 
-    query = query.order('created_at', { ascending: false });
+    if (input.query?.trim()) {
+      const pattern = ilikePattern(input.query);
+      dbQuery = dbQuery.or(
+        `title.ilike.${pattern},description.ilike.${pattern},creator_name.ilike.${pattern},domain_name.ilike.${pattern}`
+      );
+    }
 
-    const { data, error } = await query;
+    if (input.domainSlug?.trim()) {
+      dbQuery = dbQuery.eq('domain_slug', input.domainSlug.trim());
+    }
+
+    if (input.premiumFilter === 'free') {
+      dbQuery = dbQuery.or('premium_enabled.eq.false,price_amount.lte.0,premium_access_days.is.null');
+    } else if (input.premiumFilter === 'premium') {
+      dbQuery = dbQuery.eq('premium_enabled', true).gt('price_amount', 0).not('premium_access_days', 'is', null);
+    }
+
+    const minRating = input.minRating ?? null;
+    if (typeof minRating === 'number' && minRating > 0) {
+      dbQuery = dbQuery.gte('average_rating', minRating);
+    }
+
+    if (input.sort === 'best_rated') {
+      dbQuery = dbQuery
+        .order('average_rating', { ascending: false })
+        .order('total_reviews', { ascending: false })
+        .order('created_at', { ascending: false });
+    } else if (input.sort === 'most_popular') {
+      dbQuery = dbQuery
+        .order('active_learner_count', { ascending: false })
+        .order('wishlist_count', { ascending: false })
+        .order('total_reviews', { ascending: false })
+        .order('created_at', { ascending: false });
+    } else {
+      dbQuery = dbQuery.order('created_at', { ascending: false });
+    }
+
+    if (!input.courseIds?.length) {
+      dbQuery = dbQuery.limit(limit);
+    }
+
+    const { data, error } = await dbQuery;
     if (error) {
       throw error;
     }
@@ -1006,4 +1051,3 @@ export class SupabaseCourseRepository implements CourseRepository {
     return mapQuizAttempt(data);
   }
 }
-

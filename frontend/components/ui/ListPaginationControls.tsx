@@ -49,7 +49,7 @@ export function ListPaginationControls(props: Props) {
       <div className="list-pagination-actions">
         <div className="list-page-size-group">
           <span className="muted">Show</span>
-          <div className="inline premium-badge-row" style={{ gap: 8 }}>
+          <div className="list-page-size-options">
             {listPageSizeOptions.map((option) => (
               <Link
                 key={option}
@@ -84,5 +84,4 @@ export function ListPaginationControls(props: Props) {
     </div>
   );
 }
-
 

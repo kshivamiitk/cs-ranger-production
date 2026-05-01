@@ -14,6 +14,14 @@ type ModuleRow = Database['public']['Tables']['course_modules']['Row'];
 type NodeRow = Database['public']['Tables']['course_nodes']['Row'];
 type EntitlementRow = Database['public']['Tables']['course_entitlements']['Row'];
 type UserProfileRow = Database['public']['Tables']['user_profiles']['Row'];
+type TopCreatorStatsRow = {
+  creator_user_id: string;
+  published_course_count: number | string | null;
+  published_node_count: number | string | null;
+  premium_course_count: number | string | null;
+  follower_count: number | string | null;
+  featured_course_titles: string[] | null;
+};
 
 function sanitizeSearchQuery(query: string) {
   return query.trim().replace(/[%,]/g, ' ');
@@ -21,6 +29,10 @@ function sanitizeSearchQuery(query: string) {
 
 function ilikePattern(query: string) {
   return `%${sanitizeSearchQuery(query)}%`;
+}
+
+function toInt(value: number | string | null | undefined) {
+  return Number.parseInt(String(value ?? 0), 10) || 0;
 }
 
 export class SupabaseSearchRepository implements SearchRepository {
@@ -55,6 +67,116 @@ export class SupabaseSearchRepository implements SearchRepository {
 
   async listTopCreators(input: { viewerUserId?: string | null; limit?: number }) {
     const limit = Math.max(1, Math.min(input.limit ?? 6, 12));
+    try {
+      return await this.listTopCreatorsFromReadModel(input, limit);
+    } catch (error) {
+      if (process.env.NODE_ENV === 'production') {
+        throw error;
+      }
+    }
+
+    return this.listTopCreatorsLegacy(input, limit);
+  }
+
+  private async listTopCreatorsFromReadModel(input: { viewerUserId?: string | null }, limit: number) {
+    const readModel = this.supabase.from('creator_public_stats_read_model' as any);
+    const [followerResponse, contributionResponse] = await Promise.all([
+      readModel
+        .select('creator_user_id, published_course_count, published_node_count, premium_course_count, follower_count, featured_course_titles')
+        .gt('published_course_count', 0)
+        .order('follower_count', { ascending: false })
+        .order('published_node_count', { ascending: false })
+        .limit(limit * 3),
+      this.supabase
+        .from('creator_public_stats_read_model' as any)
+        .select('creator_user_id, published_course_count, published_node_count, premium_course_count, follower_count, featured_course_titles')
+        .gt('published_course_count', 0)
+        .order('published_node_count', { ascending: false })
+        .order('published_course_count', { ascending: false })
+        .limit(limit * 3),
+    ]);
+
+    if ((followerResponse as any).error) throw (followerResponse as any).error;
+    if ((contributionResponse as any).error) throw (contributionResponse as any).error;
+
+    const followerStats = (((followerResponse as any).data ?? []) as TopCreatorStatsRow[]);
+    const contributionStats = (((contributionResponse as any).data ?? []) as TopCreatorStatsRow[]);
+    const statsRows = [...followerStats, ...contributionStats];
+    const creatorIds = Array.from(new Set(statsRows.map((row) => row.creator_user_id)));
+
+    if (creatorIds.length === 0) {
+      return {
+        byFollowers: [],
+        byContributions: [],
+      } satisfies TopCreatorsView;
+    }
+
+    const [profileResponse, viewerFollowResponse] = await Promise.all([
+      this.supabase
+        .from('user_profiles')
+        .select('user_id, full_name, username, bio, profile_photo_url, primary_role, is_banned')
+        .in('user_id', creatorIds)
+        .eq('primary_role', 'creator')
+        .eq('is_banned', false),
+      input.viewerUserId
+        ? this.supabase
+            .from('creator_followers')
+            .select('creator_user_id')
+            .eq('follower_user_id', input.viewerUserId)
+            .in('creator_user_id', creatorIds)
+        : Promise.resolve({ data: [], error: null }),
+    ]);
+
+    if (profileResponse.error) throw profileResponse.error;
+    if ((viewerFollowResponse as any).error) throw (viewerFollowResponse as any).error;
+
+    const profileById = new Map(
+      ((profileResponse.data ?? []) as Array<
+        Pick<UserProfileRow, 'user_id' | 'full_name' | 'username' | 'bio' | 'profile_photo_url' | 'primary_role' | 'is_banned'>
+      >).map((profile) => [profile.user_id, profile])
+    );
+    const viewerFollowingIds = new Set(
+      (((viewerFollowResponse as any).data ?? []) as Array<{ creator_user_id: string }>).map((row) => row.creator_user_id)
+    );
+    const statsByCreatorId = new Map(statsRows.map((row) => [row.creator_user_id, row]));
+
+    const toSummary = (row: TopCreatorStatsRow): TopCreatorSummary | null => {
+      const creator = profileById.get(row.creator_user_id);
+      if (!creator) return null;
+
+      return {
+        creator: {
+          userId: creator.user_id,
+          fullName: creator.full_name,
+          username: creator.username ?? null,
+          primaryRole: 'creator',
+          profilePhotoUrl: creator.profile_photo_url,
+          bio: creator.bio,
+          isBanned: creator.is_banned,
+        },
+        follow: {
+          creatorUserId: creator.user_id,
+          followerCount: toInt(row.follower_count),
+          viewerIsFollowing: viewerFollowingIds.has(creator.user_id),
+        },
+        publishedCourseCount: toInt(row.published_course_count),
+        publishedNodeCount: toInt(row.published_node_count),
+        premiumCourseCount: toInt(row.premium_course_count),
+        featuredCourseTitles: row.featured_course_titles ?? [],
+      } satisfies TopCreatorSummary;
+    };
+
+    return {
+      byFollowers: followerStats.map(toSummary).filter((value): value is TopCreatorSummary => Boolean(value)).slice(0, limit),
+      byContributions: contributionStats
+        .map((row) => statsByCreatorId.get(row.creator_user_id) ?? row)
+        .map(toSummary)
+        .filter((value): value is TopCreatorSummary => Boolean(value))
+        .slice(0, limit),
+    } satisfies TopCreatorsView;
+  }
+
+  private async listTopCreatorsLegacy(input: { viewerUserId?: string | null }, limit: number) {
     const { data: creatorRows, error: creatorError } = await this.supabase
       .from('user_profiles')
 .select('user_id, full_name, username, bio, profile_photo_url, primary_role, is_banned')
@@ -400,6 +522,10 @@ export class SupabaseSearchRepository implements SearchRepository {
     }
 
     const creatorIds = (data ?? []).map((row) => row.user_id);
+    if (creatorIds.length === 0) {
+      return [];
+    }
+
     const { data: followerRows, error: followerError } = await this.supabase
       .from('creator_followers')
       .select('creator_user_id, follower_user_id')
@@ -434,5 +560,3 @@ export class SupabaseSearchRepository implements SearchRepository {
     }));
   }
 }
-
-

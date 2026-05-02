@@ -3,7 +3,6 @@ import type {
   CourseNode,
   CourseNodePreview,
   HtmlNodePayload,
-  GithubNodePayload,
   NodeType,
   QuestionNodePayload,
   QuizNodePayload,
@@ -55,10 +54,8 @@ function extractSnippet(type: NodeType, payload: unknown) {
       const normalized = normalizeNodePayload(type, payload) as PdfNodePayload;
       return truncate(`${normalized.title ?? ''} ${normalized.note}`);
     }
-    case 'github': {
-      const normalized = normalizeNodePayload(type, payload) as GithubNodePayload;
-      return truncate(`${normalized.repositoryUrl} ${normalized.previewUrl} ${normalized.note}`);
-    }
+    case 'github':
+      return '';
     default:
       return '';
   }
@@ -86,5 +83,4 @@ export function deriveSafeNodeExcerpt(
 
   return '';
 }
-
 

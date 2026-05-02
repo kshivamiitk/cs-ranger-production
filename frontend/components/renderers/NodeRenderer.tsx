@@ -10,14 +10,12 @@ import type {
   ContentNodePayload,
   CourseNode,
   HtmlNodePayload,
-  GithubNodePayload,
   PdfNodePayload,
   QuestionNodePayload,
   QuizNodePayload,
   VideoNodePayload,
 } from '@/src/domain/models';
 import { HtmlSandbox, type HtmlSandboxNavigation } from '@/components/renderers/HtmlSandbox';
-import { GithubWebsiteEmbed } from '@/components/renderers/GithubWebsiteEmbed';
 import { PdfEmbed } from '@/components/renderers/PdfEmbed';
 import { RichContentRenderer } from '@/components/renderers/RichContentRenderer';
 import { VideoEmbed } from '@/components/renderers/VideoEmbed';
@@ -157,16 +155,19 @@ function PdfNodeView(props: {
   );
 }
 
-function GithubNodeView(props: {
+function RetiredNodeView(props: {
   title: string;
-  payload: GithubNodePayload;
   showTitle: boolean;
   mode: NodeRenderMode;
 }) {
   return (
     <div className="stack node-renderer-root" data-mode={props.mode}>
       <NodeHeading title={props.title} showTitle={props.showTitle} />
-      <GithubWebsiteEmbed payload={props.payload} title={props.title} />
+      <section className="empty-state retired-node-state">
+        <div className="section-label">Retired Node</div>
+        <h3>This lesson format is no longer available</h3>
+        <p>Ask the creator to republish this lesson as content, HTML, question, quiz, video, or PDF.</p>
+      </section>
     </div>
   );
 }
@@ -228,10 +229,9 @@ export function NodeRenderer(props: {
     case 'pdf':
       return <PdfNodeView title={props.node.title} payload={props.node.payload as PdfNodePayload} showTitle={showTitle} mode={mode} />;
     case 'github':
-      return <GithubNodeView title={props.node.title} payload={props.node.payload as GithubNodePayload} showTitle={showTitle} mode={mode} />;
+      return <RetiredNodeView title={props.node.title} showTitle={showTitle} mode={mode} />;
     default:
       return null;
   }
 }
-
 

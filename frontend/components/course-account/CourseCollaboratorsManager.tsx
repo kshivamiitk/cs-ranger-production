@@ -165,7 +165,7 @@ export function CourseCollaboratorsManager(props: { courseId: string; courseTitl
         <div>
           <h2 className="panel-title" style={{ marginBottom: 8 }}>Collaborator workspace</h2>
           <p className="muted" style={{ margin: 0 }}>
-            {props.courseTitle} can now have GitHub-style collaborators. The owner keeps pricing, payout, and publishing control. Collaborators can edit modules and nodes and will see this course in their creator dashboard too.
+            {props.courseTitle} can now have structured collaborators. The owner keeps pricing, payout, and publishing control. Collaborators can edit modules and nodes and will see this course in their creator dashboard too.
           </p>
         </div>
       </div>
@@ -289,5 +289,4 @@ export function CourseCollaboratorsManager(props: { courseId: string; courseTitl
     </section>
   );
 }
-
 

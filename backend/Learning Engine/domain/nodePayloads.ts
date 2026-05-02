@@ -2,7 +2,6 @@ import type {
   ContentNodePayload,
   CourseNode,
   HtmlNodePayload,
-  GithubNodePayload,
   NodePayload,
   NodeType,
   QuestionNodePayload,
@@ -151,17 +150,6 @@ function normalizePdfNodePayload(payload: unknown): PdfNodePayload {
   };
 }
 
-function normalizeGithubNodePayload(payload: unknown): GithubNodePayload {
-  const record = asObject(payload) ?? {};
-
-  return {
-    repositoryUrl: asString(record.repositoryUrl, 'https://github.com/your-name/your-course-website'),
-    previewUrl: asString(record.previewUrl, 'https://your-name.github.io/your-course-website/'),
-    branch: asString(record.branch, 'main'),
-    note: asString(record.note, 'Paste a GitHub Pages, Vercel, Netlify, or Cloudflare Pages URL to render the full course website in the learner box.'),
-  };
-}
-
 function normalizeHtmlNodePayload(payload: unknown): HtmlNodePayload {
   const record = asObject(payload) ?? {};
 
@@ -196,12 +184,24 @@ export function normalizeNodePayload(type: NodeType, payload: unknown): NodePayl
     case 'pdf':
       return normalizePdfNodePayload(payload);
     case 'github':
-      return normalizeGithubNodePayload(payload);
+      return normalizeContentNodePayload({
+        introduction: {
+          format: 'markdown',
+          content: 'This retired node type no longer renders in CS Ranger.',
+        },
+        explanation: {
+          format: 'markdown',
+          content: 'Create a new supported node type and move the lesson content there.',
+        },
+        solvedExamples: {
+          format: 'markdown',
+          content: 'Supported node types are content, HTML, question, quiz, video, and PDF.',
+        },
+      });
   }
 }
 
 export function createDefaultNodePayload(type: CourseNode['type']): CourseNode['payload'] {
   return normalizeNodePayload(type, {});
 }
-
 

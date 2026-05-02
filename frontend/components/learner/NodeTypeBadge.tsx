@@ -1,7 +1,7 @@
 'use client';
 
 import type { LucideIcon } from 'lucide-react';
-import { BookOpen, CircleHelp, Code2, FileText, Github, ListChecks, PlayCircle } from 'lucide-react';
+import { ArchiveX, BookOpen, CircleHelp, Code2, FileText, ListChecks, PlayCircle } from 'lucide-react';
 
 import { cn } from '@/lib/utils';
 import type { NodeType } from '@/src/domain/models';
@@ -14,7 +14,7 @@ const iconByType: Record<NodeType, LucideIcon> = {
   video: PlayCircle,
   html: Code2,
   pdf: FileText,
-  github: Github,
+  github: ArchiveX,
 };
 
 export function NodeTypeBadge(props: {
@@ -31,5 +31,4 @@ export function NodeTypeBadge(props: {
     </span>
   );
 }
-
 

@@ -2,7 +2,6 @@ import type {
   ContentNodePayload,
   CourseNode,
   CourseNodePreview,
-  GithubNodePayload,
   ModuleWithNodes,
   NodeType,
   QuestionNodePayload,
@@ -26,7 +25,7 @@ export function getNodeTypeLabel(type: NodeType) {
     case 'pdf':
       return 'PDF';
     case 'github':
-      return 'GitHub Site';
+      return 'Retired';
   }
 }
 
@@ -83,7 +82,7 @@ export function getNodeSummary(node: AnyNodeSummaryInput) {
       case 'pdf':
         return 'Readable PDF lesson';
       case 'github':
-        return 'Embedded GitHub-powered course website';
+        return 'Retired lesson format';
     }
   }
 
@@ -104,10 +103,8 @@ export function getNodeSummary(node: AnyNodeSummaryInput) {
       const payload = (node as CourseNode).payload as PdfNodePayload;
       return payload.title ? `PDF • ${payload.title}` : 'PDF lesson reader';
     }
-    case 'github': {
-      const payload = (node as CourseNode).payload as GithubNodePayload;
-      return payload.previewUrl ? 'GitHub website preview embedded in the reader' : 'GitHub repository website';
-    }
+    case 'github':
+      return 'Retired lesson format';
     case 'question': {
       const payload = (node as CourseNode).payload as QuestionNodePayload;
       return `${payload.items.length} question${payload.items.length === 1 ? '' : 's'} • ${payload.format}`;
@@ -152,9 +149,7 @@ export function getNodeLearnerSubtitle(node: Pick<CourseNodePreview, 'type' | 'i
         ? `${access.label} PDF lesson with embedded reading support.`
         : 'PDF lesson with embedded reading support.';
     case 'github':
-      return node.isPremium
-        ? `${access.label} GitHub-powered website embedded inside the lesson box.`
-        : 'GitHub-powered website embedded inside the lesson box.';
+      return `${access.label} retired lesson format.`;
   }
 }
 
@@ -172,5 +167,4 @@ export function getModuleNodeTypeCounts(module: Pick<ModuleWithNodes, 'nodes'>) 
       count: counts.get(type) ?? 0,
     }));
 }
-
 

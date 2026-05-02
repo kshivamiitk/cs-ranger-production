@@ -8,12 +8,12 @@ import { createServerContainer } from '@/src/infrastructure/container/server';
 
 const getReadonlyServerContainer = cache(async () => createServerContainer());
 
-function themeFromCookie(value: string | undefined): ThemeMode {
+function themeFromCookie(value: string | undefined): ThemeMode | null {
   if (value === 'light' || value === 'dark' || value === 'ocean' || value === 'forest' || value === 'ember') {
     return value;
   }
 
-  return defaultTheme;
+  return null;
 }
 
 export async function getServerViewerContext() {
@@ -24,12 +24,13 @@ export async function getServerViewerContext() {
 
 export async function getServerPageContext() {
   const cookieStore = await cookies();
-  const themeMode = themeFromCookie(cookieStore.get(cookieNames.theme)?.value);
+  const cookieThemeMode = themeFromCookie(cookieStore.get(cookieNames.theme)?.value);
   const container = await getReadonlyServerContainer();
-  const viewerContext = await container.authService.getViewerContext(themeMode);
+  const viewerContext = await container.authService.getViewerContext(cookieThemeMode ?? defaultTheme);
 
   return {
     ...viewerContext,
+    themeMode: cookieThemeMode ?? viewerContext.themeMode,
     container,
   };
 }

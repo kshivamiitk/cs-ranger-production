@@ -10,7 +10,6 @@ const nodeTypeOptions: Array<{ value: NodeType; label: string }> = [
   { value: 'video', label: 'Video node' },
   { value: 'html', label: 'HTML node' },
   { value: 'pdf', label: 'PDF node' },
-  { value: 'github', label: 'GitHub website node' },
 ];
 
 export function NodeTypeSelect(props: {
@@ -18,6 +17,11 @@ export function NodeTypeSelect(props: {
   onChange: (value: NodeType) => void;
   disabled?: boolean;
 }) {
+  const options =
+    props.value === 'github'
+      ? [{ value: 'github' as NodeType, label: 'Retired node type' }, ...nodeTypeOptions]
+      : nodeTypeOptions;
+
   return (
     <label className="field">
       <span className="field-label">Node type</span>
@@ -26,7 +30,7 @@ export function NodeTypeSelect(props: {
         disabled={props.disabled}
         onChange={(event) => props.onChange(event.target.value as NodeType)}
       >
-        {nodeTypeOptions.map((option) => (
+        {options.map((option) => (
           <option key={option.value} value={option.value}>
             {option.label}
           </option>
@@ -35,5 +39,4 @@ export function NodeTypeSelect(props: {
     </label>
   );
 }
-
 

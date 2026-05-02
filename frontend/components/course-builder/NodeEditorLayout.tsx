@@ -7,7 +7,6 @@ import { useMemo, useState } from 'react';
 
 import { ContentNodeEditor } from '@/components/course-builder/ContentNodeEditor';
 import { HtmlNodeEditor } from '@/components/course-builder/HtmlNodeEditor';
-import { GithubNodeEditor } from '@/components/course-builder/GithubNodeEditor';
 import { PdfNodeEditor } from '@/components/course-builder/PdfNodeEditor';
 import { NodeTypeSelect } from '@/components/course-builder/NodeTypeSelect';
 import { QuestionNodeEditor } from '@/components/course-builder/QuestionNodeEditor';
@@ -28,7 +27,6 @@ import type {
   CourseDetail,
   CourseNode,
   HtmlNodePayload,
-  GithubNodePayload,
   ModuleWithNodes,
   NodeType,
   PdfNodePayload,
@@ -63,8 +61,8 @@ const nodeTypeCopy: Record<NodeType, { label: string; description: string }> = {
     description: 'Upload or link a PDF and let learners read it directly inside the course node.',
   },
   github: {
-    label: 'GitHub website node',
-    description: 'Embed a deployed GitHub-powered course website inside the same learner box as HTML nodes.',
+    label: 'Retired website node',
+    description: 'This legacy node type is no longer available. Use HTML, content, video, question, quiz, or PDF nodes instead.',
   },
 };
 
@@ -118,11 +116,12 @@ export function NodeEditorLayout(props: CreateNodeEditorProps | EditNodeEditorPr
   const pricingHref = `/creator/courses/${props.course.id}/edit`;
   const coursePremiumState = deriveCoursePremiumState(props.course, draft.isPremium ? 1 : 0);
   const currentNodeCountsAsFree = props.mode === 'edit' && !props.node.isPremium;
+  const nodeTypeIsRetired = draft.type === 'github';
   const projectedFreeNodeCount =
     props.course.freeNodeCount - (currentNodeCountsAsFree ? 1 : 0) + (draft.isPremium ? 0 : 1);
   const freeNodePolicyApplies = courseCountsAsPremium(props.course);
   const freeNodePolicyBlocked = freeNodePolicyApplies && projectedFreeNodeCount > PREMIUM_COURSE_FREE_NODE_LIMIT;
-  const submitDisabled = saving || freeNodePolicyBlocked;
+  const submitDisabled = saving || freeNodePolicyBlocked || nodeTypeIsRetired;
 
   function changeNodeType(type: NodeType) {
     if (props.mode === 'edit') {
@@ -198,7 +197,16 @@ export function NodeEditorLayout(props: CreateNodeEditorProps | EditNodeEditorPr
       case 'pdf':
         return <PdfNodeEditor payload={draft.payload as PdfNodePayload} onChange={(payload) => setDraft({ ...draft, payload })} />;
       case 'github':
-        return <GithubNodeEditor payload={draft.payload as GithubNodePayload} onChange={(payload) => setDraft({ ...draft, payload })} />;
+        return (
+          <section className="card stack retired-node-notice">
+            <div className="section-label">Retired Node Type</div>
+            <h3 className="panel-title">This node type is no longer available</h3>
+            <p className="muted">
+              Create a new supported node and move the lesson content there. New course nodes can be content,
+              HTML, question, quiz, video, or PDF.
+            </p>
+          </section>
+        );
     }
   }, [draft]);
 
@@ -343,6 +351,11 @@ export function NodeEditorLayout(props: CreateNodeEditorProps | EditNodeEditorPr
         </section>
       </section>
 
+      {nodeTypeIsRetired ? (
+        <div className="studio-inline-alert">
+          This retired node type cannot be saved. Create a supported replacement node to publish this lesson.
+        </div>
+      ) : null}
       {error ? <div className="studio-inline-alert">{error}</div> : null}
 
       <div className="inline">
@@ -357,4 +370,3 @@ export function NodeEditorLayout(props: CreateNodeEditorProps | EditNodeEditorPr
     </form>
   );
 }
-

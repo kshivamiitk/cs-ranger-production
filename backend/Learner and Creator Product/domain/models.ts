@@ -236,21 +236,13 @@ export interface PdfNodePayload {
   note: string;
 }
 
-export interface GithubNodePayload {
-  repositoryUrl: string;
-  previewUrl: string;
-  branch?: string | null;
-  note: string;
-}
-
 export type NodePayload =
   | ContentNodePayload
   | HtmlNodePayload
   | QuestionNodePayload
   | QuizNodePayload
   | VideoNodePayload
-  | PdfNodePayload
-  | GithubNodePayload;
+  | PdfNodePayload;
 
 export interface CourseNode<TPayload extends NodePayload = NodePayload> {
   id: string;

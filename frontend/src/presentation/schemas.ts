@@ -37,14 +37,6 @@ const requiredUrlOrDataPdfSchema = z
     'Enter a valid PDF URL or upload a valid PDF file.'
   );
 
-const requiredExternalUrlSchema = (label: string, max: number) =>
-  z
-    .string()
-    .trim()
-    .min(1, `${label} is required.`)
-    .max(max, `${label} is too long.`)
-    .refine((value) => URL.canParse(value), `Enter a valid ${label.toLowerCase()}.`);
-
 const optionalProfilePhotoSchema = z
   .string()
   .trim()
@@ -224,15 +216,6 @@ export const nodeSchema = z.discriminatedUnion('type', [
       note: requiredBoundedString('PDF notes', AUTHORING_LIMITS.pdfNote),
     }),
   }).extend(nodeMetaSchema.shape),
-  z.object({
-    type: z.literal('github'),
-    payload: z.object({
-      repositoryUrl: requiredExternalUrlSchema('Repository URL', AUTHORING_LIMITS.githubUrl),
-      previewUrl: requiredExternalUrlSchema('Preview URL', AUTHORING_LIMITS.githubUrl),
-      branch: z.string().trim().max(80).transform((value) => (value.length === 0 ? null : value)).nullable().optional(),
-      note: requiredBoundedString('GitHub website notes', AUTHORING_LIMITS.githubNote),
-    }),
-  }).extend(nodeMetaSchema.shape),
 ]);
 
 export const latexPreviewSourceSchema = z
@@ -384,5 +367,4 @@ export const courseReviewUpsertSchema = z.object({
       return value.length === 0 ? null : value;
     }),
 });
-
 

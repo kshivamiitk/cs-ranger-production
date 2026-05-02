@@ -81,7 +81,7 @@ export default async function HomePage() {
         <div className="marketing-hero-panel marketing-hero-panel-conversation">
           <div className="claude-style-note">
             <span className="section-label">v1.0 production system</span>
-            <p>Fast indexed APIs, HTML/CSS/JS runtime, PDF reading, GitHub website embeds, test reports, and consistent premium surfaces.</p>
+            <p>Fast indexed APIs, HTML/CSS/JS runtime, PDF reading, test reports, and consistent premium surfaces.</p>
           </div>
           <div className="marketing-conversation-stack">
             <article className="marketing-conversation-bubble marketing-conversation-bubble-user">
@@ -115,4 +115,3 @@ export default async function HomePage() {
     </main>
   );
 }
-

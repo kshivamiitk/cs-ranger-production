@@ -196,17 +196,21 @@ export function SupportWorkspace(props: {
   function renderMessage(message: SupportThreadMessage) {
     if (!props.activeThread) return null;
     const messageFromThreadSender = message.senderUserId === props.activeThread.senderUserId;
+    const messageFromCurrentViewer = message.senderUserId === props.viewerId;
     const senderName = messageFromThreadSender
       ? (props.activeThread.senderProfile?.fullName ?? 'Sender')
       : (props.activeThread.targetAdmin?.fullName ?? 'Admin');
-    const messageRoleLabel = message.senderUserId === props.viewerId ? 'You' : (messageFromThreadSender ? 'Learner' : 'Admin');
+    const displaySenderName = messageFromCurrentViewer ? props.viewerName : senderName;
+    const messageRoleLabel = messageFromCurrentViewer ? 'You' : (messageFromThreadSender ? 'Learner' : 'Admin');
     const rowClassName = cn(
       'v18-support-message-row',
-      messageFromThreadSender ? 'is-thread-sender' : 'is-thread-recipient'
+      messageFromThreadSender ? 'is-thread-sender' : 'is-thread-recipient',
+      messageFromCurrentViewer ? 'is-current-viewer' : 'is-counterparty'
     );
     const bubbleClassName = cn(
       'v18-support-message-bubble',
       messageFromThreadSender ? 'is-thread-sender' : 'is-thread-recipient',
+      messageFromCurrentViewer ? 'is-current-viewer' : 'is-counterparty',
       message.isDeleted ? 'is-deleted' : undefined
     );
     const isEditing = editingMessageId === message.id;
@@ -217,7 +221,7 @@ export function SupportWorkspace(props: {
       return (
         <div key={message.id} className={rowClassName}>
           <form className={cn(bubbleClassName, 'v18-support-edit-card')} onSubmit={handleEditSubmit}>
-            <div className="v18-support-message-sender">Editing {senderName}</div>
+            <div className="v18-support-message-sender">Editing {displaySenderName}</div>
             <textarea
               className="input v18-support-composer-input"
               value={editingBody}
@@ -261,7 +265,7 @@ export function SupportWorkspace(props: {
         <article className={bubbleClassName}>
           <div className="v18-support-message-header">
             <div className="stack stack-gap-4">
-              <div className="v18-support-message-sender">{senderName}</div>
+              <div className="v18-support-message-sender">{displaySenderName}</div>
               <div className="v18-support-message-role">{messageRoleLabel}</div>
             </div>
             {(canEdit || canDelete) ? (
@@ -362,8 +366,13 @@ export function SupportWorkspace(props: {
                   <span className="studio-badge studio-badge-muted">{props.activeThread.status}</span>
                   {props.activeThread.unreadCount > 0 ? <span className="v18-support-unread-pill is-visible">{props.activeThread.unreadCount} unread</span> : null}
                 </div>
-                <h2 className="panel-title text-no-margin">{props.activeThread.subject ?? 'Untitled support thread'}</h2>
-                <span className="muted">{activeCounterpartyName}</span>
+                <div className="v18-support-chat-title-row">
+                  <UserAvatar src={activeCounterpartyAvatar} name={activeCounterpartyName ?? 'Support'} alt={activeCounterpartyName ?? 'Support'} size="md" />
+                  <div className="stack stack-gap-4">
+                    <h2 className="panel-title text-no-margin">{props.activeThread.subject ?? 'Untitled support thread'}</h2>
+                    <span className="muted">{activeCounterpartyName}</span>
+                  </div>
+                </div>
               </div>
               {props.viewerIsAdmin ? (
                 <div className="v18-support-status-actions">
@@ -497,4 +506,3 @@ export function SupportWorkspace(props: {
     </section>
   );
 }
-

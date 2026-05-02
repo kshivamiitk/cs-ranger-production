@@ -34,7 +34,6 @@ export default async function ProfileSettingsPage() {
           </div>
           <div className="inline premium-badge-row">
             <span className="studio-badge studio-badge-primary">{profile.primaryRole}</span>
-            {profile.githubUsername ? <span className="studio-badge studio-badge-muted">GitHub: {profile.githubUsername}</span> : null}
             {profile.isAdmin ? <span className="studio-badge studio-badge-success">admin</span> : null}
           </div>
         </section>
@@ -45,12 +44,9 @@ export default async function ProfileSettingsPage() {
           username={profile.username ?? ''}
           bio={profile.bio ?? ''}
           themeMode={profile.themeMode}
-          githubUsername={profile.githubUsername ?? ''}
-          githubProfileUrl={profile.githubProfileUrl ?? ''}
         />
       </section>
     </AppShell>
   );
 }
-
 

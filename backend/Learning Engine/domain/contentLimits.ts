@@ -12,13 +12,10 @@ export const AUTHORING_LIMITS = {
   javascript: 200_000,
   pdfUrl: 6_000_000,
   pdfNote: 200_000,
-  githubUrl: 2_000,
-  githubNote: 200_000,
 } as const;
 
 export const LATEX_PREVIEW_SOURCE_MAX = 600_000;
 export const LATEX_PREVIEW_TIMEOUT_MS = 15_000;
 export const LATEX_PREVIEW_CACHE_TTL_MS = 10 * 60 * 1000;
 export const LATEX_PREVIEW_CACHE_MAX_ENTRIES = 20;
-
 

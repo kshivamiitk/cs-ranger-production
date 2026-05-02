@@ -50,9 +50,9 @@ const roleCards: Array<{ value: UserRole; title: string; description: string }> 
   },
 ] as const;
 
-export function AuthForm({ nextPath }: { nextPath: string }) {
+export function AuthForm({ nextPath, initialMode = 'signin' }: { nextPath: string; initialMode?: AuthMode }) {
   const router = useRouter();
-  const [mode, setMode] = useState<AuthMode>('signin');
+  const [mode, setMode] = useState<AuthMode>(initialMode);
   const [error, setError] = useState<string | null>(null);
   const [message, setMessage] = useState<string | null>(null);
   const [pending, startTransition] = useTransition();
@@ -123,7 +123,7 @@ export function AuthForm({ nextPath }: { nextPath: string }) {
       <div className="auth-form-header">
         <div className="auth-form-brand">
           <BrandSymbol size="sm" />
-          <div className="stack" style={{ gap: 4 }}>
+          <div className="auth-form-brand-text">
             <span className="tag">Secure access</span>
             <span className="auth-form-brand-copy">Email or Google</span>
           </div>
@@ -198,7 +198,7 @@ export function AuthForm({ nextPath }: { nextPath: string }) {
                 required
                 disabled={pending}
               />
-              <p className="muted" style={{ margin: '8px 0 0' }}>This unique username is how other creators find you for course collaboration.</p>
+              <p className="muted auth-field-hint">This unique username is how other creators find you for course collaboration.</p>
             </label>
           </>
         ) : null}
@@ -258,7 +258,7 @@ export function AuthForm({ nextPath }: { nextPath: string }) {
         </Button>
 
         {mode === 'signin' ? (
-          <p className="muted" style={{ margin: 0, textAlign: 'center' }}>
+          <p className="muted auth-forgot-row">
             <Link href={`/forgot-password?next=${encodeURIComponent(nextPath)}`}>Forgot password?</Link>
           </p>
         ) : null}
@@ -285,5 +285,4 @@ export function AuthForm({ nextPath }: { nextPath: string }) {
     </section>
   );
 }
-
 

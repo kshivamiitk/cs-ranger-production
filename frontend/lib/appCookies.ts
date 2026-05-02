@@ -8,6 +8,7 @@ const cookieOptions = {
   sameSite: 'lax' as const,
   secure: process.env.NODE_ENV === 'production',
   path: '/',
+  maxAge: 60 * 60 * 24 * 365,
 };
 
 export function applyViewerCookies(response: NextResponse, viewer: Viewer) {
@@ -22,5 +23,4 @@ export function clearViewerCookies(response: NextResponse) {
   response.cookies.set(cookieNames.pendingRole, '', { ...cookieOptions, maxAge: 0 });
   response.cookies.set('app_is_admin', '', { ...cookieOptions, maxAge: 0 });
 }
-
 

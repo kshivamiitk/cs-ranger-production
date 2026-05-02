@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     default: 'CS Ranger',
     template: '%s · CS Ranger',
   },
-  description: 'Scale-ready creator and learner platform with fast course APIs, HTML/PDF/GitHub nodes, immersive previews, and production testing hooks.',
+  description: 'Scale-ready creator and learner platform with fast course APIs, modern course nodes, immersive previews, and production testing hooks.',
   icons: {
     icon: [
       { url: '/favicon.ico' },
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'CS Ranger',
-    description: 'Scale-ready creator and learner platform with fast course APIs, HTML/PDF/GitHub nodes, immersive previews, and production testing hooks.',
+    description: 'Scale-ready creator and learner platform with fast course APIs, modern course nodes, immersive previews, and production testing hooks.',
     images: ['/image.jpg'],
   },
 };
@@ -48,5 +48,4 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
     </html>
   );
 }
-
 

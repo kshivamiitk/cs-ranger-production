@@ -25,8 +25,6 @@ export function ProfileSettingsForm(props: {
   profilePhotoUrl: string;
   bio: string;
   themeMode: ThemeMode;
-  githubUsername: string;
-  githubProfileUrl: string;
 }) {
   const router = useRouter();
   const [pending, startTransition] = useTransition();
@@ -35,8 +33,6 @@ export function ProfileSettingsForm(props: {
   const [profilePhotoUrl, setProfilePhotoUrl] = useState(props.profilePhotoUrl);
   const [bio, setBio] = useState(props.bio);
   const [themeMode, setThemeMode] = useState<ThemeMode>(props.themeMode);
-  const [githubUsername, setGithubUsername] = useState(props.githubUsername);
-  const [githubProfileUrl, setGithubProfileUrl] = useState(props.githubProfileUrl);
   const [error, setError] = useState<string | null>(null);
   const [message, setMessage] = useState<string | null>(null);
   const [photoStatus, setPhotoStatus] = useState<string | null>(null);
@@ -58,11 +54,10 @@ export function ProfileSettingsForm(props: {
             profilePhotoUrl,
             bio,
             themeMode,
-            githubUsername,
-            githubProfileUrl,
           }),
         });
         document.documentElement.dataset.theme = themeMode;
+        document.cookie = `app_theme=${themeMode}; path=/; max-age=31536000; SameSite=Lax`;
         setMessage('Profile updated.');
         router.refresh();
       } catch (caught) {
@@ -101,6 +96,12 @@ export function ProfileSettingsForm(props: {
       setError('Image upload failed while reading the file.');
     };
     reader.readAsDataURL(file);
+  }
+
+  function handleThemeModeChange(nextThemeMode: ThemeMode) {
+    setThemeMode(nextThemeMode);
+    document.documentElement.dataset.theme = nextThemeMode;
+    document.cookie = `app_theme=${nextThemeMode}; path=/; max-age=31536000; SameSite=Lax`;
   }
 
   return (
@@ -148,33 +149,9 @@ export function ProfileSettingsForm(props: {
         <TextArea value={bio} onChange={(event) => setBio(event.target.value)} rows={6} placeholder="Tell other learners and creators a bit about yourself." />
       </label>
 
-
-      <section className="card stack" style={{ gap: 12 }}>
-        <div>
-          <span className="field-label">GitHub course identity</span>
-          <p className="muted" style={{ margin: '6px 0 0' }}>Linking this lets you use GitHub website nodes confidently when you publish course websites from your repositories.</p>
-        </div>
-        <label className="field">
-          <span className="field-label">GitHub username</span>
-          <Input
-            value={githubUsername}
-            onChange={(event) => setGithubUsername(event.target.value.toLowerCase().replace(/[^a-z0-9-]/g, ''))}
-            placeholder="your-github-handle"
-          />
-        </label>
-        <label className="field">
-          <span className="field-label">GitHub profile URL</span>
-          <Input
-            value={githubProfileUrl}
-            onChange={(event) => setGithubProfileUrl(event.target.value)}
-            placeholder="https://github.com/your-github-handle"
-          />
-        </label>
-      </section>
-
       <label className="field">
         <span className="field-label">Theme mode</span>
-        <Select value={themeMode} onChange={(event) => setThemeMode(event.target.value as ThemeMode)}>
+        <Select value={themeMode} onChange={(event) => handleThemeModeChange(event.target.value as ThemeMode)}>
           {themeOptions.map((option) => (
             <option key={option.value} value={option.value}>{option.label}</option>
           ))}
@@ -190,5 +167,3 @@ export function ProfileSettingsForm(props: {
     </form>
   );
 }
-
-

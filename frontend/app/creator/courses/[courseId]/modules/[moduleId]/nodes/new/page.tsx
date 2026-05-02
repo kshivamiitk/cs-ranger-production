@@ -7,7 +7,7 @@ import type { NodeType } from '@/src/domain/models';
 import { requireServerCreator } from '@/src/presentation/serverPage';
 
 function resolveNodeType(value: string | string[] | undefined): NodeType | undefined {
-  if (value === 'content' || value === 'question' || value === 'quiz' || value === 'video' || value === 'html' || value === 'pdf' || value === 'github') {
+  if (value === 'content' || value === 'question' || value === 'quiz' || value === 'video' || value === 'html' || value === 'pdf') {
     return value;
   }
 
@@ -65,4 +65,3 @@ export default async function CreateCourseNodePage({
     notFound();
   }
 }
-

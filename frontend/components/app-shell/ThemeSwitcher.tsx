@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, useTransition } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Palette } from 'lucide-react';
 
 import { apiJson } from '@/src/presentation/http/client';
@@ -19,33 +19,62 @@ const themeCopy: Record<ThemeMode, { label: string; caption: string }> = {
 
 export function ThemeSwitcher({ currentTheme, compact = false }: { currentTheme: ThemeMode; compact?: boolean }) {
   const [activeTheme, setActiveTheme] = useState(currentTheme);
-  const [pending, startTransition] = useTransition();
+  const saveTimerRef = useRef<number | null>(null);
+  const abortRef = useRef<AbortController | null>(null);
 
   useEffect(() => {
     setActiveTheme(currentTheme);
   }, [currentTheme]);
 
-  function applyTheme(themeMode: ThemeMode) {
-    setActiveTheme(themeMode);
-    startTransition(async () => {
-      document.documentElement.dataset.theme = themeMode;
-      document.cookie = `app_theme=${themeMode}; path=/; SameSite=Lax`;
+  useEffect(() => {
+    return () => {
+      if (saveTimerRef.current) {
+        window.clearTimeout(saveTimerRef.current);
+      }
+      abortRef.current?.abort();
+    };
+  }, []);
+
+  function persistTheme(themeMode: ThemeMode) {
+    if (saveTimerRef.current) {
+      window.clearTimeout(saveTimerRef.current);
+    }
+    abortRef.current?.abort();
+
+    saveTimerRef.current = window.setTimeout(async () => {
+      const controller = new AbortController();
+      abortRef.current = controller;
+
       try {
         await apiJson('/api/theme', {
           method: 'POST',
           body: JSON.stringify({ themeMode }),
+          signal: controller.signal,
         });
       } catch (error) {
-        console.warn(messages.theme.saveWarning, error);
+        if (!controller.signal.aborted) {
+          console.warn(messages.theme.saveWarning, error);
+        }
+      } finally {
+        if (abortRef.current === controller) {
+          abortRef.current = null;
+        }
       }
-    });
+    }, 180);
+  }
+
+  function applyTheme(themeMode: ThemeMode) {
+    setActiveTheme(themeMode);
+    document.documentElement.dataset.theme = themeMode;
+    document.cookie = `app_theme=${themeMode}; path=/; max-age=31536000; SameSite=Lax`;
+    persistTheme(themeMode);
   }
 
   if (compact) {
     return (
       <label className="top-navbar-theme-select" aria-label="Switch theme">
         <Palette size={16} />
-        <select value={activeTheme} disabled={pending} onChange={(event) => applyTheme(event.target.value as ThemeMode)}>
+        <select value={activeTheme} onChange={(event) => applyTheme(event.target.value as ThemeMode)}>
           {themeOptions.map((themeMode) => (
             <option key={themeMode} value={themeMode}>
               {themeCopy[themeMode].label}
@@ -66,7 +95,6 @@ export function ThemeSwitcher({ currentTheme, compact = false }: { currentTheme:
             variant="ghost"
             className="theme-option-button"
             data-active={activeTheme === themeMode}
-            disabled={pending}
             onClick={() => applyTheme(themeMode)}
           >
             <span className="theme-option-swatch" data-theme-preview={themeMode} />
@@ -80,5 +108,4 @@ export function ThemeSwitcher({ currentTheme, compact = false }: { currentTheme:
     </div>
   );
 }
-
 

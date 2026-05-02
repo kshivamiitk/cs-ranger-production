@@ -40,9 +40,18 @@ function routeSupportsBlockedRedirect(pathname: string) {
 }
 
 function redirectToLogin(request: NextRequest) {
-  const loginUrl = new URL('/login', request.url);
-  loginUrl.searchParams.set('next', request.nextUrl.pathname);
-  return NextResponse.redirect(loginUrl);
+  const params = new URLSearchParams({ next: request.nextUrl.pathname });
+  return redirectToInternalPath(`/login?${params.toString()}`);
+}
+
+function redirectToInternalPath(path: string) {
+  return new NextResponse(null, {
+    status: 307,
+    headers: {
+      Location: path,
+      'Cache-Control': 'no-store',
+    },
+  });
 }
 
 async function loadAccessProfile(request: NextRequest): Promise<{
@@ -124,15 +133,15 @@ export async function middleware(request: NextRequest) {
     }
 
     if (profile.is_banned && routeSupportsBlockedRedirect(pathname)) {
-      return NextResponse.redirect(new URL('/blocked', request.url));
+      return redirectToInternalPath('/blocked');
     }
 
     if (routeNeedsCreator(pathname) && profile.primary_role !== 'creator') {
-      return NextResponse.redirect(new URL('/dashboard', request.url));
+      return redirectToInternalPath('/dashboard');
     }
 
     if (routeNeedsAdmin(pathname) && !profile.is_admin) {
-      return NextResponse.redirect(new URL('/dashboard', request.url));
+      return redirectToInternalPath('/dashboard');
     }
 
     return response;

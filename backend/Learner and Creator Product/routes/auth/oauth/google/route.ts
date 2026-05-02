@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 
 import { cookieNames } from '@/lib/constants';
+import { env } from '@/lib/env';
 import { enforceRateLimit } from '@/src/platform/rate-limiting/redisRateLimiter';
 import { createServerContainer } from '@/src/infrastructure/container/server';
 import { failure, safeNextPath } from '@/src/presentation/http/routeUtils';
@@ -13,9 +14,10 @@ export async function GET(request: Request) {
     const url = new URL(request.url);
     const nextPath = safeNextPath(url.searchParams.get('next'));
     const role = url.searchParams.get('role') === 'creator' ? 'creator' : 'learner';
-    const callbackUrl = `${url.origin}/auth/callback?next=${encodeURIComponent(nextPath)}`;
+    const callbackUrl = new URL('/auth/callback', env.appUrl);
+    callbackUrl.searchParams.set('next', nextPath);
     const { authService } = await createServerContainer({ writeCookies: true });
-    const oauthUrl = await authService.beginGoogleOAuth(callbackUrl);
+    const oauthUrl = await authService.beginGoogleOAuth(callbackUrl.toString());
     const response = NextResponse.redirect(oauthUrl);
     response.cookies.set(cookieNames.pendingRole, role, {
       path: '/',
@@ -27,4 +29,3 @@ export async function GET(request: Request) {
     return failure(error, request);
   }
 }
-

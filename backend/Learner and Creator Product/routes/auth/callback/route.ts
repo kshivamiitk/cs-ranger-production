@@ -6,6 +6,16 @@ import { enforceRateLimit } from '@/src/platform/rate-limiting/redisRateLimiter'
 import { createServerContainer } from '@/src/infrastructure/container/server';
 import { failure, safeNextPath } from '@/src/presentation/http/routeUtils';
 
+function redirectToInternalPath(path: string) {
+  return new NextResponse(null, {
+    status: 307,
+    headers: {
+      Location: path,
+      'Cache-Control': 'no-store',
+    },
+  });
+}
+
 export async function GET(request: Request) {
   try {
     const rateLimited = await enforceRateLimit(request, 'auth');
@@ -17,7 +27,7 @@ export async function GET(request: Request) {
     const recovery = url.searchParams.get('recovery') === '1';
 
     if (!code) {
-      return NextResponse.redirect(new URL(`/login?next=${encodeURIComponent(nextPath)}`, request.url));
+      return redirectToInternalPath(`/login?next=${encodeURIComponent(nextPath)}`);
     }
 
     const { authService } = await createServerContainer({ writeCookies: true });
@@ -35,7 +45,7 @@ export async function GET(request: Request) {
         ? `/auth/reset-password?next=${encodeURIComponent(nextPath)}`
         : nextPath;
 
-    const response = NextResponse.redirect(new URL(destination, request.url));
+    const response = redirectToInternalPath(destination);
     applyViewerCookies(response, viewer);
     response.cookies.set(cookieNames.pendingRole, '', { path: '/', maxAge: 0 });
     return response;
@@ -43,4 +53,3 @@ export async function GET(request: Request) {
     return failure(error, request);
   }
 }
-

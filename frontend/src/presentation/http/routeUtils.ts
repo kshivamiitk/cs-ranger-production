@@ -112,7 +112,7 @@ export function failure(error: unknown, options?: Request | FailureOptions | nul
   );
 }
 
-export function isStrictInternalPath(value: string | null | undefined) {
+export function isStrictInternalPath(value: string | null | undefined): value is string {
   if (!value || !value.startsWith('/')) {
     return false;
   }
@@ -146,7 +146,7 @@ export function isStrictInternalPath(value: string | null | undefined) {
   return true;
 }
 
-export function safeNextPath(value: string | null | undefined, fallback = '/dashboard') {
+export function safeNextPath(value: string | null | undefined, fallback = '/dashboard'): string {
   if (!isStrictInternalPath(value)) {
     return fallback;
   }
@@ -183,7 +183,7 @@ export async function readJsonWithLimit(request: Request, maxBytes: number) {
   }
 }
 
-export function strictInternalPathOrDefault(value: string | null | undefined, fallback = '/dashboard') {
+export function strictInternalPathOrDefault(value: string | null | undefined, fallback = '/dashboard'): string {
   if (!isStrictInternalPath(value)) {
     return fallback;
   }

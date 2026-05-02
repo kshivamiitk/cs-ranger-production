@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 
 import { applyViewerCookies } from '@/lib/appCookies';
+import { env } from '@/lib/env';
 import { enforceRateLimit } from '@/src/platform/rate-limiting/redisRateLimiter';
 import { createServerContainer } from '@/src/infrastructure/container/server';
 import { signUpSchema } from '@/src/presentation/schemas';
@@ -16,10 +17,12 @@ export async function POST(request: Request) {
     const body = await readJsonWithLimit(request, AUTH_BODY_LIMIT_BYTES);
     const parsed = signUpSchema.parse(body);
     const nextPath = safeNextPath(typeof (body as { next?: unknown })?.next === 'string' ? (body as { next: string }).next : null);
+    const callbackUrl = new URL('/auth/callback', env.appUrl);
+    callbackUrl.searchParams.set('next', nextPath);
     const { authService } = await createServerContainer({ writeCookies: true });
     const result = await authService.signUp({
       ...parsed,
-      redirectTo: `${new URL(request.url).origin}/auth/callback?next=${encodeURIComponent(nextPath)}`,
+      redirectTo: callbackUrl.toString(),
     });
 
     if (!result.viewer) {
@@ -35,4 +38,3 @@ export async function POST(request: Request) {
     return failure(error, request);
   }
 }
-

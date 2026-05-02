@@ -41,11 +41,14 @@ function sanitize(value: unknown, depth = 0): unknown {
 }
 
 function write(level: LogLevel, message: string, fields: LogFields = {}) {
+  const sanitizedFields = sanitize(fields);
   const payload = {
     level,
     message,
     time: new Date().toISOString(),
-    ...sanitize(fields),
+    ...(sanitizedFields && typeof sanitizedFields === 'object' && !Array.isArray(sanitizedFields)
+      ? (sanitizedFields as LogFields)
+      : {}),
   };
   const line = JSON.stringify(payload);
   if (level === 'error') {

@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { ZodError } from 'zod';
 
+import { env } from '@/lib/env';
 import { enforceRateLimit } from '@/src/platform/rate-limiting/redisRateLimiter';
 import { createServerContainer } from '@/src/infrastructure/container/server';
 import { forgotPasswordSchema } from '@/src/presentation/schemas';
@@ -18,13 +19,14 @@ export async function POST(request: Request) {
     const body = await readJsonWithLimit(request, AUTH_BODY_LIMIT_BYTES);
     const parsed = forgotPasswordSchema.parse(body);
     const nextPath = safeNextPath(typeof (body as { next?: unknown })?.next === 'string' ? (body as { next: string }).next : null);
-    const origin = new URL(request.url).origin;
-    const redirectTo = `${origin}/auth/callback?recovery=1&next=${encodeURIComponent(nextPath)}`;
+    const callbackUrl = new URL('/auth/callback', env.appUrl);
+    callbackUrl.searchParams.set('recovery', '1');
+    callbackUrl.searchParams.set('next', nextPath);
 
     const { authService } = await createServerContainer();
     await authService.requestPasswordReset({
       email: parsed.email,
-      redirectTo,
+      redirectTo: callbackUrl.toString(),
     });
 
     return NextResponse.json({ message: genericMessage });
@@ -35,4 +37,3 @@ export async function POST(request: Request) {
     return NextResponse.json({ message: genericMessage });
   }
 }
-

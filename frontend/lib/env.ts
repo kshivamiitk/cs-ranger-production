@@ -1,5 +1,32 @@
 export type EnvPayoutMode = 'manual' | 'self_withdrawal' | 'admin_bulk';
 
+const productionAppUrl = 'https://cs-ranger.in';
+const localAppUrl = 'http://localhost:3000';
+
+function isLocalHostName(hostname: string) {
+  return hostname === 'localhost' || hostname === '127.0.0.1' || hostname === '0.0.0.0';
+}
+
+function resolveAppUrl() {
+  const configuredUrl = (process.env.NEXT_PUBLIC_APP_URL ?? process.env.NEXT_PUBLIC_SITE_URL ?? '').trim();
+  const fallbackUrl = process.env.NODE_ENV === 'production' ? productionAppUrl : localAppUrl;
+
+  if (!configuredUrl) {
+    return fallbackUrl;
+  }
+
+  try {
+    const parsedUrl = new URL(configuredUrl);
+    if (process.env.NODE_ENV === 'production' && isLocalHostName(parsedUrl.hostname)) {
+      return productionAppUrl;
+    }
+
+    return parsedUrl.origin;
+  } catch {
+    return fallbackUrl;
+  }
+}
+
 function resolvePayoutMode(): EnvPayoutMode {
   const raw = (process.env.PAYOUT_MODE ?? '').trim().toLowerCase();
   if (raw === 'manual' || raw === 'self_withdrawal' || raw === 'admin_bulk') {
@@ -10,9 +37,10 @@ function resolvePayoutMode(): EnvPayoutMode {
 }
 
 const payoutMode = resolvePayoutMode();
+const appUrl = resolveAppUrl();
 
 export const env = {
-  appUrl: process.env.NEXT_PUBLIC_APP_URL ?? process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000',
+  appUrl,
   supabaseUrl: process.env.NEXT_PUBLIC_SUPABASE_URL ?? '',
   supabaseAnonKey: process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY ?? process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? '',
   supabaseServiceRoleKey: process.env.SUPABASE_SERVICE_ROLE_KEY ?? '',
@@ -60,4 +88,3 @@ export function assertSupabaseEnv() {
     throw new Error('Missing environment variable: NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY or NEXT_PUBLIC_SUPABASE_ANON_KEY');
   }
 }
-

@@ -41,7 +41,7 @@ export function CreatorCourseHero(props: {
   return (
     <section className="studio-hero-card">
       <div className="studio-hero-grid">
-        <div className="stack-lg" style={{ gap: 18 }}>
+        <div className="stack-lg creator-course-hero-copy">
           <Link href={props.backHref} className="inline muted-link">
             <ArrowLeft size={16} />
             {props.backLabel}
@@ -67,18 +67,18 @@ export function CreatorCourseHero(props: {
             </span>
           </div>
 
-          <div className="stack" style={{ gap: 12 }}>
+          <div className="stack creator-course-title-stack">
             <div className="section-label">Creator Modules</div>
-            <h2 className="headline" style={{ fontSize: 'clamp(2.1rem, 3vw, 3.25rem)' }}>{props.course.title}</h2>
-            <p className="subheadline" style={{ marginTop: 0, maxWidth: 720 }}>
+            <h2 className="headline creator-course-hero-title">{props.course.title}</h2>
+            <p className="subheadline creator-course-hero-summary">
               {props.course.description}
             </p>
-            <p className="muted" style={{ margin: 0, maxWidth: 720 }}>
+            <p className="muted creator-course-hero-helper">
               {premium.helper}
             </p>
           </div>
 
-          <div className="hero-actions" style={{ justifyContent: 'flex-start' }}>
+          <div className="hero-actions creator-course-hero-actions">
             {props.actions}
             <Link href={`/creator/courses/${props.course.id}/edit`} className="button button-secondary">
               <PencilLine size={16} />
@@ -98,5 +98,4 @@ export function CreatorCourseHero(props: {
     </section>
   );
 }
-
 

@@ -36,7 +36,7 @@ export function CourseModuleNavigator(props: {
       <div className="course-rail-header">
         <div>
           <div className="section-label">{variant === 'roadmap' ? 'Curriculum path' : 'Module navigator'}</div>
-          <h3 className="panel-title" style={{ marginTop: 10 }}>
+          <h3 className="panel-title course-module-heading">
             {variant === 'roadmap' ? 'Modules and lesson nodes' : 'Modules'}
           </h3>
           {variant === 'roadmap' ? (
@@ -82,9 +82,14 @@ export function CourseModuleNavigator(props: {
                   <strong className="course-module-rail-title">{module.title}</strong>
                   <p className="course-module-rail-summary">{module.summary}</p>
                   {variant === 'roadmap' && module.accessibleNodeCount > 0 ? (
-                    <div className="course-module-progress-line" aria-label={`${module.completionPercent}% complete`}>
-                      <span style={{ width: `${Math.min(100, Math.max(0, module.completionPercent))}%` }} />
-                    </div>
+                    <progress
+                      className="course-module-progress-line"
+                      max={100}
+                      value={Math.min(100, Math.max(0, module.completionPercent))}
+                      aria-label={`${module.completionPercent}% complete`}
+                    >
+                      {module.completionPercent}%
+                    </progress>
                   ) : null}
                 </div>
 
@@ -149,7 +154,7 @@ function NodeLink(props: {
       </div>
 
       <div className="module-node-list-footer">
-        <span className="inline premium-badge-row" style={{ gap: 8 }}>
+        <span className="inline premium-badge-row module-node-badge-row">
           {props.node.isCompleted ? (
             <span className="studio-badge studio-badge-success">
               <CheckCircle2 size={12} />
@@ -179,4 +184,3 @@ function NodeLink(props: {
     </Link>
   );
 }
-

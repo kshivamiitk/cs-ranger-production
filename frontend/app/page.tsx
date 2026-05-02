@@ -47,11 +47,11 @@ export default async function HomePage() {
             <span className="tag">CS Ranger v1.0</span>
             <span className="studio-badge studio-badge-muted">Production learning operating system</span>
           </div>
-          <div className="stack" style={{ gap: 16 }}>
-            <h1 className="headline marketing-v4-title" style={{ margin: 0 }}>
+          <div className="stack marketing-copy-stack">
+            <h1 className="headline marketing-v4-title flush">
               A premium, dynamic learning workspace that feels cinematic, structured, and serious from the first screen.
             </h1>
-            <p className="subheadline marketing-v4-copy" style={{ margin: 0 }}>
+            <p className="subheadline marketing-v4-copy flush">
               Version 1.0 brings the polished learner workspace, creator studio, premium access controls, fast course APIs, and deployment-ready testing scripts into one stable release.
             </p>
           </div>
@@ -104,9 +104,9 @@ export default async function HomePage() {
               <div className="marketing-feature-icon">
                 <Icon size={20} />
               </div>
-              <div className="stack" style={{ gap: 8 }}>
-                <h2 className="panel-title" style={{ margin: 0 }}>{card.title}</h2>
-                <p className="muted" style={{ margin: 0 }}>{card.copy}</p>
+              <div className="stack stack-compact">
+                <h2 className="panel-title flush">{card.title}</h2>
+                <p className="muted flush">{card.copy}</p>
               </div>
             </article>
           );

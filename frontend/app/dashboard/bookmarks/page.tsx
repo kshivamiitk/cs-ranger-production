@@ -17,6 +17,7 @@ export default async function LearnerBookmarksPage() {
       themeMode={themeMode}
       title="Node Bookmarks"
       subtitle="Save important nodes for future study and reopen them directly from one learner bookmark shelf."
+      hideHeader
     >
       <section className="stat-grid">
         <StatCard label="Saved nodes" value={String(bookmarks.length)} icon={<Bookmark size={18} />} />
@@ -37,4 +38,3 @@ export default async function LearnerBookmarksPage() {
     </AppShell>
   );
 }
-

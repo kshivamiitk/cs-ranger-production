@@ -15,6 +15,39 @@ function amountToMinorUnits(amount: number) {
   return Math.round(amount * 100);
 }
 
+function timingSafeHexEqual(expectedHex: string, actualHex: string | null | undefined) {
+  if (!actualHex) {
+    return false;
+  }
+
+  const normalizedActual = actualHex.trim();
+  if (!/^[a-f0-9]+$/i.test(expectedHex) || !/^[a-f0-9]+$/i.test(normalizedActual)) {
+    return false;
+  }
+
+  const expected = Buffer.from(expectedHex, 'hex');
+  const actual = Buffer.from(normalizedActual, 'hex');
+  return expected.length === actual.length && crypto.timingSafeEqual(expected, actual);
+}
+
+async function providerFetch(url: string, init: RequestInit, timeoutMs = 10_000) {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    return await fetch(url, {
+      ...init,
+      signal: controller.signal,
+    });
+  } catch (error) {
+    if (error instanceof Error && error.name === 'AbortError') {
+      throw new ApplicationError('Payment provider request timed out.', 504);
+    }
+    throw error;
+  } finally {
+    clearTimeout(timeout);
+  }
+}
+
 class SandboxPaymentGateway implements PaymentGatewayPort {
   getProvider(): PaymentProvider {
     return 'sandbox';
@@ -89,7 +122,7 @@ class RazorpayPaymentGateway implements PaymentGatewayPort {
     currency: string;
     learner: Viewer;
   }): Promise<PremiumPaymentOrder> {
-    const response = await fetch('https://api.razorpay.com/v1/orders', {
+    const response = await providerFetch('https://api.razorpay.com/v1/orders', {
       method: 'POST',
       headers: {
         Authorization: `Basic ${Buffer.from(`${this.keyId}:${this.keySecret}`).toString('base64')}`,
@@ -147,7 +180,7 @@ class RazorpayPaymentGateway implements PaymentGatewayPort {
       .update(`${input.providerOrderId}|${input.providerPaymentId}`)
       .digest('hex');
 
-    if (digest !== input.providerSignature) {
+    if (!timingSafeHexEqual(digest, input.providerSignature)) {
       throw new ApplicationError('Payment signature verification failed.', 400);
     }
 
@@ -167,7 +200,7 @@ class RazorpayPaymentGateway implements PaymentGatewayPort {
     }
 
     const digest = crypto.createHmac('sha256', this.webhookSecret).update(body).digest('hex');
-    if (digest !== signature) {
+    if (!timingSafeHexEqual(digest, signature)) {
       throw new ApplicationError('Razorpay webhook signature verification failed.', 400);
     }
   }
@@ -242,4 +275,3 @@ export function buildSandboxVerificationPayload(order: PremiumPaymentOrder) {
     currency: order.currency ?? premiumPaymentDefaults.currency,
   };
 }
-

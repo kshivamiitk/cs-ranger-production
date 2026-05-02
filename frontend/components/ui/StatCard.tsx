@@ -8,7 +8,7 @@ export function StatCard(props: {
 }) {
   return (
     <article className="stat-card">
-      <div className="inline" style={{ justifyContent: 'space-between' }}>
+      <div className="stat-card-header">
         <span className="stat-label">{props.label}</span>
         {props.icon}
       </div>
@@ -17,5 +17,4 @@ export function StatCard(props: {
     </article>
   );
 }
-
 

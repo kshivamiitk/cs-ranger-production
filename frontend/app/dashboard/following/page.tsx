@@ -71,12 +71,13 @@ export default async function FollowingCreatorsPage() {
         support: getSupportUnreadCountForViewer(viewer, supportThreads),
         notifications: 0,
       }}
+      hideHeader
     >
       <div className="stack-lg">
         {followedCreators.length === 0 ? (
           <section className="panel stack-lg">
             <div className="empty-state">You are not following any creators yet. Follow a creator to build your release stream and premium learning network.</div>
-            <div className="inline" style={{ justifyContent: 'center' }}>
+            <div className="inline action-cluster center-inline">
               <Link href="/creators" className="button">Find creators</Link>
             </div>
           </section>
@@ -84,19 +85,19 @@ export default async function FollowingCreatorsPage() {
           <section className="v12-following-grid">
             {followedCreators.map((creator) => (
               <article key={creator.userId} className="panel stack-lg v12-following-card">
-                <div className="inline" style={{ alignItems: 'center', gap: 14 }}>
+                <div className="inline action-cluster creator-profile-inline">
                   <UserAvatar src={creator.profilePhotoUrl} name={creator.fullName ?? 'Creator'} alt={creator.fullName ?? 'Creator'} size="md" />
-                  <div className="stack" style={{ gap: 4 }}>
-                    <h2 className="panel-title" style={{ margin: 0 }}>{creator.fullName ?? 'Unknown creator'}</h2>
+                  <div className="stack stack-micro">
+                    <h2 className="panel-title flush">{creator.fullName ?? 'Unknown creator'}</h2>
                     <span className="muted">{creator.courseCount} published course{creator.courseCount === 1 ? '' : 's'}</span>
                   </div>
                 </div>
-                <p className="muted" style={{ margin: 0 }}>{creator.bio ?? 'Creator profile available.'}</p>
+                <p className="muted flush">{creator.bio ?? 'Creator profile available.'}</p>
                 <div className="inline premium-badge-row">
                   <span className="studio-badge studio-badge-primary">Following</span>
                   {creator.latestCourse ? <span className="studio-badge studio-badge-muted">Latest: {creator.latestCourse.title}</span> : null}
                 </div>
-                <div className="inline" style={{ justifyContent: 'space-between', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
+                <div className="inline split-inline">
                   <Link href={`/creators/${creator.userId}`} className="button button-secondary">View creator</Link>
                   <FollowCreatorButton creatorUserId={creator.userId} viewerUserId={viewer.user.id} initialFollowing={true} initialFollowerCount={0} compact />
                 </div>

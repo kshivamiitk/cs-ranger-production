@@ -23,6 +23,9 @@ export const env = {
   razorpayxKeySecret: process.env.RAZORPAYX_KEY_SECRET ?? '',
   razorpayxAccountNumber: process.env.RAZORPAYX_ACCOUNT_NUMBER ?? '',
   razorpayxWebhookSecret: process.env.RAZORPAYX_WEBHOOK_SECRET ?? '',
+  enableRateLimiting: process.env.ENABLE_RATE_LIMITING === 'true',
+  rateLimitRedisUrl: process.env.RATE_LIMIT_REDIS_URL ?? process.env.REDIS_URL ?? '',
+  rateLimitRedisToken: process.env.RATE_LIMIT_REDIS_TOKEN ?? '',
   allowSandboxPayouts: process.env.ALLOW_SANDBOX_PAYOUTS === 'true',
   payoutMode,
   enableSelfWithdrawal: payoutMode === 'self_withdrawal',
@@ -57,5 +60,4 @@ export function assertSupabaseEnv() {
     throw new Error('Missing environment variable: NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY or NEXT_PUBLIC_SUPABASE_ANON_KEY');
   }
 }
-
 

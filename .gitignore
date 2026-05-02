@@ -19,3 +19,14 @@ frontend/.env.*.local
 npm-debug.log*
 yarn-debug.log*
 pnpm-debug.log*
+
+# Runtime/generated diagnostics can contain cookies, auth headers, request bodies, or local secrets.
+backend/testing/reports/
+backend/testing/reports/*.json
+project-dump.txt
+*.har
+*.cookie
+*.cookies
+cookies.txt
+headers.txt
+*.local-report.json

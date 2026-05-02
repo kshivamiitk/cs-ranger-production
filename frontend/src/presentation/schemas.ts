@@ -2,6 +2,8 @@ import { z } from 'zod';
 import { AUTHORING_LIMITS, LATEX_PREVIEW_SOURCE_MAX } from '@/src/domain/contentLimits';
 
 const richTextFormatSchema = z.enum(['markdown', 'latex']);
+const HTTPS_URL_MESSAGE = 'Enter an HTTPS URL.';
+const imageDataUrlPattern = /^data:image\/(?:png|jpe?g|webp|gif);base64,[a-z0-9+/=\s]+$/i;
 
 function requiredBoundedString(label: string, max: number) {
   return z
@@ -18,14 +20,37 @@ function richContentSectionSchema(label: string, max: number) {
   });
 }
 
-const optionalUrlSchema = z
+function isHttpsUrl(value: string) {
+  try {
+    return new URL(value).protocol === 'https:';
+  } catch {
+    return false;
+  }
+}
+
+function isAllowedInternalHref(value: string) {
+  return value.startsWith('/') && !value.startsWith('//') && !value.includes('\\') && !/[\u0000-\u001f\u007f]/.test(value);
+}
+
+const optionalImageUrlSchema = z
   .string()
   .trim()
   .max(1024 * 1024 * 2, 'Payload is too large.')
-  .refine((value) => value.length === 0 || URL.canParse(value), 'Enter a valid URL or upload a valid image.')
+  .refine(
+    (value) => value.length === 0 || isHttpsUrl(value) || imageDataUrlPattern.test(value),
+    'Enter an HTTPS image URL or upload a valid image.'
+  )
   .transform((value) => (value.length === 0 ? null : value));
 
-
+export const optionalHttpsOrInternalUrlSchema = z
+  .string()
+  .trim()
+  .max(400, 'URL is too long.')
+  .refine(
+    (value) => value.length === 0 || isHttpsUrl(value) || isAllowedInternalHref(value),
+    'Enter an internal path or HTTPS URL.'
+  )
+  .transform((value) => (value.length === 0 ? null : value));
 
 const requiredUrlOrDataPdfSchema = z
   .string()
@@ -33,16 +58,11 @@ const requiredUrlOrDataPdfSchema = z
   .min(1, 'PDF URL or uploaded PDF data is required.')
   .max(AUTHORING_LIMITS.pdfUrl, `PDF payload exceeds ${AUTHORING_LIMITS.pdfUrl.toLocaleString()} characters.`)
   .refine(
-    (value) => URL.canParse(value) || value.startsWith('data:application/pdf;base64,'),
+    (value) => isHttpsUrl(value) || value.startsWith('data:application/pdf;base64,'),
     'Enter a valid PDF URL or upload a valid PDF file.'
   );
 
-const optionalProfilePhotoSchema = z
-  .string()
-  .trim()
-  .max(1024 * 1024 * 2, 'Profile photo payload is too large.')
-  .refine((value) => value.length === 0 || URL.canParse(value), 'Enter a valid image URL or upload a valid image.')
-  .transform((value) => (value.length === 0 ? null : value));
+const optionalProfilePhotoSchema = optionalImageUrlSchema;
 
 const usernameSchema = z
   .string()
@@ -88,14 +108,22 @@ export const profileUpdateSchema = z.object({
     .transform((value) => (value.length === 0 ? null : value)),
   themeMode: z.enum(['light', 'dark', 'ocean', 'forest', 'ember']),
   githubUsername: z.string().trim().max(80).transform((value) => (value.length === 0 ? null : value)).nullable().optional(),
-  githubProfileUrl: z.string().trim().max(500).refine((value) => value.length === 0 || URL.canParse(value), 'Enter a valid GitHub profile URL.').transform((value) => (value.length === 0 ? null : value)).nullable().optional(),
+  githubProfileUrl: z.string().trim().max(500).refine((value) => {
+    if (value.length === 0) return true;
+    try {
+      const url = new URL(value);
+      return url.protocol === 'https:' && ['github.com', 'www.github.com'].includes(url.hostname.toLowerCase());
+    } catch {
+      return false;
+    }
+  }, 'Enter a valid HTTPS GitHub profile URL.').transform((value) => (value.length === 0 ? null : value)).nullable().optional(),
 });
 
 export const courseSchema = z
   .object({
     title: z.string().trim().min(3).max(160),
     description: z.string().trim().min(10).max(4000),
-    imageUrl: optionalUrlSchema,
+    imageUrl: optionalImageUrlSchema,
     domainName: z.string().trim().max(80).transform((value) => (value.length === 0 ? null : value)).nullable().optional(),
     priceAmount: z.coerce.number().min(0).max(999999),
     premiumEnabled: z.boolean(),
@@ -204,7 +232,7 @@ export const nodeSchema = z.discriminatedUnion('type', [
     type: z.literal('video'),
     payload: z.object({
       format: richTextFormatSchema,
-      videoUrl: z.url(),
+      videoUrl: z.string().trim().refine(isHttpsUrl, HTTPS_URL_MESSAGE),
       note: requiredBoundedString('Video notes', AUTHORING_LIMITS.videoNote),
     }),
   }).extend(nodeMetaSchema.shape),
@@ -367,4 +395,3 @@ export const courseReviewUpsertSchema = z.object({
       return value.length === 0 ? null : value;
     }),
 });
-

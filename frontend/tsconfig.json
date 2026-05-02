@@ -60,6 +60,9 @@
         "../backend/Data, Growth & Experience/infrastructure/*",
         "../backend/Devops and Platform/platform-runtime/*"
       ],
+      "@/src/platform/*": [
+        "../backend/Devops and Platform/*"
+      ],
       "@/src/server/*": [
         "../backend/Learner and Creator Product/server/*",
         "../backend/Payments, Admin & Trust/server/*",

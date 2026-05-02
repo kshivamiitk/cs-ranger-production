@@ -34,6 +34,7 @@ export function LearnerCourseWorkspace(props: {
     : null;
   const renewalMessage = access.canRenewPremium && entitlementLabel ? 'Renew before this date to extend access.' : null;
   const courseNodes = course.modules.flatMap((module) => module.nodes);
+  const progressPercent = Math.min(100, Math.max(0, progress?.completionPercent ?? 0));
   const roadmapStartNode = courseNodes.find((node) => !node.isLocked) ?? courseNodes[0] ?? null;
   const readerTargetNode = progress?.continueLearning
     ? {
@@ -86,9 +87,9 @@ export function LearnerCourseWorkspace(props: {
               <aside className="v226-course-cockpit-card">
                 <span className="v226-cockpit-number">{progress?.completionPercent ?? 0}%</span>
                 <span className="muted">completed</span>
-                <div className="v226-course-progress-track">
-                  <span className="v226-course-progress-fill" style={{ width: `${Math.min(100, Math.max(0, progress?.completionPercent ?? 0))}%` }} />
-                </div>
+                <progress className="v226-course-progress-track" max={100} value={progressPercent}>
+                  {progressPercent}%
+                </progress>
                 <strong>{activeNodeSummary?.title ?? progress?.continueLearning?.nodeTitle ?? 'Choose your next node'}</strong>
               </aside>
             </div>
@@ -119,7 +120,7 @@ export function LearnerCourseWorkspace(props: {
             </div>
 
             {courseSummary ? (
-              <p className="muted course-workspace-summary-copy" style={{ margin: 0 }}>
+              <p className="muted course-workspace-summary-copy flush">
                 {courseSummary}
               </p>
             ) : null}

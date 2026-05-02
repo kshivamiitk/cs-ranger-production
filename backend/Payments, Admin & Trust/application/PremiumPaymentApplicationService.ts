@@ -3,6 +3,7 @@ import { resolveCourseAccess } from '@/src/domain/courseAccess';
 import { calculatePurchaseSettlement } from '@/src/domain/paymentSettlement';
 import type { CourseRepository, FinanceRepository, PaymentGatewayPort } from '@/src/domain/ports';
 import type { Viewer } from '@/src/domain/models';
+import { createProviderWebhookEventKey } from '@/shared/scaling/idempotency';
 
 export class PremiumPaymentApplicationService {
   constructor(
@@ -123,6 +124,19 @@ export class PremiumPaymentApplicationService {
       throw new ApplicationError('Payment verification order id does not match the pending purchase.', 400);
     }
 
+    if (purchase.paymentStatus === 'paid') {
+      if (purchase.providerPaymentId && purchase.providerPaymentId !== input.providerPaymentId) {
+        throw new ApplicationError('Payment verification does not match the finalized provider payment id.', 409);
+      }
+
+      return this.financeRepository.finalizePremiumPurchase({
+        purchaseId: purchase.id,
+        providerPaymentId: purchase.providerPaymentId ?? input.providerPaymentId,
+        providerSignature: purchase.providerSignature ?? input.providerSignature,
+        paymentStatus: 'paid',
+      });
+    }
+
     await this.paymentGateway.verifyPremiumPayment({
       provider: purchase.paymentProvider ?? 'sandbox',
       providerOrderId: input.providerOrderId,
@@ -225,6 +239,28 @@ export class PremiumPaymentApplicationService {
       } as const;
     }
 
+    const eventKey = createProviderWebhookEventKey({
+      provider: event.provider,
+      eventType: event.eventType,
+      providerOrderId: event.providerOrderId,
+      providerPaymentId: event.providerPaymentId,
+      fallbackSignature: event.providerSignature,
+    });
+
+    if (purchase.paymentStatus === 'paid') {
+      const incomingPaymentId = event.providerPaymentId ?? event.providerOrderId;
+      if (purchase.providerPaymentId && purchase.providerPaymentId !== incomingPaymentId) {
+        throw new ApplicationError('Webhook provider payment id does not match the finalized purchase.', 409);
+      }
+
+      return {
+        ignored: true,
+        reason: 'Duplicate paid webhook ignored.',
+        eventType: event.eventType,
+        eventKey,
+      } as const;
+    }
+
     const finalization = await this.financeRepository.finalizePremiumPurchase({
       purchaseId: purchase.id,
       providerPaymentId: event.providerPaymentId ?? event.providerOrderId,
@@ -239,4 +275,3 @@ export class PremiumPaymentApplicationService {
     } as const;
   }
 }
-

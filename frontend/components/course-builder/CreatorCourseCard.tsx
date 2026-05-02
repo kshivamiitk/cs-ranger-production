@@ -56,10 +56,10 @@ export function CreatorCourseCard(props: {
           </span>
         </div>
 
-        <div className="stack" style={{ gap: 10 }}>
+        <div className="stack stack-tight">
           <h2 className="premium-card-title">{props.course.title}</h2>
           <p className="premium-card-copy">{props.course.description}</p>
-          <p className="muted" style={{ margin: 0 }}>
+          <p className="muted flush">
             {premium.helper}
           </p>
         </div>
@@ -76,7 +76,7 @@ export function CreatorCourseCard(props: {
             </span>
           </div>
 
-          <div className="inline">
+          <div className="inline creator-course-actions">
             {props.course.ownershipType !== 'collaborator' ? (
               <>
                 <Link href={`/creator/courses/${props.course.id}/account`} className="button button-ghost">
@@ -98,5 +98,4 @@ export function CreatorCourseCard(props: {
     </article>
   );
 }
-
 

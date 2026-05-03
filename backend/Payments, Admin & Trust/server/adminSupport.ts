@@ -147,6 +147,63 @@ export function getSupportUnreadCountForViewer(_viewer: Viewer, threads: Support
   return threads.reduce((sum, thread) => sum + (thread.unreadCount ?? 0), 0);
 }
 
+export async function getSupportUnreadCountForViewerFast(viewer: Viewer) {
+  const supabase = createServiceRoleSupabaseClient();
+  let query = supabase
+    .from("admin_messages")
+    .select("id, sender_user_id, created_at")
+    .order("updated_at", { ascending: false });
+
+  if (viewer.profile.isAdmin) query = query.eq("target_user_id", viewer.user.id);
+  else query = query.eq("sender_user_id", viewer.user.id);
+
+  const { data: rows, error } = await query;
+  if (error) throw error;
+
+  const threadRows = rows ?? [];
+  const threadIds = threadRows.map((row: any) => row.id) as string[];
+  if (threadIds.length === 0) return 0;
+
+  const [repliesResult, readsResult] = await Promise.all([
+    supabase
+      .from("admin_message_replies")
+      .select("thread_id, sender_user_id, created_at")
+      .in("thread_id", threadIds),
+    supabase
+      .from("admin_message_thread_reads")
+      .select("thread_id, last_read_at")
+      .eq("user_id", viewer.user.id)
+      .in("thread_id", threadIds),
+  ]);
+
+  if (repliesResult.error) throw repliesResult.error;
+  if (readsResult.error) throw readsResult.error;
+
+  const lastReadAtMap = new Map<string, number>();
+  for (const row of (readsResult.data ?? []) as any[]) {
+    lastReadAtMap.set(row.thread_id, new Date(row.last_read_at).getTime());
+  }
+
+  let unreadCount = 0;
+  for (const row of threadRows as any[]) {
+    const lastReadAt = lastReadAtMap.get(row.id) ?? 0;
+    const createdAt = new Date(row.created_at).getTime();
+    if (row.sender_user_id !== viewer.user.id && createdAt > lastReadAt) {
+      unreadCount += 1;
+    }
+  }
+
+  for (const row of (repliesResult.data ?? []) as any[]) {
+    const lastReadAt = lastReadAtMap.get(row.thread_id) ?? 0;
+    const createdAt = new Date(row.created_at).getTime();
+    if (row.sender_user_id !== viewer.user.id && createdAt > lastReadAt) {
+      unreadCount += 1;
+    }
+  }
+
+  return unreadCount;
+}
+
 export async function listSupportThreadsForViewer(viewer: Viewer): Promise<SupportThreadListItem[]> {
   const supabase = createServiceRoleSupabaseClient();
   let query = supabase
@@ -316,5 +373,4 @@ export async function getSupportThreadForViewer(viewer: Viewer, threadId: string
     messages,
   };
 }
-
 

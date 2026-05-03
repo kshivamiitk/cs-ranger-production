@@ -1,6 +1,7 @@
 import { createServerContainer } from '@/src/infrastructure/container/server';
 import { failure, ok } from '@/src/presentation/http/routeUtils';
 import { courseReviewUpsertSchema } from '@/src/presentation/schemas';
+import { invalidatePublicCourseReviewsCache } from '@/shared/performance/courseReviewCache';
 
 export async function PUT(
   request: Request,
@@ -12,10 +13,10 @@ export async function PUT(
     const { authService, courseReviewService } = await createServerContainer({ writeCookies: true });
     const viewer = await authService.requireViewer();
     const review = await courseReviewService.upsertCourseReview(viewer, courseId, parsed);
+    invalidatePublicCourseReviewsCache(courseId);
     return ok({ review });
   } catch (error) {
     return failure(error);
   }
 }
-
 

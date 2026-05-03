@@ -120,6 +120,11 @@ async function loadAccessProfile(request: NextRequest): Promise<{
 export async function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
   const needsViewer = routeNeedsViewer(pathname);
+  const needsRoleGate = routeNeedsCreator(pathname) || routeNeedsAdmin(pathname);
+
+  if (!needsViewer && !needsRoleGate) {
+    return NextResponse.next();
+  }
 
   try {
     const { response, profile } = await loadAccessProfile(request);
@@ -155,5 +160,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/creator/:path*', '/admin/:path*', '/dashboard/:path*', '/courses/:path*', '/search', '/creators/:path*'],
+  matcher: ['/creator/:path*', '/admin/:path*', '/dashboard/profile/:path*', '/dashboard/transactions/:path*'],
 };

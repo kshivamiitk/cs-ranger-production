@@ -7,7 +7,7 @@ import { ListPaginationControls } from '@/components/ui/ListPaginationControls';
 import { paginateList, resolveListPagination } from '@/lib/pagination';
 import { formatDateTimeLabel } from '@/lib/utils';
 import { requireServerPageContext } from '@/src/presentation/serverPage';
-import { getSupportUnreadCountForViewer, listSupportThreadsForViewer } from '@/src/server/adminSupport';
+import { getSupportUnreadCountForViewerFast } from '@/src/server/adminSupport';
 import { getFeedUnreadCountForViewer } from '@/src/server/feedSeen';
 import { listBroadcastsForViewer } from '@/src/server/adminBroadcasts';
 
@@ -19,9 +19,9 @@ export default async function LearnerNotificationsPage({
   const resolvedSearchParams = await searchParams;
   const { viewer, themeMode, container } = await requireServerPageContext('/dashboard/notifications');
   const { learnerDashboardService } = container;
-  const [dashboard, supportThreads, broadcasts] = await Promise.all([
+  const [dashboard, supportUnreadCount, broadcasts] = await Promise.all([
     learnerDashboardService.getDashboard(viewer),
-    listSupportThreadsForViewer(viewer),
+    getSupportUnreadCountForViewerFast(viewer),
     listBroadcastsForViewer(viewer),
   ]);
 
@@ -55,7 +55,7 @@ export default async function LearnerNotificationsPage({
       subtitle="A compact event inbox for creator releases, followed-course updates, and admin broadcasts."
       unreadCounts={{
         feed: await getFeedUnreadCountForViewer(viewer, dashboard.feed.items),
-        support: getSupportUnreadCountForViewer(viewer, supportThreads),
+        support: supportUnreadCount,
         notifications: 0,
       }}
     >
@@ -109,4 +109,3 @@ export default async function LearnerNotificationsPage({
     </AppShell>
   );
 }
-

@@ -5,7 +5,7 @@ import { ListPaginationControls } from '@/components/ui/ListPaginationControls';
 import { paginateList, resolveListPagination } from '@/lib/pagination';
 import { formatDateTimeLabel } from '@/lib/utils';
 import { requireServerPageContext } from '@/src/presentation/serverPage';
-import { getSupportUnreadCountForViewer, listSupportThreadsForViewer } from '@/src/server/adminSupport';
+import { getSupportUnreadCountForViewerFast } from '@/src/server/adminSupport';
 import { markFeedItemsSeen } from '@/src/server/feedSeen';
 
 export default async function LearnerFeedPage({
@@ -16,16 +16,15 @@ export default async function LearnerFeedPage({
   const resolvedSearchParams = await searchParams;
   const { viewer, themeMode, container } = await requireServerPageContext('/dashboard/feed');
   const { learnerDashboardService } = container;
-  const [dashboard, supportThreads] = await Promise.all([
+  const [dashboard, supportUnread] = await Promise.all([
     learnerDashboardService.getDashboard(viewer, { includeFeed: true }),
-    listSupportThreadsForViewer(viewer),
+    getSupportUnreadCountForViewerFast(viewer),
   ]);
 
   await markFeedItemsSeen(viewer, dashboard.feed.items);
 
   const pagination = resolveListPagination(resolvedSearchParams);
   const pagedFeed = paginateList(dashboard.feed.items, pagination.page, pagination.size);
-  const supportUnread = getSupportUnreadCountForViewer(viewer, supportThreads);
 
   const followedCreators = Array.from(
     new Map(

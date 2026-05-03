@@ -22,6 +22,8 @@ function guardedPdfHeaders(byteLength?: number) {
     'X-Download-Options': 'noopen',
     'Cross-Origin-Resource-Policy': 'same-origin',
     'Referrer-Policy': 'no-referrer',
+    'Content-Security-Policy': "frame-ancestors 'self'",
+    Vary: 'Cookie, Sec-Fetch-Dest, Sec-Fetch-Site',
   });
 
   if (typeof byteLength === 'number') {
@@ -33,7 +35,7 @@ function guardedPdfHeaders(byteLength?: number) {
 
 function assertEmbeddedPdfRequest(request: Request) {
   const fetchDest = request.headers.get('sec-fetch-dest');
-  if (fetchDest && !['iframe', 'embed', 'object', 'empty'].includes(fetchDest)) {
+  if (fetchDest && !['iframe', 'embed', 'object'].includes(fetchDest)) {
     throw new ApplicationError('PDF files can only be opened inside the protected course reader.', 403);
   }
 

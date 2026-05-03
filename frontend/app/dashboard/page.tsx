@@ -7,7 +7,7 @@ import { paginateList, resolveListPagination } from '@/lib/pagination';
 import { formatDateTimeLabel } from '@/lib/utils';
 import { createServiceRoleSupabaseClient } from '@/src/infrastructure/supabase/serverClient';
 import { requireServerPageContext } from '@/src/presentation/serverPage';
-import { getSupportUnreadCountForViewer, listSupportThreadsForViewer } from '@/src/server/adminSupport';
+import { getSupportUnreadCountForViewerFast } from '@/src/server/adminSupport';
 
 function startOfDayIso(date: Date) {
   const next = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()));
@@ -74,10 +74,10 @@ export default async function DashboardPage({
   const { viewer, themeMode, container } = await requireServerPageContext('/dashboard');
   const { learnerDashboardService } = container;
 
-  const [dashboard, heatmap, supportThreads] = await Promise.all([
+  const [dashboard, heatmap, unreadSupportCount] = await Promise.all([
     learnerDashboardService.getDashboard(viewer, { includeFeed: false }),
     buildLearnerHeatmap(viewer.user.id),
-    listSupportThreadsForViewer(viewer),
+    getSupportUnreadCountForViewerFast(viewer),
   ]);
 
   const continueCourses = [...dashboard.catalogCourses]
@@ -92,7 +92,6 @@ export default async function DashboardPage({
 
   const pagination = resolveListPagination(resolvedSearchParams);
   const pagedContinue = paginateList(continueCourses, pagination.page, pagination.size);
-  const unreadSupportCount = getSupportUnreadCountForViewer(viewer, supportThreads);
   const unreadFeedCount = 0;
 
   return (

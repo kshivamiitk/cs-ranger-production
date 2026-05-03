@@ -9,10 +9,7 @@ import { latexPreviewRequestSchema, latexPreviewSourceSchema } from '@/src/prese
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 
-export async function POST(
-  request: NextRequest,
-  _context: RouteContext<'/api/latex/preview'>
-) {
+export async function POST(request: NextRequest) {
   try {
     const rateLimited = await enforceRateLimit(request, 'latexPreview');
     if (rateLimited) return rateLimited;
@@ -36,4 +33,3 @@ export async function POST(
     return failure(error, request);
   }
 }
-

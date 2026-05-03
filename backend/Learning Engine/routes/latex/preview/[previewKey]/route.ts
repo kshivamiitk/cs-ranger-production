@@ -7,7 +7,7 @@ export const dynamic = 'force-dynamic';
 
 export async function GET(
   _request: NextRequest,
-  context: RouteContext<'/api/latex/preview/[previewKey]'>
+  context: { params: Promise<{ previewKey: string }> }
 ) {
   const { previewKey } = await context.params;
   const { richContentPreviewService } = await createServerContainer();
@@ -27,5 +27,4 @@ export async function GET(
     },
   });
 }
-
 

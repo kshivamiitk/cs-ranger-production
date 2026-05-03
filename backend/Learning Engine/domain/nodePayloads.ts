@@ -144,9 +144,9 @@ function normalizePdfNodePayload(payload: unknown): PdfNodePayload {
   const record = asObject(payload) ?? {};
 
   return {
-    pdfUrl: asString(record.pdfUrl, '/sample-assets/sample-python-notes.pdf'),
+    pdfUrl: asString(record.pdfUrl, ''),
     title: asString(record.title, 'PDF lesson notes'),
-    note: asString(record.note, 'Upload or link a PDF that learners can read directly inside the node.'),
+    note: asString(record.note, 'Upload a PDF that learners can read directly inside the protected node reader.'),
   };
 }
 
@@ -204,4 +204,3 @@ export function normalizeNodePayload(type: NodeType, payload: unknown): NodePayl
 export function createDefaultNodePayload(type: CourseNode['type']): CourseNode['payload'] {
   return normalizeNodePayload(type, {});
 }
-

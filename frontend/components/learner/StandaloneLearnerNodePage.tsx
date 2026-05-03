@@ -6,7 +6,7 @@ import {
   getContentSectionByKey,
   type ContentSectionKey,
 } from '@/src/domain/contentSections';
-import type { CatalogCourseNodeView } from '@/src/domain/models';
+import type { CatalogCourseNodeView, CourseNode, PdfNodePayload } from '@/src/domain/models';
 import { ContentNodeSectionNav } from '@/components/learner/ContentNodeSectionNav';
 import { NodeBookmarkButton } from '@/components/learner/NodeBookmarkButton';
 import { NodeProgressActions } from '@/components/learner/NodeProgressActions';
@@ -19,6 +19,20 @@ function nodeHref(courseId: string, nodeId: string) {
   return `/courses/${courseId}/nodes/${nodeId}`;
 }
 
+function protectPdfNodePayload(courseId: string, node: CourseNode) {
+  if (node.type !== 'pdf') {
+    return node;
+  }
+
+  return {
+    ...node,
+    payload: {
+      ...(node.payload as PdfNodePayload),
+      pdfUrl: `/api/courses/${courseId}/nodes/${node.id}/pdf`,
+    },
+  } satisfies CourseNode;
+}
+
 export function StandaloneLearnerNodePage(props: {
   courseView: CatalogCourseNodeView;
   interactiveQuiz: boolean;
@@ -27,11 +41,12 @@ export function StandaloneLearnerNodePage(props: {
   bookmarkEnabled: boolean;
 }) {
   const { course, access, module, nodeSummary, node, previousNode, nextNode } = props.courseView;
+  const protectedNode = node ? protectPdfNodePayload(course.id, node) : null;
   const premium = describeCoursePremiumState(course, props.courseView.overview.premiumNodeCount);
   const backHref = module ? `/courses/${course.id}#module-${module.id}` : `/courses/${course.id}`;
   const loginHref = `/login?next=${encodeURIComponent(`/courses/${course.id}/nodes/${nodeSummary?.id ?? ''}`)}`;
   const activeContentSection =
-    node?.type === 'content'
+    protectedNode?.type === 'content'
       ? getContentSectionByKey(props.contentSectionKey ?? defaultContentSectionKey)
       : null;
   const htmlNavigation = {
@@ -58,7 +73,7 @@ export function StandaloneLearnerNodePage(props: {
     );
   }
 
-  if (props.courseView.nodeLocked || !node) {
+  if (props.courseView.nodeLocked || !protectedNode) {
     return (
       <section className="reader-locked-state fade-in-panel">
         <div className="inline premium-badge-row">
@@ -143,7 +158,7 @@ export function StandaloneLearnerNodePage(props: {
         courseId={course.id}
         courseTitle={course.title}
         moduleTitle={module.title}
-        node={node}
+        node={protectedNode}
         interactiveQuiz={props.interactiveQuiz}
         contentSectionKey={activeContentSection?.key ?? null}
         htmlNavigation={htmlNavigation}
@@ -153,20 +168,20 @@ export function StandaloneLearnerNodePage(props: {
             {activeContentSection ? (
               <ContentNodeSectionNav
                 courseId={course.id}
-                nodeId={node.id}
+                nodeId={protectedNode.id}
                 activeSectionKey={activeContentSection.key}
               />
             ) : null}
             <NodeProgressActions
               courseId={course.id}
-              nodeId={node.id}
+              nodeId={protectedNode.id}
               initialCompleted={props.courseView.nodeCompleted}
               enabled={Boolean(props.courseView.progress)}
               unavailableLabel={progressUnavailableLabel}
             />
             <NodeBookmarkButton
               courseId={course.id}
-              nodeId={node.id}
+              nodeId={protectedNode.id}
               initialBookmarked={props.initialBookmarked}
               enabled={props.bookmarkEnabled}
             />

@@ -58,7 +58,7 @@ const nodeTypeCopy: Record<NodeType, { label: string; description: string }> = {
   },
   pdf: {
     label: 'PDF node',
-    description: 'Upload or link a PDF and let learners read it directly inside the course node.',
+    description: 'Upload a PDF for protected in-course reading without exposing direct download links.',
   },
   github: {
     label: 'Retired website node',

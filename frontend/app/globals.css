@@ -9997,6 +9997,24 @@ html[data-theme='ember'] {
   gap: 16px;
 }
 
+.pdf-node-title,
+.pdf-editor-title {
+  margin: 0;
+}
+
+.pdf-node-security-copy,
+.pdf-editor-copy {
+  margin: 8px 0 0;
+}
+
+.pdf-upload-field {
+  gap: 10px;
+}
+
+.pdf-upload-status {
+  width: fit-content;
+}
+
 .pdf-node-note {
   border: 1px solid var(--border-subtle);
   border-radius: 22px;
@@ -10011,6 +10029,7 @@ html[data-theme='ember'] {
   border-radius: 28px;
   background: #0f172a;
   box-shadow: var(--shadow-lg);
+  user-select: none;
 }
 
 .pdf-node-reader .empty-state {

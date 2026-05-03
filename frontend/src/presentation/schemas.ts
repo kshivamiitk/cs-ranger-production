@@ -52,14 +52,14 @@ export const optionalHttpsOrInternalUrlSchema = z
   )
   .transform((value) => (value.length === 0 ? null : value));
 
-const requiredUrlOrDataPdfSchema = z
+const requiredUploadedPdfDataSchema = z
   .string()
   .trim()
-  .min(1, 'PDF URL or uploaded PDF data is required.')
+  .min(1, 'Upload a PDF file before saving this node.')
   .max(AUTHORING_LIMITS.pdfUrl, `PDF payload exceeds ${AUTHORING_LIMITS.pdfUrl.toLocaleString()} characters.`)
   .refine(
-    (value) => isHttpsUrl(value) || value.startsWith('data:application/pdf;base64,'),
-    'Enter a valid PDF URL or upload a valid PDF file.'
+    (value) => value.startsWith('data:application/pdf;base64,'),
+    'Public PDF URLs are disabled. Upload a PDF file into the node.'
   );
 
 const optionalProfilePhotoSchema = optionalImageUrlSchema;
@@ -239,7 +239,7 @@ export const nodeSchema = z.discriminatedUnion('type', [
   z.object({
     type: z.literal('pdf'),
     payload: z.object({
-      pdfUrl: requiredUrlOrDataPdfSchema,
+      pdfUrl: requiredUploadedPdfDataSchema,
       title: z.string().trim().max(160).transform((value) => (value.length === 0 ? null : value)).nullable().optional(),
       note: requiredBoundedString('PDF notes', AUTHORING_LIMITS.pdfNote),
     }),

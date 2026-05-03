@@ -51,7 +51,7 @@ export function ModuleNodeList(props: {
   }
 
   if (nodes.length === 0) {
-    return <div className="empty-state">No nodes yet. Use "Add node" to open the dedicated node authoring page.</div>;
+    return <div className="empty-state">No nodes yet. Use &quot;Add node&quot; to open the dedicated node authoring page.</div>;
   }
 
   return (

@@ -3,6 +3,7 @@ import type { NextConfig } from 'next';
 
 const frontendNodeModules = path.resolve(__dirname, 'node_modules');
 const moduleFromFrontend = (modulePath: string) => path.join(frontendNodeModules, modulePath);
+const repositoryRoot = path.resolve(__dirname, '..');
 
 const nextConfig: NextConfig = {
   // Backend-owned route handlers live outside frontend/ and are re-exported by
@@ -11,7 +12,21 @@ const nextConfig: NextConfig = {
   experimental: {
     externalDir: true,
   },
-  outputFileTracingRoot: path.resolve(__dirname, '..'),
+  outputFileTracingRoot: repositoryRoot,
+  poweredByHeader: false,
+  async headers() {
+    return [
+      {
+        source: '/:path*',
+        headers: [
+          { key: 'X-Content-Type-Options', value: 'nosniff' },
+          { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
+          { key: 'X-Frame-Options', value: 'SAMEORIGIN' },
+          { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=()' },
+        ],
+      },
+    ];
+  },
   webpack: (config) => {
     config.resolve = config.resolve || {};
     config.resolve.alias = {
@@ -33,6 +48,7 @@ const nextConfig: NextConfig = {
       zod: moduleFromFrontend('zod'),
       clsx: moduleFromFrontend('clsx'),
       'lucide-react': moduleFromFrontend('lucide-react'),
+      '@/src/platform': path.join(repositoryRoot, 'backend', 'Devops and Platform'),
 
       // External backend files import these Next entrypoints. Alias only the
       // public entrypoints that the backend uses, not the entire `next` package.
@@ -48,4 +64,3 @@ const nextConfig: NextConfig = {
 };
 
 export default nextConfig;
-

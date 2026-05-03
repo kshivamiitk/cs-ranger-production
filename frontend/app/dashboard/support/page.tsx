@@ -38,10 +38,10 @@ export default async function LearnerSupportPage({ searchParams }: { searchParam
         support: getSupportUnreadCountForViewer(viewer, threads),
         notifications: 0,
       }}
+      hideHeader
     >
       <SupportWorkspace viewerId={viewer.user.id} viewerName={viewer.profile.fullName ?? viewer.user.email} viewerIsAdmin={false} admins={admins} threads={threads} activeThread={activeThread} />
     </AppShell>
   );
 }
-
 

@@ -33,12 +33,15 @@ export async function apiJson<T>(input: RequestInfo | URL, init?: RequestInit): 
   const body = await response.json().catch(() => ({}));
 
   if (!response.ok) {
-    const message = typeof body?.error === 'string' ? body.error : messages.api.requestFailed;
+    const envelopeMessage =
+      typeof body?.error === 'object' && body.error !== null && typeof body.error.message === 'string'
+        ? body.error.message
+        : null;
+    const message = envelopeMessage ?? (typeof body?.error === 'string' ? body.error : messages.api.requestFailed);
     throw new ApiClientError(message, response.status, body?.details ?? body);
   }
 
   return body as T;
 }
-
 
 

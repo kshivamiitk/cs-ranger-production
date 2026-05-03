@@ -237,10 +237,10 @@ export function CreatorCourseModulesWorkspace(props: {
       {error ? <div className="studio-inline-alert">{error}</div> : null}
 
       <section className="stack-lg">
-        <div className="stack" style={{ gap: 10 }}>
+        <div className="stack creator-structure-heading">
           <div className="section-label">Modules</div>
-          <h3 className="panel-title" style={{ fontSize: '1.6rem' }}>Course structure</h3>
-          <p className="muted" style={{ margin: 0 }}>
+          <h3 className="panel-title creator-structure-title">Course structure</h3>
+          <p className="muted flush">
             Navigate modules from the left rail, keep one module active at a time, and use dedicated node routes for focused authoring.
           </p>
         </div>
@@ -271,9 +271,9 @@ export function CreatorCourseModulesWorkspace(props: {
               />
             ) : (
               <section className="studio-empty-state">
-                <div className="stack" style={{ gap: 10 }}>
+                <div className="stack stack-tight">
                   <h3 className="panel-title">No active module selected</h3>
-                  <p className="muted" style={{ margin: 0 }}>
+                  <p className="muted flush">
                     Create a module to open its node workspace here.
                   </p>
                 </div>
@@ -301,4 +301,3 @@ function reindexPositions<T extends { position: number }>(items: T[]) {
       position: index + 1,
     }));
 }
-

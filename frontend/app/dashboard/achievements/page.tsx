@@ -65,13 +65,14 @@ export default async function LearnerAchievementsPage() {
         support: getSupportUnreadCountForViewer(viewer, supportThreads),
         notifications: 0,
       }}
+      hideHeader
     >
       <div className="stack-lg">
         <section className="panel stack-lg">
           <div className="panel-header">
             <div>
-              <h2 className="panel-title" style={{ margin: 0 }}>Badges</h2>
-              <p className="muted" style={{ marginTop: 8 }}>Milestones you have already earned from consistent learning activity.</p>
+              <h2 className="panel-title flush">Badges</h2>
+              <p className="muted flush">Milestones you have already earned from consistent learning activity.</p>
             </div>
           </div>
           {achievedBadges.length === 0 ? (
@@ -84,8 +85,8 @@ export default async function LearnerAchievementsPage() {
                     <span className="studio-badge studio-badge-success">Earned badge</span>
                     {badge.achievedAt ? <span className="studio-badge studio-badge-muted">{formatDateLabel(badge.achievedAt)}</span> : null}
                   </div>
-                  <h3 className="panel-title" style={{ margin: 0 }}>{badge.label}</h3>
-                  <p className="muted" style={{ margin: 0 }}>{badge.description}</p>
+                  <h3 className="panel-title flush">{badge.label}</h3>
+                  <p className="muted flush">{badge.description}</p>
                 </article>
               ))}
             </div>
@@ -95,8 +96,8 @@ export default async function LearnerAchievementsPage() {
         <section className="panel stack-lg">
           <div className="panel-header">
             <div>
-              <h2 className="panel-title" style={{ margin: 0 }}>Certificates</h2>
-              <p className="muted" style={{ marginTop: 8 }}>Issued certificates remain one click away, with direct download access.</p>
+              <h2 className="panel-title flush">Certificates</h2>
+              <p className="muted flush">Issued certificates remain one click away, with direct download access.</p>
             </div>
           </div>
           {(issuedCertificates ?? []).length === 0 ? (
@@ -112,10 +113,10 @@ export default async function LearnerAchievementsPage() {
                       <span className="studio-badge studio-badge-primary">Certificate</span>
                       <span className="studio-badge studio-badge-muted">{formatDateLabel(certificate.issued_at)}</span>
                     </div>
-                    <h3 className="panel-title" style={{ margin: 0 }}>{course?.title ?? 'Course certificate'}</h3>
-                    <p className="muted" style={{ margin: 0 }}>Creator: {creatorName ?? 'Unknown creator'}</p>
-                    <p className="muted" style={{ margin: 0 }}>Code: {certificate.certificate_code}</p>
-                    <div className="inline" style={{ gap: 10, flexWrap: 'wrap' }}>
+                    <h3 className="panel-title flush">{course?.title ?? 'Course certificate'}</h3>
+                    <p className="muted flush">Creator: {creatorName ?? 'Unknown creator'}</p>
+                    <p className="muted flush">Code: {certificate.certificate_code}</p>
+                    <div className="inline action-cluster">
                       <a
                         href={buildCertificateDownloadHref(certificate, course?.title ?? 'Course certificate', viewer.profile.fullName ?? viewer.user.email)}
                         download={`${(course?.title ?? 'certificate').replace(/\s+/g, '-').toLowerCase()}-certificate.txt`}

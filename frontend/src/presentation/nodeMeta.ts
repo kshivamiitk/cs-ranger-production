@@ -146,8 +146,8 @@ export function getNodeLearnerSubtitle(node: Pick<CourseNodePreview, 'type' | 'i
         : 'Interactive HTML, CSS, and JavaScript output.';
     case 'pdf':
       return node.isPremium
-        ? `${access.label} PDF lesson with embedded reading support.`
-        : 'PDF lesson with embedded reading support.';
+        ? `${access.label} PDF lesson with protected reader support.`
+        : 'PDF lesson with protected reader support.';
     case 'github':
       return `${access.label} retired lesson format.`;
   }
@@ -167,4 +167,3 @@ export function getModuleNodeTypeCounts(module: Pick<ModuleWithNodes, 'nodes'>) 
       count: counts.get(type) ?? 0,
     }));
 }
-

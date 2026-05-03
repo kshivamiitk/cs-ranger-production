@@ -6,9 +6,10 @@ import type { Metadata, Viewport } from 'next';
 import { cookies } from 'next/headers';
 
 import { cookieNames, defaultTheme } from '@/lib/constants';
+import { env } from '@/lib/env';
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000'),
+  metadataBase: new URL(env.appUrl),
   title: {
     default: 'CS Ranger',
     template: '%s · CS Ranger',
@@ -48,4 +49,3 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
     </html>
   );
 }
-

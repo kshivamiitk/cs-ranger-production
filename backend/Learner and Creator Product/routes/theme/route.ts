@@ -1,9 +1,10 @@
 import { NextResponse } from 'next/server';
 
 import { applyGuestThemeCookie } from '@/lib/appCookies';
+import { enforceRateLimit } from '@/src/platform/rate-limiting/redisRateLimiter';
 import { createServerContainer } from '@/src/infrastructure/container/server';
 import { themeModeSchema } from '@/src/presentation/schemas';
-import { failure } from '@/src/presentation/http/routeUtils';
+import { failure, readJsonWithLimit } from '@/src/presentation/http/routeUtils';
 
 function isRecoverableThemePersistenceError(error: unknown) {
   return error instanceof Error && (
@@ -16,7 +17,10 @@ function isRecoverableThemePersistenceError(error: unknown) {
 
 export async function POST(request: Request) {
   try {
-    const parsed = themeModeSchema.parse(await request.json());
+    const rateLimited = await enforceRateLimit(request, 'theme');
+    if (rateLimited) return rateLimited;
+
+    const parsed = themeModeSchema.parse(await readJsonWithLimit(request, 2 * 1024));
     const response = NextResponse.json({ themeMode: parsed.themeMode, persisted: false });
 
     try {
@@ -38,9 +42,8 @@ export async function POST(request: Request) {
     applyGuestThemeCookie(response, parsed.themeMode);
     return response;
   } catch (error) {
-    return failure(error);
+    return failure(error, request);
   }
 }
-
 
 

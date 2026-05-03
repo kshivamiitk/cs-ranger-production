@@ -26,6 +26,24 @@ function amountToMinorUnits(amount: number) {
   return Math.round(amount * 100);
 }
 
+async function providerFetch(url: string, init: RequestInit, timeoutMs = 10_000) {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    return await fetch(url, {
+      ...init,
+      signal: controller.signal,
+    });
+  } catch (error) {
+    if (error instanceof Error && error.name === 'AbortError') {
+      throw new ApplicationError('Payout provider request timed out.', 504);
+    }
+    throw error;
+  } finally {
+    clearTimeout(timeout);
+  }
+}
+
 function normalizeStatus(status: string | null | undefined): CreatorPayoutResult['status'] {
   const normalized = (status ?? '').trim().toLowerCase();
   if (normalized === 'processed') {
@@ -217,7 +235,7 @@ class RazorpayXPayoutGateway implements PayoutGatewayPort {
       'Content-Type': 'application/json',
     };
 
-    const contactResponse = await fetch('https://api.razorpay.com/v1/contacts', {
+    const contactResponse = await providerFetch('https://api.razorpay.com/v1/contacts', {
       method: 'POST',
       headers: authHeader,
       body: JSON.stringify({
@@ -260,7 +278,7 @@ class RazorpayXPayoutGateway implements PayoutGatewayPort {
             },
           };
 
-    const fundAccountResponse = await fetch('https://api.razorpay.com/v1/fund_accounts', {
+    const fundAccountResponse = await providerFetch('https://api.razorpay.com/v1/fund_accounts', {
       method: 'POST',
       headers: authHeader,
       body: JSON.stringify(fundAccountPayload),
@@ -275,7 +293,7 @@ class RazorpayXPayoutGateway implements PayoutGatewayPort {
       throw new ApplicationError('Payout fund account creation returned an invalid response.', 502);
     }
 
-    const payoutResponse = await fetch('https://api.razorpay.com/v1/payouts', {
+    const payoutResponse = await providerFetch('https://api.razorpay.com/v1/payouts', {
       method: 'POST',
       headers: authHeader,
       body: JSON.stringify({
@@ -391,5 +409,4 @@ export function createPayoutGateway(): PayoutGatewayPort {
 
   return new UnavailablePayoutGateway();
 }
-
 

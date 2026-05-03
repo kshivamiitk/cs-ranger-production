@@ -295,7 +295,7 @@ export function Sidebar({
                 <span data-hidden={isCollapsed}>Profile</span>
               </div>
               {!isCollapsed ? (
-                <div className="sidebar-copy" style={{ marginTop: 8 }}>
+                <div className="sidebar-copy sidebar-profile-helper">
                   Edit your name, photo, bio, and theme preferences.
                 </div>
               ) : null}
@@ -342,4 +342,3 @@ export function Sidebar({
     </>
   );
 }
-

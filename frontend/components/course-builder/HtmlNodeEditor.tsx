@@ -68,10 +68,10 @@ export function HtmlNodeEditor(props: {
 
       <div className="html-editor-workbench fade-in-panel">
         <section className="studio-form-card stack-lg html-editor-pane">
-          <div className="stack" style={{ gap: 10 }}>
+          <div className="stack stack-tight">
             <div className="field-label">Currently editing</div>
-            <h3 className="panel-title" style={{ fontSize: '1.2rem' }}>{activeConfig.label}</h3>
-            <p className="muted" style={{ margin: 0 }}>
+            <h3 className="panel-title html-editor-pane-title">{activeConfig.label}</h3>
+            <p className="muted flush">
               Switch between HTML, CSS, and JavaScript. v22.8 renders them as one complete mini-page, so local style.css/script.js references and button JavaScript work in the learner reader.
             </p>
           </div>
@@ -88,7 +88,7 @@ export function HtmlNodeEditor(props: {
         </section>
 
         <div className="studio-inline-alert html-runtime-help-card">
-          <strong>v22.8 HTML project mode:</strong> Put your structure in HTML, styling in CSS, and logic in JavaScript. If your HTML contains <code>&lt;link href="style.css" rel="stylesheet"&gt;</code> or <code>&lt;script src="script.js"&gt;&lt;/script&gt;</code>, CS Ranger injects these panes automatically. For course navigation, use <code>data-csranger-action="next"</code>, <code>data-csranger-action="previous"</code>, or <code>window.CSRanger.goToNextNode()</code>.
+          <strong>v22.8 HTML project mode:</strong> Put your structure in HTML, styling in CSS, and logic in JavaScript. If your HTML contains <code>&lt;link href=&quot;style.css&quot; rel=&quot;stylesheet&quot;&gt;</code> or <code>&lt;script src=&quot;script.js&quot;&gt;&lt;/script&gt;</code>, CS Ranger injects these panes automatically. For course navigation, use <code>data-csranger-action=&quot;next&quot;</code>, <code>data-csranger-action=&quot;previous&quot;</code>, or <code>window.CSRanger.goToNextNode()</code>.
         </div>
 
         <ScrollablePreviewPanel
@@ -109,5 +109,4 @@ export function HtmlNodeEditor(props: {
     </div>
   );
 }
-
 

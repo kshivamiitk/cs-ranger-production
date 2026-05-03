@@ -22,8 +22,8 @@ export function LearnerDashboardOverview(props: { dashboard: LearnerDashboardVie
             <span className="studio-badge studio-badge-muted">{dashboard.streak.currentDays} day streak</span>
           </div>
           <div className="hero-panel-title-block">
-            <h2 className="headline" style={{ margin: 0 }}>Study from one calm premium workspace.</h2>
-            <p className="subheadline" style={{ margin: 0 }}>
+            <h2 className="headline flush">Study from one calm premium workspace.</h2>
+            <p className="subheadline flush">
               Continue your strongest course, watch premium access windows, follow creator releases, and keep your streak alive without digging through scattered tools.
             </p>
           </div>
@@ -88,16 +88,16 @@ export function LearnerDashboardOverview(props: { dashboard: LearnerDashboardVie
             <div className="dashboard-mini-card-grid">
               {dashboard.continueLearningCourses.map((course) => (
                 <article key={course.id} className="dashboard-mini-card">
-                  <div className="stack" style={{ gap: 8 }}>
+                  <div className="stack stack-compact">
                     <span className="studio-badge studio-badge-primary">{course.progress?.completionPercent ?? 0}% complete</span>
-                    <h3 className="panel-title" style={{ margin: 0 }}>{course.title}</h3>
+                    <h3 className="panel-title flush">{course.title}</h3>
                     <p className="muted dashboard-mini-copy">
                       {course.progress?.lastVisited
                         ? `Last visited: ${course.progress.lastVisited.nodeTitle}`
                         : 'Start from the first unlocked node.'}
                     </p>
                   </div>
-                  <div className="inline" style={{ justifyContent: 'space-between', alignItems: 'center' }}>
+                  <div className="inline split-inline">
                     <span className="muted">
                       {course.progress?.completedNodeCount ?? 0}/{course.progress?.accessibleNodeCount ?? 0} nodes complete
                     </span>
@@ -137,19 +137,19 @@ export function LearnerDashboardOverview(props: { dashboard: LearnerDashboardVie
 
                 return (
                   <article key={course.id} className="dashboard-timeline-card">
-                    <div className="stack" style={{ gap: 6 }}>
+                    <div className="stack stack-micro">
                       <div className="inline premium-badge-row">
                         <span className={`studio-badge ${expiry.tone === 'warning' ? 'studio-badge-warning' : 'studio-badge-success'}`}>
                           {expiry.statusLabel}
                         </span>
                         <span className="studio-badge studio-badge-muted">{expiry.relativeLabel}</span>
                       </div>
-                      <h3 className="panel-title" style={{ margin: 0 }}>{course.title}</h3>
-                      <p className="muted" style={{ margin: 0 }}>
+                      <h3 className="panel-title flush">{course.title}</h3>
+                      <p className="muted flush">
                         Active until <strong>{expiry.exactLabel}</strong>
                       </p>
                     </div>
-                    <div className="inline" style={{ justifyContent: 'space-between', alignItems: 'center' }}>
+                    <div className="inline split-inline">
                       <span className="muted">{course.premiumAccessDays ? `${course.premiumAccessDays} day base access` : 'Premium access'}</span>
                       <Link href={`/courses/${course.id}`} className="button button-secondary">
                         View course
@@ -181,7 +181,7 @@ export function LearnerDashboardOverview(props: { dashboard: LearnerDashboardVie
             <div className="editorial-list">
               {feedHead.map((item) => (
                 <Link key={item.id} href={item.href} className="editorial-list-item">
-                  <div className="stack" style={{ gap: 6 }}>
+                  <div className="stack stack-micro">
                     <div className="inline premium-badge-row">
                       <span className="studio-badge studio-badge-primary">{item.kind.replaceAll('_', ' ')}</span>
                       <span className="studio-badge studio-badge-muted">{formatDateTimeLabel(item.occurredAt)}</span>
@@ -201,7 +201,7 @@ export function LearnerDashboardOverview(props: { dashboard: LearnerDashboardVie
               <h2 className="panel-title">Saved for later + milestones</h2>
               <p className="muted">Your saved nodes, wishlisted courses, and achievement shelf stay one click away.</p>
             </div>
-            <div className="inline" style={{ gap: 8 }}>
+            <div className="inline action-cluster">
               <Link href="/dashboard/bookmarks" className="button button-secondary">
                 Bookmarks
               </Link>
@@ -275,11 +275,11 @@ export function LearnerDashboardOverview(props: { dashboard: LearnerDashboardVie
                     <span className="studio-badge studio-badge-warning">Pending</span>
                     <span className="studio-badge studio-badge-muted">{transaction.paymentProvider ?? 'manual'}</span>
                   </div>
-                  <h3 className="panel-title" style={{ margin: 0 }}>{transaction.courseTitle}</h3>
+                  <h3 className="panel-title flush">{transaction.courseTitle}</h3>
                   <p className="muted dashboard-mini-copy">
                     Created {formatDateTimeLabel(transaction.createdAt)} · {formatCurrency(transaction.grossAmount, transaction.currency)}
                   </p>
-                  <div className="inline" style={{ justifyContent: 'space-between', alignItems: 'center' }}>
+                  <div className="inline split-inline">
                     <span className="muted">Resume checkout from the transaction page.</span>
                     <Link href="/dashboard/transactions" className="button button-secondary">
                       Resume
@@ -306,7 +306,7 @@ export function LearnerDashboardOverview(props: { dashboard: LearnerDashboardVie
               </span>
               <span className="studio-badge studio-badge-muted">Longest {dashboard.streak.longestDays} days</span>
             </div>
-            <h3 className="panel-title" style={{ margin: 0 }}>{dashboard.streak.currentDays} day current streak</h3>
+            <h3 className="panel-title flush">{dashboard.streak.currentDays} day current streak</h3>
             <p className="muted dashboard-mini-copy">
               Total active days: {dashboard.streak.totalActiveDays} · {dashboard.streak.lastActiveAt ? `Last active ${formatDateTimeLabel(dashboard.streak.lastActiveAt)}` : 'Complete a node to start your streak.'}
             </p>
@@ -317,4 +317,3 @@ export function LearnerDashboardOverview(props: { dashboard: LearnerDashboardVie
     </div>
   );
 }
-

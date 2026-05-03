@@ -2,6 +2,7 @@ import { describePayoutMode, env } from '@/lib/env';
 import { ApplicationError } from '@/src/application/errors';
 import type { FinanceRepository, PayoutGatewayPort } from '@/src/domain/ports';
 import type { Viewer } from '@/src/domain/models';
+import { createProviderWebhookEventKey } from '@/shared/scaling/idempotency';
 
 export class CreatorFinanceApplicationService {
   constructor(
@@ -153,6 +154,28 @@ export class CreatorFinanceApplicationService {
       } as const;
     }
 
+    const eventKey = createProviderWebhookEventKey({
+      provider: event.provider,
+      eventType: event.eventType,
+      payoutId: event.payoutId,
+      fallbackSignature: input.signature,
+    });
+
+    if (withdrawal.status === 'paid' || withdrawal.status === 'rejected') {
+      const duplicateProcessed = withdrawal.status === 'paid' && event.status === 'processed';
+      const duplicateRejected = withdrawal.status === 'rejected' && event.status === 'failed';
+      if (duplicateProcessed || duplicateRejected) {
+        return {
+          ignored: true,
+          reason: 'Duplicate payout webhook ignored.',
+          eventType: event.eventType,
+          eventKey,
+        } as const;
+      }
+
+      throw new ApplicationError('Payout webhook status conflicts with finalized withdrawal.', 409);
+    }
+
     if (event.status === 'processed') {
       const finalized = await this.financeRepository.finalizeWithdrawalFromPayout({
         withdrawalRequestId: withdrawal.id,
@@ -190,5 +213,4 @@ export class CreatorFinanceApplicationService {
     }
   }
 }
-
 

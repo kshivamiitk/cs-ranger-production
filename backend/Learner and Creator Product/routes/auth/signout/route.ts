@@ -4,11 +4,21 @@ import { NextResponse } from 'next/server';
 import { clearViewerCookies } from '@/lib/appCookies';
 import { createServerContainer } from '@/src/infrastructure/container/server';
 
-export async function POST(request: Request) {
+function createSignOutRedirectResponse() {
+  return new NextResponse(null, {
+    status: 303,
+    headers: {
+      Location: '/login',
+      'Cache-Control': 'no-store',
+    },
+  });
+}
+
+export async function POST() {
   const { authService } = await createServerContainer({ writeCookies: true });
   await authService.signOut();
 
-  const response = NextResponse.redirect(new URL('/login', request.url), { status: 303 });
+  const response = createSignOutRedirectResponse();
   clearViewerCookies(response);
   const cookieStore = await cookies();
   for (const cookie of cookieStore.getAll()) {
@@ -23,5 +33,3 @@ export async function POST(request: Request) {
   }
   return response;
 }
-
-

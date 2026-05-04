@@ -1,0 +1,1296 @@
+{
+  "generatedAt": "2026-05-03T21:44:47.354Z",
+  "startedAt": "2026-05-03T21:44:45.818Z",
+  "baseUrl": "http://localhost:3001",
+  "options": {
+    "repeat": 5,
+    "concurrency": 2,
+    "timeoutMs": 20000,
+    "includeMutating": false,
+    "methods": [],
+    "only": [],
+    "exclude": [],
+    "params": {},
+    "headers": [],
+    "failP95Ms": 0,
+    "failOnStatus": false
+  },
+  "summary": {
+    "discoveredRoutes": 69,
+    "testedEndpointMethods": 51,
+    "skippedEndpointMethods": 18,
+    "slowest": [
+      {
+        "method": "GET",
+        "path": "/api/courses/b99e778e-ad1b-454a-9d22-45475434d515/nodes/95cf7a50-7999-4041-80b8-67b65e58ef8b/pdf",
+        "routePath": "/api/courses/[courseId]/nodes/[nodeId]/pdf",
+        "file": "frontend/app/api/courses/[courseId]/nodes/[nodeId]/pdf/route.ts",
+        "url": "http://localhost:3001/api/courses/b99e778e-ad1b-454a-9d22-45475434d515/nodes/95cf7a50-7999-4041-80b8-67b65e58ef8b/pdf",
+        "attempts": 5,
+        "ok": 5,
+        "errors": 0,
+        "statuses": {
+          "200": 5
+        },
+        "minMs": 6,
+        "avgMs": 175,
+        "p50Ms": 8,
+        "p90Ms": 431,
+        "p95Ms": 431,
+        "maxMs": 431
+      },
+      {
+        "method": "GET",
+        "path": "/api/nodes/95cf7a50-7999-4041-80b8-67b65e58ef8b/discussions/comments",
+        "routePath": "/api/nodes/[nodeId]/discussions/comments",
+        "file": "frontend/app/api/nodes/[nodeId]/discussions/comments/route.ts",
+        "url": "http://localhost:3001/api/nodes/95cf7a50-7999-4041-80b8-67b65e58ef8b/discussions/comments",
+        "attempts": 5,
+        "ok": 5,
+        "errors": 0,
+        "statuses": {
+          "200": 5
+        },
+        "minMs": 1,
+        "avgMs": 173,
+        "p50Ms": 2,
+        "p90Ms": 429,
+        "p95Ms": 429,
+        "maxMs": 429
+      },
+      {
+        "method": "GET",
+        "path": "/api/courses/b99e778e-ad1b-454a-9d22-45475434d515/reviews",
+        "routePath": "/api/courses/[courseId]/reviews",
+        "file": "frontend/app/api/courses/[courseId]/reviews/route.ts",
+        "url": "http://localhost:3001/api/courses/b99e778e-ad1b-454a-9d22-45475434d515/reviews",
+        "attempts": 5,
+        "ok": 5,
+        "errors": 0,
+        "statuses": {
+          "200": 5
+        },
+        "minMs": 2,
+        "avgMs": 109,
+        "p50Ms": 2,
+        "p90Ms": 270,
+        "p95Ms": 270,
+        "maxMs": 270
+      },
+      {
+        "method": "GET",
+        "path": "/api/courses/b99e778e-ad1b-454a-9d22-45475434d515/pricing-plans",
+        "routePath": "/api/courses/[courseId]/pricing-plans",
+        "file": "frontend/app/api/courses/[courseId]/pricing-plans/route.ts",
+        "url": "http://localhost:3001/api/courses/b99e778e-ad1b-454a-9d22-45475434d515/pricing-plans",
+        "attempts": 5,
+        "ok": 5,
+        "errors": 0,
+        "statuses": {
+          "200": 5
+        },
+        "minMs": 2,
+        "avgMs": 47,
+        "p50Ms": 4,
+        "p90Ms": 113,
+        "p95Ms": 113,
+        "maxMs": 113
+      },
+      {
+        "method": "GET",
+        "path": "/api/admin/broadcasts",
+        "routePath": "/api/admin/broadcasts",
+        "file": "frontend/app/api/admin/broadcasts/route.ts",
+        "url": "http://localhost:3001/api/admin/broadcasts",
+        "attempts": 5,
+        "ok": 0,
+        "errors": 5,
+        "statuses": {
+          "405": 5
+        },
+        "minMs": 1,
+        "avgMs": 23,
+        "p50Ms": 6,
+        "p90Ms": 66,
+        "p95Ms": 66,
+        "maxMs": 66
+      },
+      {
+        "method": "GET",
+        "path": "/api/courses",
+        "routePath": "/api/courses",
+        "file": "frontend/app/api/courses/route.ts",
+        "url": "http://localhost:3001/api/courses",
+        "attempts": 5,
+        "ok": 5,
+        "errors": 0,
+        "statuses": {
+          "200": 5
+        },
+        "minMs": 1,
+        "avgMs": 6,
+        "p50Ms": 2,
+        "p90Ms": 13,
+        "p95Ms": 13,
+        "maxMs": 13
+      },
+      {
+        "method": "GET",
+        "path": "/api/auth/oauth/google",
+        "routePath": "/api/auth/oauth/google",
+        "file": "frontend/app/api/auth/oauth/google/route.ts",
+        "url": "http://localhost:3001/api/auth/oauth/google",
+        "attempts": 5,
+        "ok": 0,
+        "errors": 5,
+        "statuses": {
+          "307": 5
+        },
+        "minMs": 1,
+        "avgMs": 4,
+        "p50Ms": 2,
+        "p90Ms": 9,
+        "p95Ms": 9,
+        "maxMs": 9
+      },
+      {
+        "method": "GET",
+        "path": "/api/admin/bulk-payouts",
+        "routePath": "/api/admin/bulk-payouts",
+        "file": "frontend/app/api/admin/bulk-payouts/route.ts",
+        "url": "http://localhost:3001/api/admin/bulk-payouts",
+        "attempts": 5,
+        "ok": 0,
+        "errors": 5,
+        "statuses": {
+          "405": 5
+        },
+        "minMs": 2,
+        "avgMs": 3,
+        "p50Ms": 2,
+        "p90Ms": 5,
+        "p95Ms": 5,
+        "maxMs": 5
+      },
+      {
+        "method": "GET",
+        "path": "/api/auth/forgot-password",
+        "routePath": "/api/auth/forgot-password",
+        "file": "frontend/app/api/auth/forgot-password/route.ts",
+        "url": "http://localhost:3001/api/auth/forgot-password",
+        "attempts": 5,
+        "ok": 0,
+        "errors": 5,
+        "statuses": {
+          "405": 5
+        },
+        "minMs": 1,
+        "avgMs": 3,
+        "p50Ms": 2,
+        "p90Ms": 5,
+        "p95Ms": 5,
+        "maxMs": 5
+      },
+      {
+        "method": "GET",
+        "path": "/api/courses/b99e778e-ad1b-454a-9d22-45475434d515",
+        "routePath": "/api/courses/[courseId]",
+        "file": "frontend/app/api/courses/[courseId]/route.ts",
+        "url": "http://localhost:3001/api/courses/b99e778e-ad1b-454a-9d22-45475434d515",
+        "attempts": 5,
+        "ok": 5,
+        "errors": 0,
+        "statuses": {
+          "200": 5
+        },
+        "minMs": 2,
+        "avgMs": 2,
+        "p50Ms": 2,
+        "p90Ms": 3,
+        "p95Ms": 3,
+        "maxMs": 3
+      }
+    ]
+  },
+  "endpoints": [
+    {
+      "method": "GET",
+      "path": "/api/admin/broadcasts",
+      "routePath": "/api/admin/broadcasts",
+      "file": "frontend/app/api/admin/broadcasts/route.ts",
+      "url": "http://localhost:3001/api/admin/broadcasts",
+      "attempts": 5,
+      "ok": 0,
+      "errors": 5,
+      "statuses": {
+        "405": 5
+      },
+      "minMs": 1,
+      "avgMs": 23,
+      "p50Ms": 6,
+      "p90Ms": 66,
+      "p95Ms": 66,
+      "maxMs": 66
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/bulk-payouts",
+      "routePath": "/api/admin/bulk-payouts",
+      "file": "frontend/app/api/admin/bulk-payouts/route.ts",
+      "url": "http://localhost:3001/api/admin/bulk-payouts",
+      "attempts": 5,
+      "ok": 0,
+      "errors": 5,
+      "statuses": {
+        "405": 5
+      },
+      "minMs": 2,
+      "avgMs": 3,
+      "p50Ms": 2,
+      "p90Ms": 5,
+      "p95Ms": 5,
+      "maxMs": 5
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/finance/settings",
+      "routePath": "/api/admin/finance/settings",
+      "file": "frontend/app/api/admin/finance/settings/route.ts",
+      "url": "http://localhost:3001/api/admin/finance/settings",
+      "attempts": 5,
+      "ok": 0,
+      "errors": 5,
+      "statuses": {
+        "405": 5
+      },
+      "minMs": 1,
+      "avgMs": 2,
+      "p50Ms": 2,
+      "p90Ms": 2,
+      "p95Ms": 2,
+      "maxMs": 2
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/intro-card",
+      "routePath": "/api/admin/intro-card",
+      "file": "frontend/app/api/admin/intro-card/route.ts",
+      "url": "http://localhost:3001/api/admin/intro-card",
+      "attempts": 5,
+      "ok": 0,
+      "errors": 5,
+      "statuses": {
+        "405": 5
+      },
+      "minMs": 1,
+      "avgMs": 1,
+      "p50Ms": 1,
+      "p90Ms": 1,
+      "p95Ms": 1,
+      "maxMs": 1
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/messages",
+      "routePath": "/api/admin/messages",
+      "file": "frontend/app/api/admin/messages/route.ts",
+      "url": "http://localhost:3001/api/admin/messages",
+      "attempts": 5,
+      "ok": 0,
+      "errors": 5,
+      "statuses": {
+        "405": 5
+      },
+      "minMs": 1,
+      "avgMs": 1,
+      "p50Ms": 1,
+      "p90Ms": 2,
+      "p95Ms": 2,
+      "maxMs": 2
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/moderation",
+      "routePath": "/api/admin/moderation",
+      "file": "frontend/app/api/admin/moderation/route.ts",
+      "url": "http://localhost:3001/api/admin/moderation",
+      "attempts": 5,
+      "ok": 0,
+      "errors": 5,
+      "statuses": {
+        "405": 5
+      },
+      "minMs": 1,
+      "avgMs": 2,
+      "p50Ms": 2,
+      "p90Ms": 2,
+      "p95Ms": 2,
+      "maxMs": 2
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/payouts",
+      "routePath": "/api/admin/payouts",
+      "file": "frontend/app/api/admin/payouts/route.ts",
+      "url": "http://localhost:3001/api/admin/payouts",
+      "attempts": 5,
+      "ok": 0,
+      "errors": 5,
+      "statuses": {
+        "405": 5
+      },
+      "minMs": 1,
+      "avgMs": 1,
+      "p50Ms": 1,
+      "p90Ms": 1,
+      "p95Ms": 1,
+      "maxMs": 1
+    },
+    {
+      "method": "GET",
+      "path": "/api/auth/callback",
+      "routePath": "/api/auth/callback",
+      "file": "frontend/app/api/auth/callback/route.ts",
+      "url": "http://localhost:3001/api/auth/callback",
+      "attempts": 5,
+      "ok": 0,
+      "errors": 5,
+      "statuses": {
+        "307": 5
+      },
+      "minMs": 1,
+      "avgMs": 1,
+      "p50Ms": 1,
+      "p90Ms": 2,
+      "p95Ms": 2,
+      "maxMs": 2
+    },
+    {
+      "method": "GET",
+      "path": "/api/auth/forgot-password",
+      "routePath": "/api/auth/forgot-password",
+      "file": "frontend/app/api/auth/forgot-password/route.ts",
+      "url": "http://localhost:3001/api/auth/forgot-password",
+      "attempts": 5,
+      "ok": 0,
+      "errors": 5,
+      "statuses": {
+        "405": 5
+      },
+      "minMs": 1,
+      "avgMs": 3,
+      "p50Ms": 2,
+      "p90Ms": 5,
+      "p95Ms": 5,
+      "maxMs": 5
+    },
+    {
+      "method": "GET",
+      "path": "/api/auth/oauth/google",
+      "routePath": "/api/auth/oauth/google",
+      "file": "frontend/app/api/auth/oauth/google/route.ts",
+      "url": "http://localhost:3001/api/auth/oauth/google",
+      "attempts": 5,
+      "ok": 0,
+      "errors": 5,
+      "statuses": {
+        "307": 5
+      },
+      "minMs": 1,
+      "avgMs": 4,
+      "p50Ms": 2,
+      "p90Ms": 9,
+      "p95Ms": 9,
+      "maxMs": 9
+    },
+    {
+      "method": "GET",
+      "path": "/api/auth/reset-password",
+      "routePath": "/api/auth/reset-password",
+      "file": "frontend/app/api/auth/reset-password/route.ts",
+      "url": "http://localhost:3001/api/auth/reset-password",
+      "attempts": 5,
+      "ok": 0,
+      "errors": 5,
+      "statuses": {
+        "405": 5
+      },
+      "minMs": 1,
+      "avgMs": 1,
+      "p50Ms": 1,
+      "p90Ms": 2,
+      "p95Ms": 2,
+      "maxMs": 2
+    },
+    {
+      "method": "GET",
+      "path": "/api/auth/signin",
+      "routePath": "/api/auth/signin",
+      "file": "frontend/app/api/auth/signin/route.ts",
+      "url": "http://localhost:3001/api/auth/signin",
+      "attempts": 5,
+      "ok": 0,
+      "errors": 5,
+      "statuses": {
+        "405": 5
+      },
+      "minMs": 1,
+      "avgMs": 1,
+      "p50Ms": 1,
+      "p90Ms": 1,
+      "p95Ms": 1,
+      "maxMs": 1
+    },
+    {
+      "method": "GET",
+      "path": "/api/auth/signout",
+      "routePath": "/api/auth/signout",
+      "file": "frontend/app/api/auth/signout/route.ts",
+      "url": "http://localhost:3001/api/auth/signout",
+      "attempts": 5,
+      "ok": 0,
+      "errors": 5,
+      "statuses": {
+        "405": 5
+      },
+      "minMs": 1,
+      "avgMs": 1,
+      "p50Ms": 1,
+      "p90Ms": 1,
+      "p95Ms": 1,
+      "maxMs": 1
+    },
+    {
+      "method": "GET",
+      "path": "/api/auth/signup",
+      "routePath": "/api/auth/signup",
+      "file": "frontend/app/api/auth/signup/route.ts",
+      "url": "http://localhost:3001/api/auth/signup",
+      "attempts": 5,
+      "ok": 0,
+      "errors": 5,
+      "statuses": {
+        "405": 5
+      },
+      "minMs": 1,
+      "avgMs": 1,
+      "p50Ms": 1,
+      "p90Ms": 1,
+      "p95Ms": 1,
+      "maxMs": 1
+    },
+    {
+      "method": "GET",
+      "path": "/api/courses",
+      "routePath": "/api/courses",
+      "file": "frontend/app/api/courses/route.ts",
+      "url": "http://localhost:3001/api/courses",
+      "attempts": 5,
+      "ok": 5,
+      "errors": 0,
+      "statuses": {
+        "200": 5
+      },
+      "minMs": 1,
+      "avgMs": 6,
+      "p50Ms": 2,
+      "p90Ms": 13,
+      "p95Ms": 13,
+      "maxMs": 13
+    },
+    {
+      "method": "GET",
+      "path": "/api/courses/b99e778e-ad1b-454a-9d22-45475434d515",
+      "routePath": "/api/courses/[courseId]",
+      "file": "frontend/app/api/courses/[courseId]/route.ts",
+      "url": "http://localhost:3001/api/courses/b99e778e-ad1b-454a-9d22-45475434d515",
+      "attempts": 5,
+      "ok": 5,
+      "errors": 0,
+      "statuses": {
+        "200": 5
+      },
+      "minMs": 2,
+      "avgMs": 2,
+      "p50Ms": 2,
+      "p90Ms": 3,
+      "p95Ms": 3,
+      "maxMs": 3
+    },
+    {
+      "method": "GET",
+      "path": "/api/courses/b99e778e-ad1b-454a-9d22-45475434d515/certificate",
+      "routePath": "/api/courses/[courseId]/certificate",
+      "file": "frontend/app/api/courses/[courseId]/certificate/route.ts",
+      "url": "http://localhost:3001/api/courses/b99e778e-ad1b-454a-9d22-45475434d515/certificate",
+      "attempts": 5,
+      "ok": 0,
+      "errors": 5,
+      "statuses": {
+        "401": 5
+      },
+      "minMs": 1,
+      "avgMs": 2,
+      "p50Ms": 2,
+      "p90Ms": 2,
+      "p95Ms": 2,
+      "maxMs": 2
+    },
+    {
+      "method": "GET",
+      "path": "/api/courses/b99e778e-ad1b-454a-9d22-45475434d515/nodes/95cf7a50-7999-4041-80b8-67b65e58ef8b/bookmark",
+      "routePath": "/api/courses/[courseId]/nodes/[nodeId]/bookmark",
+      "file": "frontend/app/api/courses/[courseId]/nodes/[nodeId]/bookmark/route.ts",
+      "url": "http://localhost:3001/api/courses/b99e778e-ad1b-454a-9d22-45475434d515/nodes/95cf7a50-7999-4041-80b8-67b65e58ef8b/bookmark",
+      "attempts": 5,
+      "ok": 0,
+      "errors": 5,
+      "statuses": {
+        "405": 5
+      },
+      "minMs": 1,
+      "avgMs": 1,
+      "p50Ms": 1,
+      "p90Ms": 1,
+      "p95Ms": 1,
+      "maxMs": 1
+    },
+    {
+      "method": "GET",
+      "path": "/api/courses/b99e778e-ad1b-454a-9d22-45475434d515/nodes/95cf7a50-7999-4041-80b8-67b65e58ef8b/pdf",
+      "routePath": "/api/courses/[courseId]/nodes/[nodeId]/pdf",
+      "file": "frontend/app/api/courses/[courseId]/nodes/[nodeId]/pdf/route.ts",
+      "url": "http://localhost:3001/api/courses/b99e778e-ad1b-454a-9d22-45475434d515/nodes/95cf7a50-7999-4041-80b8-67b65e58ef8b/pdf",
+      "attempts": 5,
+      "ok": 5,
+      "errors": 0,
+      "statuses": {
+        "200": 5
+      },
+      "minMs": 6,
+      "avgMs": 175,
+      "p50Ms": 8,
+      "p90Ms": 431,
+      "p95Ms": 431,
+      "maxMs": 431
+    },
+    {
+      "method": "GET",
+      "path": "/api/courses/b99e778e-ad1b-454a-9d22-45475434d515/nodes/95cf7a50-7999-4041-80b8-67b65e58ef8b/progress/complete",
+      "routePath": "/api/courses/[courseId]/nodes/[nodeId]/progress/complete",
+      "file": "frontend/app/api/courses/[courseId]/nodes/[nodeId]/progress/complete/route.ts",
+      "url": "http://localhost:3001/api/courses/b99e778e-ad1b-454a-9d22-45475434d515/nodes/95cf7a50-7999-4041-80b8-67b65e58ef8b/progress/complete",
+      "attempts": 5,
+      "ok": 0,
+      "errors": 5,
+      "statuses": {
+        "405": 5
+      },
+      "minMs": 1,
+      "avgMs": 2,
+      "p50Ms": 3,
+      "p90Ms": 3,
+      "p95Ms": 3,
+      "maxMs": 3
+    },
+    {
+      "method": "GET",
+      "path": "/api/courses/b99e778e-ad1b-454a-9d22-45475434d515/nodes/95cf7a50-7999-4041-80b8-67b65e58ef8b/progress/visit",
+      "routePath": "/api/courses/[courseId]/nodes/[nodeId]/progress/visit",
+      "file": "frontend/app/api/courses/[courseId]/nodes/[nodeId]/progress/visit/route.ts",
+      "url": "http://localhost:3001/api/courses/b99e778e-ad1b-454a-9d22-45475434d515/nodes/95cf7a50-7999-4041-80b8-67b65e58ef8b/progress/visit",
+      "attempts": 5,
+      "ok": 0,
+      "errors": 5,
+      "statuses": {
+        "405": 5
+      },
+      "minMs": 1,
+      "avgMs": 1,
+      "p50Ms": 1,
+      "p90Ms": 1,
+      "p95Ms": 1,
+      "maxMs": 1
+    },
+    {
+      "method": "GET",
+      "path": "/api/courses/b99e778e-ad1b-454a-9d22-45475434d515/premium/order",
+      "routePath": "/api/courses/[courseId]/premium/order",
+      "file": "frontend/app/api/courses/[courseId]/premium/order/route.ts",
+      "url": "http://localhost:3001/api/courses/b99e778e-ad1b-454a-9d22-45475434d515/premium/order",
+      "attempts": 5,
+      "ok": 0,
+      "errors": 5,
+      "statuses": {
+        "405": 5
+      },
+      "minMs": 1,
+      "avgMs": 1,
+      "p50Ms": 1,
+      "p90Ms": 1,
+      "p95Ms": 1,
+      "maxMs": 1
+    },
+    {
+      "method": "GET",
+      "path": "/api/courses/b99e778e-ad1b-454a-9d22-45475434d515/premium/verify",
+      "routePath": "/api/courses/[courseId]/premium/verify",
+      "file": "frontend/app/api/courses/[courseId]/premium/verify/route.ts",
+      "url": "http://localhost:3001/api/courses/b99e778e-ad1b-454a-9d22-45475434d515/premium/verify",
+      "attempts": 5,
+      "ok": 0,
+      "errors": 5,
+      "statuses": {
+        "405": 5
+      },
+      "minMs": 1,
+      "avgMs": 1,
+      "p50Ms": 1,
+      "p90Ms": 1,
+      "p95Ms": 1,
+      "maxMs": 1
+    },
+    {
+      "method": "GET",
+      "path": "/api/courses/b99e778e-ad1b-454a-9d22-45475434d515/pricing-plans",
+      "routePath": "/api/courses/[courseId]/pricing-plans",
+      "file": "frontend/app/api/courses/[courseId]/pricing-plans/route.ts",
+      "url": "http://localhost:3001/api/courses/b99e778e-ad1b-454a-9d22-45475434d515/pricing-plans",
+      "attempts": 5,
+      "ok": 5,
+      "errors": 0,
+      "statuses": {
+        "200": 5
+      },
+      "minMs": 2,
+      "avgMs": 47,
+      "p50Ms": 4,
+      "p90Ms": 113,
+      "p95Ms": 113,
+      "maxMs": 113
+    },
+    {
+      "method": "GET",
+      "path": "/api/courses/b99e778e-ad1b-454a-9d22-45475434d515/quiz-attempts",
+      "routePath": "/api/courses/[courseId]/quiz-attempts",
+      "file": "frontend/app/api/courses/[courseId]/quiz-attempts/route.ts",
+      "url": "http://localhost:3001/api/courses/b99e778e-ad1b-454a-9d22-45475434d515/quiz-attempts",
+      "attempts": 5,
+      "ok": 0,
+      "errors": 5,
+      "statuses": {
+        "405": 5
+      },
+      "minMs": 1,
+      "avgMs": 1,
+      "p50Ms": 1,
+      "p90Ms": 2,
+      "p95Ms": 2,
+      "maxMs": 2
+    },
+    {
+      "method": "GET",
+      "path": "/api/courses/b99e778e-ad1b-454a-9d22-45475434d515/reviews",
+      "routePath": "/api/courses/[courseId]/reviews",
+      "file": "frontend/app/api/courses/[courseId]/reviews/route.ts",
+      "url": "http://localhost:3001/api/courses/b99e778e-ad1b-454a-9d22-45475434d515/reviews",
+      "attempts": 5,
+      "ok": 5,
+      "errors": 0,
+      "statuses": {
+        "200": 5
+      },
+      "minMs": 2,
+      "avgMs": 109,
+      "p50Ms": 2,
+      "p90Ms": 270,
+      "p95Ms": 270,
+      "maxMs": 270
+    },
+    {
+      "method": "GET",
+      "path": "/api/courses/b99e778e-ad1b-454a-9d22-45475434d515/reviews/me",
+      "routePath": "/api/courses/[courseId]/reviews/me",
+      "file": "frontend/app/api/courses/[courseId]/reviews/me/route.ts",
+      "url": "http://localhost:3001/api/courses/b99e778e-ad1b-454a-9d22-45475434d515/reviews/me",
+      "attempts": 5,
+      "ok": 0,
+      "errors": 5,
+      "statuses": {
+        "405": 5
+      },
+      "minMs": 1,
+      "avgMs": 1,
+      "p50Ms": 1,
+      "p90Ms": 2,
+      "p95Ms": 2,
+      "maxMs": 2
+    },
+    {
+      "method": "GET",
+      "path": "/api/creator/collaboration-requests",
+      "routePath": "/api/creator/collaboration-requests",
+      "file": "frontend/app/api/creator/collaboration-requests/route.ts",
+      "url": "http://localhost:3001/api/creator/collaboration-requests",
+      "attempts": 5,
+      "ok": 0,
+      "errors": 5,
+      "statuses": {
+        "401": 5
+      },
+      "minMs": 1,
+      "avgMs": 2,
+      "p50Ms": 2,
+      "p90Ms": 3,
+      "p95Ms": 3,
+      "maxMs": 3
+    },
+    {
+      "method": "GET",
+      "path": "/api/creator/collaborator-search",
+      "routePath": "/api/creator/collaborator-search",
+      "file": "frontend/app/api/creator/collaborator-search/route.ts",
+      "url": "http://localhost:3001/api/creator/collaborator-search",
+      "attempts": 5,
+      "ok": 0,
+      "errors": 5,
+      "statuses": {
+        "401": 5
+      },
+      "minMs": 1,
+      "avgMs": 1,
+      "p50Ms": 1,
+      "p90Ms": 1,
+      "p95Ms": 1,
+      "maxMs": 1
+    },
+    {
+      "method": "GET",
+      "path": "/api/creator/courses",
+      "routePath": "/api/creator/courses",
+      "file": "frontend/app/api/creator/courses/route.ts",
+      "url": "http://localhost:3001/api/creator/courses",
+      "attempts": 5,
+      "ok": 0,
+      "errors": 5,
+      "statuses": {
+        "401": 5
+      },
+      "minMs": 1,
+      "avgMs": 1,
+      "p50Ms": 1,
+      "p90Ms": 2,
+      "p95Ms": 2,
+      "maxMs": 2
+    },
+    {
+      "method": "GET",
+      "path": "/api/creator/courses/b99e778e-ad1b-454a-9d22-45475434d515",
+      "routePath": "/api/creator/courses/[courseId]",
+      "file": "frontend/app/api/creator/courses/[courseId]/route.ts",
+      "url": "http://localhost:3001/api/creator/courses/b99e778e-ad1b-454a-9d22-45475434d515",
+      "attempts": 5,
+      "ok": 0,
+      "errors": 5,
+      "statuses": {
+        "401": 5
+      },
+      "minMs": 1,
+      "avgMs": 2,
+      "p50Ms": 2,
+      "p90Ms": 2,
+      "p95Ms": 2,
+      "maxMs": 2
+    },
+    {
+      "method": "GET",
+      "path": "/api/creator/courses/b99e778e-ad1b-454a-9d22-45475434d515/certificate-settings",
+      "routePath": "/api/creator/courses/[courseId]/certificate-settings",
+      "file": "frontend/app/api/creator/courses/[courseId]/certificate-settings/route.ts",
+      "url": "http://localhost:3001/api/creator/courses/b99e778e-ad1b-454a-9d22-45475434d515/certificate-settings",
+      "attempts": 5,
+      "ok": 0,
+      "errors": 5,
+      "statuses": {
+        "401": 5
+      },
+      "minMs": 1,
+      "avgMs": 2,
+      "p50Ms": 2,
+      "p90Ms": 3,
+      "p95Ms": 3,
+      "maxMs": 3
+    },
+    {
+      "method": "GET",
+      "path": "/api/creator/courses/b99e778e-ad1b-454a-9d22-45475434d515/collaborators",
+      "routePath": "/api/creator/courses/[courseId]/collaborators",
+      "file": "frontend/app/api/creator/courses/[courseId]/collaborators/route.ts",
+      "url": "http://localhost:3001/api/creator/courses/b99e778e-ad1b-454a-9d22-45475434d515/collaborators",
+      "attempts": 5,
+      "ok": 0,
+      "errors": 5,
+      "statuses": {
+        "401": 5
+      },
+      "minMs": 1,
+      "avgMs": 1,
+      "p50Ms": 1,
+      "p90Ms": 2,
+      "p95Ms": 2,
+      "maxMs": 2
+    },
+    {
+      "method": "GET",
+      "path": "/api/creator/courses/b99e778e-ad1b-454a-9d22-45475434d515/modules",
+      "routePath": "/api/creator/courses/[courseId]/modules",
+      "file": "frontend/app/api/creator/courses/[courseId]/modules/route.ts",
+      "url": "http://localhost:3001/api/creator/courses/b99e778e-ad1b-454a-9d22-45475434d515/modules",
+      "attempts": 5,
+      "ok": 0,
+      "errors": 5,
+      "statuses": {
+        "405": 5
+      },
+      "minMs": 1,
+      "avgMs": 1,
+      "p50Ms": 1,
+      "p90Ms": 1,
+      "p95Ms": 1,
+      "maxMs": 1
+    },
+    {
+      "method": "GET",
+      "path": "/api/creator/courses/b99e778e-ad1b-454a-9d22-45475434d515/modules/reorder",
+      "routePath": "/api/creator/courses/[courseId]/modules/reorder",
+      "file": "frontend/app/api/creator/courses/[courseId]/modules/reorder/route.ts",
+      "url": "http://localhost:3001/api/creator/courses/b99e778e-ad1b-454a-9d22-45475434d515/modules/reorder",
+      "attempts": 5,
+      "ok": 0,
+      "errors": 5,
+      "statuses": {
+        "405": 5
+      },
+      "minMs": 1,
+      "avgMs": 1,
+      "p50Ms": 1,
+      "p90Ms": 2,
+      "p95Ms": 2,
+      "maxMs": 2
+    },
+    {
+      "method": "GET",
+      "path": "/api/creator/courses/b99e778e-ad1b-454a-9d22-45475434d515/pricing-plans",
+      "routePath": "/api/creator/courses/[courseId]/pricing-plans",
+      "file": "frontend/app/api/creator/courses/[courseId]/pricing-plans/route.ts",
+      "url": "http://localhost:3001/api/creator/courses/b99e778e-ad1b-454a-9d22-45475434d515/pricing-plans",
+      "attempts": 5,
+      "ok": 0,
+      "errors": 5,
+      "statuses": {
+        "401": 5
+      },
+      "minMs": 1,
+      "avgMs": 1,
+      "p50Ms": 1,
+      "p90Ms": 2,
+      "p95Ms": 2,
+      "maxMs": 2
+    },
+    {
+      "method": "GET",
+      "path": "/api/creator/learner-doubts",
+      "routePath": "/api/creator/learner-doubts",
+      "file": "frontend/app/api/creator/learner-doubts/route.ts",
+      "url": "http://localhost:3001/api/creator/learner-doubts",
+      "attempts": 5,
+      "ok": 0,
+      "errors": 5,
+      "statuses": {
+        "401": 5
+      },
+      "minMs": 1,
+      "avgMs": 1,
+      "p50Ms": 1,
+      "p90Ms": 2,
+      "p95Ms": 2,
+      "maxMs": 2
+    },
+    {
+      "method": "GET",
+      "path": "/api/creator/modules/557a1ca3-e276-4444-83bd-9668d798c8aa",
+      "routePath": "/api/creator/modules/[moduleId]",
+      "file": "frontend/app/api/creator/modules/[moduleId]/route.ts",
+      "url": "http://localhost:3001/api/creator/modules/557a1ca3-e276-4444-83bd-9668d798c8aa",
+      "attempts": 5,
+      "ok": 0,
+      "errors": 5,
+      "statuses": {
+        "405": 5
+      },
+      "minMs": 1,
+      "avgMs": 1,
+      "p50Ms": 1,
+      "p90Ms": 1,
+      "p95Ms": 1,
+      "maxMs": 1
+    },
+    {
+      "method": "GET",
+      "path": "/api/creator/modules/557a1ca3-e276-4444-83bd-9668d798c8aa/nodes",
+      "routePath": "/api/creator/modules/[moduleId]/nodes",
+      "file": "frontend/app/api/creator/modules/[moduleId]/nodes/route.ts",
+      "url": "http://localhost:3001/api/creator/modules/557a1ca3-e276-4444-83bd-9668d798c8aa/nodes",
+      "attempts": 5,
+      "ok": 0,
+      "errors": 5,
+      "statuses": {
+        "405": 5
+      },
+      "minMs": 1,
+      "avgMs": 1,
+      "p50Ms": 1,
+      "p90Ms": 2,
+      "p95Ms": 2,
+      "maxMs": 2
+    },
+    {
+      "method": "GET",
+      "path": "/api/creator/modules/557a1ca3-e276-4444-83bd-9668d798c8aa/nodes/reorder",
+      "routePath": "/api/creator/modules/[moduleId]/nodes/reorder",
+      "file": "frontend/app/api/creator/modules/[moduleId]/nodes/reorder/route.ts",
+      "url": "http://localhost:3001/api/creator/modules/557a1ca3-e276-4444-83bd-9668d798c8aa/nodes/reorder",
+      "attempts": 5,
+      "ok": 0,
+      "errors": 5,
+      "statuses": {
+        "405": 5
+      },
+      "minMs": 1,
+      "avgMs": 1,
+      "p50Ms": 1,
+      "p90Ms": 1,
+      "p95Ms": 1,
+      "maxMs": 1
+    },
+    {
+      "method": "GET",
+      "path": "/api/creator/nodes/95cf7a50-7999-4041-80b8-67b65e58ef8b",
+      "routePath": "/api/creator/nodes/[nodeId]",
+      "file": "frontend/app/api/creator/nodes/[nodeId]/route.ts",
+      "url": "http://localhost:3001/api/creator/nodes/95cf7a50-7999-4041-80b8-67b65e58ef8b",
+      "attempts": 5,
+      "ok": 0,
+      "errors": 5,
+      "statuses": {
+        "405": 5
+      },
+      "minMs": 1,
+      "avgMs": 1,
+      "p50Ms": 1,
+      "p90Ms": 1,
+      "p95Ms": 1,
+      "maxMs": 1
+    },
+    {
+      "method": "GET",
+      "path": "/api/creator/payout-profile",
+      "routePath": "/api/creator/payout-profile",
+      "file": "frontend/app/api/creator/payout-profile/route.ts",
+      "url": "http://localhost:3001/api/creator/payout-profile",
+      "attempts": 5,
+      "ok": 0,
+      "errors": 5,
+      "statuses": {
+        "405": 5
+      },
+      "minMs": 1,
+      "avgMs": 1,
+      "p50Ms": 1,
+      "p90Ms": 1,
+      "p95Ms": 1,
+      "maxMs": 1
+    },
+    {
+      "method": "GET",
+      "path": "/api/creator/withdrawals",
+      "routePath": "/api/creator/withdrawals",
+      "file": "frontend/app/api/creator/withdrawals/route.ts",
+      "url": "http://localhost:3001/api/creator/withdrawals",
+      "attempts": 5,
+      "ok": 0,
+      "errors": 5,
+      "statuses": {
+        "405": 5
+      },
+      "minMs": 1,
+      "avgMs": 1,
+      "p50Ms": 1,
+      "p90Ms": 1,
+      "p95Ms": 1,
+      "maxMs": 1
+    },
+    {
+      "method": "GET",
+      "path": "/api/creators/kumar_shivam_8d77f0/follow",
+      "routePath": "/api/creators/[creatorId]/follow",
+      "file": "frontend/app/api/creators/[creatorId]/follow/route.ts",
+      "url": "http://localhost:3001/api/creators/kumar_shivam_8d77f0/follow",
+      "attempts": 5,
+      "ok": 0,
+      "errors": 5,
+      "statuses": {
+        "405": 5
+      },
+      "minMs": 1,
+      "avgMs": 1,
+      "p50Ms": 1,
+      "p90Ms": 1,
+      "p95Ms": 1,
+      "maxMs": 1
+    },
+    {
+      "method": "GET",
+      "path": "/api/latex/preview",
+      "routePath": "/api/latex/preview",
+      "file": "frontend/app/api/latex/preview/route.ts",
+      "url": "http://localhost:3001/api/latex/preview",
+      "attempts": 5,
+      "ok": 0,
+      "errors": 5,
+      "statuses": {
+        "405": 5
+      },
+      "minMs": 1,
+      "avgMs": 1,
+      "p50Ms": 1,
+      "p90Ms": 1,
+      "p95Ms": 1,
+      "maxMs": 1
+    },
+    {
+      "method": "GET",
+      "path": "/api/nodes/95cf7a50-7999-4041-80b8-67b65e58ef8b/discussions/comments",
+      "routePath": "/api/nodes/[nodeId]/discussions/comments",
+      "file": "frontend/app/api/nodes/[nodeId]/discussions/comments/route.ts",
+      "url": "http://localhost:3001/api/nodes/95cf7a50-7999-4041-80b8-67b65e58ef8b/discussions/comments",
+      "attempts": 5,
+      "ok": 5,
+      "errors": 0,
+      "statuses": {
+        "200": 5
+      },
+      "minMs": 1,
+      "avgMs": 173,
+      "p50Ms": 2,
+      "p90Ms": 429,
+      "p95Ms": 429,
+      "maxMs": 429
+    },
+    {
+      "method": "GET",
+      "path": "/api/payments/razorpay/webhook",
+      "routePath": "/api/payments/razorpay/webhook",
+      "file": "frontend/app/api/payments/razorpay/webhook/route.ts",
+      "url": "http://localhost:3001/api/payments/razorpay/webhook",
+      "attempts": 5,
+      "ok": 0,
+      "errors": 5,
+      "statuses": {
+        "405": 5
+      },
+      "minMs": 1,
+      "avgMs": 1,
+      "p50Ms": 1,
+      "p90Ms": 1,
+      "p95Ms": 1,
+      "maxMs": 1
+    },
+    {
+      "method": "GET",
+      "path": "/api/payments/razorpayx/webhook",
+      "routePath": "/api/payments/razorpayx/webhook",
+      "file": "frontend/app/api/payments/razorpayx/webhook/route.ts",
+      "url": "http://localhost:3001/api/payments/razorpayx/webhook",
+      "attempts": 5,
+      "ok": 0,
+      "errors": 5,
+      "statuses": {
+        "405": 5
+      },
+      "minMs": 1,
+      "avgMs": 1,
+      "p50Ms": 1,
+      "p90Ms": 1,
+      "p95Ms": 1,
+      "maxMs": 1
+    },
+    {
+      "method": "GET",
+      "path": "/api/profile",
+      "routePath": "/api/profile",
+      "file": "frontend/app/api/profile/route.ts",
+      "url": "http://localhost:3001/api/profile",
+      "attempts": 5,
+      "ok": 5,
+      "errors": 0,
+      "statuses": {
+        "200": 5
+      },
+      "minMs": 1,
+      "avgMs": 2,
+      "p50Ms": 2,
+      "p90Ms": 2,
+      "p95Ms": 2,
+      "maxMs": 2
+    },
+    {
+      "method": "GET",
+      "path": "/api/support/threads",
+      "routePath": "/api/support/threads",
+      "file": "frontend/app/api/support/threads/route.ts",
+      "url": "http://localhost:3001/api/support/threads",
+      "attempts": 5,
+      "ok": 0,
+      "errors": 5,
+      "statuses": {
+        "405": 5
+      },
+      "minMs": 1,
+      "avgMs": 1,
+      "p50Ms": 1,
+      "p90Ms": 1,
+      "p95Ms": 1,
+      "maxMs": 1
+    },
+    {
+      "method": "GET",
+      "path": "/api/theme",
+      "routePath": "/api/theme",
+      "file": "frontend/app/api/theme/route.ts",
+      "url": "http://localhost:3001/api/theme",
+      "attempts": 5,
+      "ok": 0,
+      "errors": 5,
+      "statuses": {
+        "405": 5
+      },
+      "minMs": 1,
+      "avgMs": 1,
+      "p50Ms": 1,
+      "p90Ms": 1,
+      "p95Ms": 1,
+      "maxMs": 1
+    }
+  ],
+  "skipped": [
+    {
+      "method": "GET",
+      "path": "/api/admin/messages/[messageId]",
+      "file": "frontend/app/api/admin/messages/[messageId]/route.ts",
+      "reason": "missing dynamic params: messageId"
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/withdrawals/[withdrawalRequestId]",
+      "file": "frontend/app/api/admin/withdrawals/[withdrawalRequestId]/route.ts",
+      "reason": "missing dynamic params: withdrawalRequestId"
+    },
+    {
+      "method": "GET",
+      "path": "/api/courses/reviews/[reviewId]",
+      "file": "frontend/app/api/courses/reviews/[reviewId]/route.ts",
+      "reason": "missing dynamic params: reviewId"
+    },
+    {
+      "method": "GET",
+      "path": "/api/creator/collaboration-requests/[inviteId]/accept",
+      "file": "frontend/app/api/creator/collaboration-requests/[inviteId]/accept/route.ts",
+      "reason": "missing dynamic params: inviteId"
+    },
+    {
+      "method": "GET",
+      "path": "/api/creator/collaboration-requests/[inviteId]/decline",
+      "file": "frontend/app/api/creator/collaboration-requests/[inviteId]/decline/route.ts",
+      "reason": "missing dynamic params: inviteId"
+    },
+    {
+      "method": "GET",
+      "path": "/api/creator/courses/[courseId]/collaborators/[collaboratorUserId]",
+      "file": "frontend/app/api/creator/courses/[courseId]/collaborators/[collaboratorUserId]/route.ts",
+      "reason": "missing dynamic params: collaboratorUserId"
+    },
+    {
+      "method": "GET",
+      "path": "/api/creator/courses/[courseId]/collaborators/invites/[inviteId]",
+      "file": "frontend/app/api/creator/courses/[courseId]/collaborators/invites/[inviteId]/route.ts",
+      "reason": "missing dynamic params: inviteId"
+    },
+    {
+      "method": "GET",
+      "path": "/api/creator/courses/[courseId]/pricing-plans/[planId]",
+      "file": "frontend/app/api/creator/courses/[courseId]/pricing-plans/[planId]/route.ts",
+      "reason": "missing dynamic params: planId"
+    },
+    {
+      "method": "GET",
+      "path": "/api/creator/learner-doubts/[commentId]",
+      "file": "frontend/app/api/creator/learner-doubts/[commentId]/route.ts",
+      "reason": "missing dynamic params: commentId"
+    },
+    {
+      "method": "GET",
+      "path": "/api/discussions/comments/[commentId]",
+      "file": "frontend/app/api/discussions/comments/[commentId]/route.ts",
+      "reason": "missing dynamic params: commentId"
+    },
+    {
+      "method": "GET",
+      "path": "/api/discussions/comments/[commentId]/likes/toggle",
+      "file": "frontend/app/api/discussions/comments/[commentId]/likes/toggle/route.ts",
+      "reason": "missing dynamic params: commentId"
+    },
+    {
+      "method": "GET",
+      "path": "/api/discussions/comments/[commentId]/reopen",
+      "file": "frontend/app/api/discussions/comments/[commentId]/reopen/route.ts",
+      "reason": "missing dynamic params: commentId"
+    },
+    {
+      "method": "GET",
+      "path": "/api/discussions/comments/[commentId]/resolve",
+      "file": "frontend/app/api/discussions/comments/[commentId]/resolve/route.ts",
+      "reason": "missing dynamic params: commentId"
+    },
+    {
+      "method": "GET",
+      "path": "/api/latex/preview/[previewKey]",
+      "file": "frontend/app/api/latex/preview/[previewKey]/route.ts",
+      "reason": "missing dynamic params: previewKey"
+    },
+    {
+      "method": "GET",
+      "path": "/api/premium/purchases/[purchaseId]/resume",
+      "file": "frontend/app/api/premium/purchases/[purchaseId]/resume/route.ts",
+      "reason": "missing dynamic params: purchaseId"
+    },
+    {
+      "method": "GET",
+      "path": "/api/support/threads/[threadId]/messages",
+      "file": "frontend/app/api/support/threads/[threadId]/messages/route.ts",
+      "reason": "missing dynamic params: threadId"
+    },
+    {
+      "method": "GET",
+      "path": "/api/support/threads/[threadId]/messages/[messageId]",
+      "file": "frontend/app/api/support/threads/[threadId]/messages/[messageId]/route.ts",
+      "reason": "missing dynamic params: threadId, messageId"
+    },
+    {
+      "method": "GET",
+      "path": "/api/support/threads/[threadId]/status",
+      "file": "frontend/app/api/support/threads/[threadId]/status/route.ts",
+      "reason": "missing dynamic params: threadId"
+    }
+  ]
+}

@@ -1,0 +1,145 @@
+{
+  "generatedAt": "2026-05-03T21:29:34.261Z",
+  "startedAt": "2026-05-03T21:29:32.991Z",
+  "baseUrl": "http://localhost:3001",
+  "options": {
+    "repeat": 20,
+    "concurrency": 5,
+    "timeoutMs": 20000,
+    "includeMutating": false,
+    "methods": [],
+    "only": [
+      "/api/courses/[courseId]/reviews",
+      "/api/courses/[courseId]/pricing-plans"
+    ],
+    "exclude": [],
+    "params": {},
+    "headers": [],
+    "failP95Ms": 0,
+    "failOnStatus": false
+  },
+  "summary": {
+    "discoveredRoutes": 69,
+    "testedEndpointMethods": 3,
+    "skippedEndpointMethods": 0,
+    "slowest": [
+      {
+        "method": "GET",
+        "path": "/api/courses/c9c9f690-c169-4ace-8b2a-1c256163bc6e/pricing-plans",
+        "routePath": "/api/courses/[courseId]/pricing-plans",
+        "file": "frontend/app/api/courses/[courseId]/pricing-plans/route.ts",
+        "url": "http://localhost:3001/api/courses/c9c9f690-c169-4ace-8b2a-1c256163bc6e/pricing-plans",
+        "attempts": 20,
+        "ok": 20,
+        "errors": 0,
+        "statuses": {
+          "200": 20
+        },
+        "minMs": 3,
+        "avgMs": 103,
+        "p50Ms": 9,
+        "p90Ms": 378,
+        "p95Ms": 379,
+        "maxMs": 408
+      },
+      {
+        "method": "GET",
+        "path": "/api/courses/c9c9f690-c169-4ace-8b2a-1c256163bc6e/reviews",
+        "routePath": "/api/courses/[courseId]/reviews",
+        "file": "frontend/app/api/courses/[courseId]/reviews/route.ts",
+        "url": "http://localhost:3001/api/courses/c9c9f690-c169-4ace-8b2a-1c256163bc6e/reviews",
+        "attempts": 20,
+        "ok": 20,
+        "errors": 0,
+        "statuses": {
+          "200": 20
+        },
+        "minMs": 117,
+        "avgMs": 186,
+        "p50Ms": 166,
+        "p90Ms": 301,
+        "p95Ms": 302,
+        "maxMs": 342
+      },
+      {
+        "method": "GET",
+        "path": "/api/courses/c9c9f690-c169-4ace-8b2a-1c256163bc6e/reviews/me",
+        "routePath": "/api/courses/[courseId]/reviews/me",
+        "file": "frontend/app/api/courses/[courseId]/reviews/me/route.ts",
+        "url": "http://localhost:3001/api/courses/c9c9f690-c169-4ace-8b2a-1c256163bc6e/reviews/me",
+        "attempts": 20,
+        "ok": 0,
+        "errors": 20,
+        "statuses": {
+          "405": 20
+        },
+        "minMs": 2,
+        "avgMs": 5,
+        "p50Ms": 4,
+        "p90Ms": 10,
+        "p95Ms": 11,
+        "maxMs": 11
+      }
+    ]
+  },
+  "endpoints": [
+    {
+      "method": "GET",
+      "path": "/api/courses/c9c9f690-c169-4ace-8b2a-1c256163bc6e/pricing-plans",
+      "routePath": "/api/courses/[courseId]/pricing-plans",
+      "file": "frontend/app/api/courses/[courseId]/pricing-plans/route.ts",
+      "url": "http://localhost:3001/api/courses/c9c9f690-c169-4ace-8b2a-1c256163bc6e/pricing-plans",
+      "attempts": 20,
+      "ok": 20,
+      "errors": 0,
+      "statuses": {
+        "200": 20
+      },
+      "minMs": 3,
+      "avgMs": 103,
+      "p50Ms": 9,
+      "p90Ms": 378,
+      "p95Ms": 379,
+      "maxMs": 408
+    },
+    {
+      "method": "GET",
+      "path": "/api/courses/c9c9f690-c169-4ace-8b2a-1c256163bc6e/reviews",
+      "routePath": "/api/courses/[courseId]/reviews",
+      "file": "frontend/app/api/courses/[courseId]/reviews/route.ts",
+      "url": "http://localhost:3001/api/courses/c9c9f690-c169-4ace-8b2a-1c256163bc6e/reviews",
+      "attempts": 20,
+      "ok": 20,
+      "errors": 0,
+      "statuses": {
+        "200": 20
+      },
+      "minMs": 117,
+      "avgMs": 186,
+      "p50Ms": 166,
+      "p90Ms": 301,
+      "p95Ms": 302,
+      "maxMs": 342
+    },
+    {
+      "method": "GET",
+      "path": "/api/courses/c9c9f690-c169-4ace-8b2a-1c256163bc6e/reviews/me",
+      "routePath": "/api/courses/[courseId]/reviews/me",
+      "file": "frontend/app/api/courses/[courseId]/reviews/me/route.ts",
+      "url": "http://localhost:3001/api/courses/c9c9f690-c169-4ace-8b2a-1c256163bc6e/reviews/me",
+      "attempts": 20,
+      "ok": 0,
+      "errors": 20,
+      "statuses": {
+        "405": 20
+      },
+      "minMs": 2,
+      "avgMs": 5,
+      "p50Ms": 4,
+      "p90Ms": 10,
+      "p95Ms": 11,
+      "maxMs": 11
+    }
+  ],
+  "skipped": []
+}

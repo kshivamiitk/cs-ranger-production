@@ -1,0 +1,70 @@
+{
+  "generatedAt": "2026-05-03T21:28:18.160Z",
+  "startedAt": "2026-05-03T21:28:16.246Z",
+  "baseUrl": "http://localhost:3001",
+  "options": {
+    "repeat": 20,
+    "concurrency": 5,
+    "timeoutMs": 20000,
+    "includeMutating": false,
+    "methods": [],
+    "only": [
+      "/api/nodes",
+      "/api/courses/c9c9f690-c169-4ace-8b2a-1c256163bc6e/reviews",
+      "/api/courses/c9c9f690-c169-4ace-8b2a-1c256163bc6e/pricing-plans"
+    ],
+    "exclude": [],
+    "params": {},
+    "headers": [],
+    "failP95Ms": 0,
+    "failOnStatus": false
+  },
+  "summary": {
+    "discoveredRoutes": 69,
+    "testedEndpointMethods": 1,
+    "skippedEndpointMethods": 0,
+    "slowest": [
+      {
+        "method": "GET",
+        "path": "/api/nodes/308a436e-a18b-4c9f-8d3f-d25ba8864026/discussions/comments",
+        "routePath": "/api/nodes/[nodeId]/discussions/comments",
+        "file": "frontend/app/api/nodes/[nodeId]/discussions/comments/route.ts",
+        "url": "http://localhost:3001/api/nodes/308a436e-a18b-4c9f-8d3f-d25ba8864026/discussions/comments",
+        "attempts": 20,
+        "ok": 20,
+        "errors": 0,
+        "statuses": {
+          "200": 20
+        },
+        "minMs": 291,
+        "avgMs": 452,
+        "p50Ms": 374,
+        "p90Ms": 664,
+        "p95Ms": 695,
+        "maxMs": 753
+      }
+    ]
+  },
+  "endpoints": [
+    {
+      "method": "GET",
+      "path": "/api/nodes/308a436e-a18b-4c9f-8d3f-d25ba8864026/discussions/comments",
+      "routePath": "/api/nodes/[nodeId]/discussions/comments",
+      "file": "frontend/app/api/nodes/[nodeId]/discussions/comments/route.ts",
+      "url": "http://localhost:3001/api/nodes/308a436e-a18b-4c9f-8d3f-d25ba8864026/discussions/comments",
+      "attempts": 20,
+      "ok": 20,
+      "errors": 0,
+      "statuses": {
+        "200": 20
+      },
+      "minMs": 291,
+      "avgMs": 452,
+      "p50Ms": 374,
+      "p90Ms": 664,
+      "p95Ms": 695,
+      "maxMs": 753
+    }
+  ],
+  "skipped": []
+}

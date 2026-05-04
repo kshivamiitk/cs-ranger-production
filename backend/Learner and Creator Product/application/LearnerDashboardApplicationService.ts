@@ -134,6 +134,18 @@ export class LearnerDashboardApplicationService {
     };
   }
 
+  async getFeed(viewer: Viewer): Promise<LearnerDashboardViewModel['feed']> {
+    const [catalogCourses, followedCreatorIds] = await Promise.all([
+      this.catalogService.listPublishedCourses(viewer),
+      this.creatorFollowRepository.listFollowedCreatorIds(viewer.user.id),
+    ]);
+
+    return {
+      followedCreatorCount: followedCreatorIds.length,
+      items: await this.buildFeed(followedCreatorIds, catalogCourses),
+    };
+  }
+
   private async buildFeed(
     followedCreatorIds: string[],
     catalogCourses: CatalogCourseSummary[]
@@ -383,4 +395,3 @@ function sortByExpiryAsc(left: CatalogCourseSummary, right: CatalogCourseSummary
   const rightMs = new Date(right.access.activeEntitlement?.expiresAt ?? 0).getTime();
   return leftMs - rightMs;
 }
-

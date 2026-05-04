@@ -4,7 +4,7 @@ import { AppShell } from '@/components/app-shell/AppShell';
 import { createServiceRoleSupabaseClient } from '@/src/infrastructure/supabase/serverClient';
 import { requireServerPageContext } from '@/src/presentation/serverPage';
 import { formatDateLabel } from '@/lib/utils';
-import { getSupportUnreadCountForViewer, listSupportThreadsForViewer } from '@/src/server/adminSupport';
+import { getSupportUnreadCountForViewerFast } from '@/src/server/adminSupport';
 
 function buildCertificateDownloadHref(certificate: any, courseTitle: string, learnerName: string) {
   if (certificate.pdf_url) {
@@ -26,9 +26,9 @@ export default async function LearnerAchievementsPage() {
   const { viewer, themeMode, container } = await requireServerPageContext('/dashboard/achievements');
   const { learnerDashboardService } = container;
 
-  const [dashboard, supportThreads] = await Promise.all([
+  const [dashboard, supportUnreadCount] = await Promise.all([
     learnerDashboardService.getDashboard(viewer, { includeFeed: false }),
-    listSupportThreadsForViewer(viewer),
+    getSupportUnreadCountForViewerFast(viewer),
   ]);
 
   const supabase = createServiceRoleSupabaseClient();
@@ -62,7 +62,7 @@ export default async function LearnerAchievementsPage() {
       subtitle="One premium shelf for your earned badges and issued certificates, including fast certificate downloads."
       unreadCounts={{
         feed: 0,
-        support: getSupportUnreadCountForViewer(viewer, supportThreads),
+        support: supportUnreadCount,
         notifications: 0,
       }}
       hideHeader

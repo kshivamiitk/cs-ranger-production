@@ -4,6 +4,8 @@ import { ApplicationError, requireValue } from '@/src/application/errors';
 import { nodeIsLocked, resolveCourseAccess } from '@/src/domain/courseAccess';
 import { CatalogCourseSummaryQueryService } from '@/src/application/CatalogCourseSummaryQueryService';
 import { LearnerProgressQueryService } from '@/src/application/LearnerProgressQueryService';
+import { learnerCreatorCacheKey, learnerCreatorCacheTtlMs } from '@/src/performance/learnerCreatorCache';
+import { cachedValue } from '@/shared/performance/apiCache';
 import type { CourseRepository, FinanceRepository } from '@/src/domain/ports';
 import type {
   CatalogCourseQuery,
@@ -61,8 +63,31 @@ export class CatalogApplicationService {
     viewer: Viewer | null,
     input?: CatalogCourseQuery
   ): Promise<CatalogCourseSummary[]> {
-    const courses = await this.listPublishedCourseOverviews(input);
-    return this.catalogCourseSummaryQueryService.buildSummaries(viewer, courses);
+    const cacheKey = learnerCreatorCacheKey([
+      'courses',
+      'summary-list',
+      viewer?.user.id ?? 'guest',
+      viewer?.profile.primaryRole ?? 'guest',
+      viewer?.profile.isAdmin ?? false,
+      input?.query,
+      input?.domainSlug,
+      input?.premiumFilter,
+      input?.sort,
+      input?.minRating,
+      input?.limit,
+    ]);
+
+    return cachedValue(
+      cacheKey,
+      viewer ? Math.min(learnerCreatorCacheTtlMs.signedCourseList, 10_000) : learnerCreatorCacheTtlMs.publicCourseList,
+      async () => {
+        const courses = await this.listPublishedCourseOverviews(input);
+        return this.catalogCourseSummaryQueryService.buildSummaries(viewer, courses);
+      },
+      {
+        staleMs: viewer ? 5_000 : 60_000,
+      }
+    );
   }
 
   async getCourseTreeView(viewer: Viewer | null, courseId: string): Promise<CatalogCourseTreeView> {
@@ -104,6 +129,31 @@ export class CatalogApplicationService {
   }
 
   async getCourseWorkspaceView(
+    viewer: Viewer | null,
+    courseId: string,
+    requestedNodeId?: string | null
+  ): Promise<CatalogCourseWorkspaceView> {
+    const cacheKey = learnerCreatorCacheKey([
+      'course',
+      courseId,
+      'workspace',
+      requestedNodeId ?? 'auto',
+      viewer?.user.id ?? 'guest',
+      viewer?.profile.primaryRole ?? 'guest',
+      viewer?.profile.isAdmin ?? false,
+    ]);
+
+    return cachedValue(
+      cacheKey,
+      viewer ? Math.min(learnerCreatorCacheTtlMs.courseDetail, 10_000) : learnerCreatorCacheTtlMs.courseDetail,
+      () => this.buildCourseWorkspaceView(viewer, courseId, requestedNodeId),
+      {
+        staleMs: viewer ? 5_000 : 60_000,
+      }
+    );
+  }
+
+  private async buildCourseWorkspaceView(
     viewer: Viewer | null,
     courseId: string,
     requestedNodeId?: string | null

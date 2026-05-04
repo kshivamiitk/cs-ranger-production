@@ -7,7 +7,7 @@ import { paginateList, resolveListPagination } from '@/lib/pagination';
 import { formatDateTimeLabel } from '@/lib/utils';
 import { createServiceRoleSupabaseClient } from '@/src/infrastructure/supabase/serverClient';
 import { requireServerPageContext } from '@/src/presentation/serverPage';
-import { getSupportUnreadCountForViewer, listSupportThreadsForViewer } from '@/src/server/adminSupport';
+import { getSupportUnreadCountForViewerFast } from '@/src/server/adminSupport';
 
 function startOfDayIso(date: Date) {
   const next = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()));
@@ -72,15 +72,15 @@ export default async function DashboardPage({
 }) {
   const resolvedSearchParams = await searchParams;
   const { viewer, themeMode, container } = await requireServerPageContext('/dashboard');
-  const { learnerDashboardService } = container;
+  const { catalogService } = container;
 
-  const [dashboard, heatmap, supportThreads] = await Promise.all([
-    learnerDashboardService.getDashboard(viewer, { includeFeed: false }),
+  const [catalogCourses, heatmap, unreadSupportCount] = await Promise.all([
+    catalogService.listPublishedCourses(viewer),
     buildLearnerHeatmap(viewer.user.id),
-    listSupportThreadsForViewer(viewer),
+    getSupportUnreadCountForViewerFast(viewer),
   ]);
 
-  const continueCourses = [...dashboard.catalogCourses]
+  const continueCourses = [...catalogCourses]
     .filter((course) => course.progress?.continueLearning)
     .sort((left, right) => {
       const leftVisited = left.progress?.lastVisited?.nodeId ? left.progress?.lastVisited : null;
@@ -92,7 +92,6 @@ export default async function DashboardPage({
 
   const pagination = resolveListPagination(resolvedSearchParams);
   const pagedContinue = paginateList(continueCourses, pagination.page, pagination.size);
-  const unreadSupportCount = getSupportUnreadCountForViewer(viewer, supportThreads);
   const unreadFeedCount = 0;
 
   return (

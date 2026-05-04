@@ -5,13 +5,13 @@ import { FollowCreatorButton } from '@/components/social/FollowCreatorButton';
 import { UserAvatar } from '@/components/user/UserAvatar';
 import { createServiceRoleSupabaseClient } from '@/src/infrastructure/supabase/serverClient';
 import { requireServerViewer } from '@/src/presentation/serverPage';
-import { getSupportUnreadCountForViewer, listSupportThreadsForViewer } from '@/src/server/adminSupport';
+import { getSupportUnreadCountForViewerFast } from '@/src/server/adminSupport';
 
 export default async function FollowingCreatorsPage() {
   const { viewer, themeMode } = await requireServerViewer('/dashboard/following');
   const supabase = createServiceRoleSupabaseClient();
-  const [supportThreads, { data: followRows }] = await Promise.all([
-    listSupportThreadsForViewer(viewer),
+  const [supportUnreadCount, { data: followRows }] = await Promise.all([
+    getSupportUnreadCountForViewerFast(viewer),
     supabase
       .from('creator_followers')
       .select('creator_user_id')
@@ -68,7 +68,7 @@ export default async function FollowingCreatorsPage() {
       subtitle="A clean directory of the creators you follow, with the latest release context and fast access to each profile."
       unreadCounts={{
         feed: 0,
-        support: getSupportUnreadCountForViewer(viewer, supportThreads),
+        support: supportUnreadCount,
         notifications: 0,
       }}
       hideHeader

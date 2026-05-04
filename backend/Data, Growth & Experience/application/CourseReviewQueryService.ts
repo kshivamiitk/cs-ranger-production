@@ -1,5 +1,7 @@
 import { ApplicationError, requireValue } from '@/src/application/errors';
 import { resolveCourseReviewEligibility } from '@/src/domain/courseReviewAccess';
+import { learnerCreatorCacheKey } from '@/src/performance/learnerCreatorCache';
+import { cachedValue } from '@/shared/performance/apiCache';
 import type { CourseRepository, CourseReviewRepository, FinanceRepository } from '@/src/domain/ports';
 import type { Course, CourseEntitlement, CourseReviewsView, Viewer } from '@/src/domain/models';
 
@@ -16,7 +18,16 @@ export class CourseReviewQueryService {
   ) {}
 
   async getCourseReviewsView(viewer: Viewer | null, courseId: string): Promise<CourseReviewsView> {
-    const course = requireValue(await this.courseRepository.getCourseById(courseId), 'Course not found.', 404);
+    const course = requireValue(
+      await cachedValue(
+        learnerCreatorCacheKey(['course', courseId, 'reviewable']),
+        30_000,
+        () => this.courseRepository.getCourseById(courseId),
+        { staleMs: 60_000 }
+      ),
+      'Course not found.',
+      404
+    );
     const activeEntitlement = viewer
       ? await this.financeRepository.getActiveEntitlement({ learnerUserId: viewer.user.id, courseId })
       : null;
@@ -46,12 +57,23 @@ export class CourseReviewQueryService {
 
     const eligibility = resolveCourseReviewEligibility(viewer, course, activeEntitlement);
 
-    const [summary, reviews, ownReview] = await Promise.all([
-      this.courseReviewRepository.getCourseReviewSummary(course.id),
-      this.courseReviewRepository.listCourseReviews({
-        courseId: course.id,
-        viewerUserId: viewer?.user.id ?? null,
-      }),
+    const [reviewPayload, ownReview] = await Promise.all([
+      cachedValue(
+        learnerCreatorCacheKey(['course', course.id, 'reviews', viewer?.user.id ?? 'guest']),
+        15_000,
+        async () => {
+          const [summary, reviews] = await Promise.all([
+            this.courseReviewRepository.getCourseReviewSummary(course.id),
+            this.courseReviewRepository.listCourseReviews({
+              courseId: course.id,
+              viewerUserId: viewer?.user.id ?? null,
+            }),
+          ]);
+
+          return { summary, reviews };
+        },
+        { staleMs: 15_000 }
+      ),
       viewer
         ? this.courseReviewRepository.getReviewerReviewForCourse(course.id, viewer.user.id)
         : Promise.resolve(null),
@@ -59,8 +81,8 @@ export class CourseReviewQueryService {
 
     return {
       courseId: course.id,
-      summary,
-      reviews,
+      summary: reviewPayload.summary,
+      reviews: reviewPayload.reviews,
       ownReview,
       canReview: eligibility.canReview,
       canReviewReason: eligibility.canReview
@@ -69,4 +91,3 @@ export class CourseReviewQueryService {
     };
   }
 }
-

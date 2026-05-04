@@ -1,6 +1,6 @@
-// Auto-generated v21 route bridge.
+// Auto-generated v21 route bridge with local API timing.
 // Backend team owns the implementation; this file only mounts it for Next.js local/full-stack execution.
-export * from '../../../../backend/Learner and Creator Product/routes/theme/route.ts';
+import { withApiTiming } from '@/lib/apiRouteTiming';
+import * as backendRoute from '../../../../backend/Learner and Creator Product/routes/theme/route.ts';
 
-
-
+export const POST = withApiTiming(backendRoute.POST, 'POST');

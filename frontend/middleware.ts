@@ -121,6 +121,10 @@ export async function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
   const needsViewer = routeNeedsViewer(pathname);
 
+  if (!needsViewer && !routeNeedsCreator(pathname) && !routeNeedsAdmin(pathname)) {
+    return NextResponse.next();
+  }
+
   try {
     const { response, profile } = await loadAccessProfile(request);
 
@@ -155,5 +159,11 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/creator/:path*', '/admin/:path*', '/dashboard/:path*', '/courses/:path*', '/search', '/creators/:path*'],
+  matcher: [
+    '/creator/:path*',
+    '/admin/:path*',
+    '/dashboard/profile/:path*',
+    '/dashboard/contact-admin/:path*',
+    '/dashboard/transactions/:path*',
+  ],
 };

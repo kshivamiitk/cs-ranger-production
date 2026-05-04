@@ -1,9 +1,9 @@
 import Link from 'next/link';
+import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { ArrowRight, BookOpen, GraduationCap, Palette, ShieldCheck, Sparkles, WalletCards } from 'lucide-react';
 
 import { BrandSymbol } from '@/components/brand/BrandSymbol';
-import { getServerViewerContext } from '@/src/presentation/serverPage';
 
 const featureCards = [
   {
@@ -31,10 +31,13 @@ const viewModes = [
   'Ember · Claude-inspired',
 ] as const;
 
-export default async function HomePage() {
-  const { viewer } = await getServerViewerContext();
+async function hasSupabaseSessionCookie() {
+  const cookieStore = await cookies();
+  return cookieStore.getAll().some((cookie) => cookie.name.startsWith('sb-') && cookie.value.trim().length > 0);
+}
 
-  if (viewer) {
+export default async function HomePage() {
+  if (await hasSupabaseSessionCookie()) {
     redirect('/dashboard');
   }
 

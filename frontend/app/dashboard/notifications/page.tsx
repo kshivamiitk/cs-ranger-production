@@ -7,7 +7,7 @@ import { ListPaginationControls } from '@/components/ui/ListPaginationControls';
 import { paginateList, resolveListPagination } from '@/lib/pagination';
 import { formatDateTimeLabel } from '@/lib/utils';
 import { requireServerPageContext } from '@/src/presentation/serverPage';
-import { getSupportUnreadCountForViewer, listSupportThreadsForViewer } from '@/src/server/adminSupport';
+import { getSupportUnreadCountForViewerFast } from '@/src/server/adminSupport';
 import { getFeedUnreadCountForViewer } from '@/src/server/feedSeen';
 import { listBroadcastsForViewer } from '@/src/server/adminBroadcasts';
 
@@ -19,9 +19,9 @@ export default async function LearnerNotificationsPage({
   const resolvedSearchParams = await searchParams;
   const { viewer, themeMode, container } = await requireServerPageContext('/dashboard/notifications');
   const { learnerDashboardService } = container;
-  const [dashboard, supportThreads, broadcasts] = await Promise.all([
-    learnerDashboardService.getDashboard(viewer),
-    listSupportThreadsForViewer(viewer),
+  const [feed, supportUnreadCount, broadcasts] = await Promise.all([
+    learnerDashboardService.getFeed(viewer),
+    getSupportUnreadCountForViewerFast(viewer),
     listBroadcastsForViewer(viewer),
   ]);
 
@@ -34,7 +34,7 @@ export default async function LearnerNotificationsPage({
       href: broadcast.ctaHref ?? '/dashboard/notifications',
       occurredAt: broadcast.updatedAt,
     })),
-    ...dashboard.feed.items.map((item) => ({
+    ...feed.items.map((item) => ({
       id: item.id,
       kind: item.kind,
       summary: item.summary,
@@ -54,15 +54,15 @@ export default async function LearnerNotificationsPage({
       title="Notifications"
       subtitle="A compact event inbox for creator releases, followed-course updates, and admin broadcasts."
       unreadCounts={{
-        feed: await getFeedUnreadCountForViewer(viewer, dashboard.feed.items),
-        support: getSupportUnreadCountForViewer(viewer, supportThreads),
+        feed: await getFeedUnreadCountForViewer(viewer, feed.items),
+        support: supportUnreadCount,
         notifications: 0,
       }}
     >
       <section className="stat-grid">
         <StatCard label="Unread alerts" value={String(Math.min(events.length, 9))} icon={<Bell size={18} />} />
-        <StatCard label="Followed creators" value={String(dashboard.feed.followedCreatorCount)} icon={<Users size={18} />} />
-        <StatCard label="Recent add-ons" value={String(dashboard.feed.items.length)} icon={<Rss size={18} />} />
+        <StatCard label="Followed creators" value={String(feed.followedCreatorCount)} icon={<Users size={18} />} />
+        <StatCard label="Recent add-ons" value={String(feed.items.length)} icon={<Rss size={18} />} />
         <StatCard label="Broadcasts" value={String(broadcasts.length)} icon={<Radio size={18} />} />
       </section>
 
@@ -109,4 +109,3 @@ export default async function LearnerNotificationsPage({
     </AppShell>
   );
 }
-

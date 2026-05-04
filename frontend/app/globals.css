@@ -238,6 +238,108 @@ a {
   text-decoration: none;
 }
 
+.route-loading-shell {
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  padding: clamp(24px, 5vw, 72px);
+}
+
+.route-loading-card {
+  width: min(620px, 100%);
+  display: grid;
+  gap: 24px;
+  padding: clamp(24px, 4vw, 42px);
+  border: 1px solid color-mix(in srgb, var(--accent) 26%, var(--border-soft));
+  border-radius: var(--radius-xl);
+  background:
+    radial-gradient(circle at 20% 0%, color-mix(in srgb, var(--accent) 22%, transparent), transparent 34%),
+    linear-gradient(135deg, color-mix(in srgb, var(--bg-surface-elevated) 96%, transparent), color-mix(in srgb, var(--bg-stage) 78%, transparent));
+  box-shadow: var(--shadow-panel);
+}
+
+.route-loading-orb {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 2px solid color-mix(in srgb, var(--accent) 35%, transparent);
+  border-top-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  animation: route-loading-spin 0.95s linear infinite;
+}
+
+.route-loading-copy {
+  display: grid;
+  gap: 10px;
+}
+
+.route-loading-copy h1,
+.route-loading-copy p {
+  margin: 0;
+}
+
+.route-loading-copy h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3.6rem);
+  letter-spacing: -0.055em;
+}
+
+.route-loading-copy p:last-child {
+  max-width: 48ch;
+  color: var(--text-secondary);
+  line-height: 1.65;
+}
+
+.route-loading-eyebrow {
+  color: var(--accent);
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.route-loading-skeleton {
+  display: grid;
+  gap: 12px;
+}
+
+.route-loading-skeleton span {
+  height: 13px;
+  border-radius: var(--radius-pill);
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--text-primary) 7%, transparent),
+    color-mix(in srgb, var(--accent) 22%, transparent),
+    color-mix(in srgb, var(--text-primary) 7%, transparent)
+  );
+  background-size: 220% 100%;
+  animation: route-loading-shimmer 1.35s ease-in-out infinite;
+}
+
+.route-loading-skeleton span:nth-child(2) {
+  width: 78%;
+}
+
+.route-loading-skeleton span:nth-child(3) {
+  width: 54%;
+}
+
+@keyframes route-loading-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes route-loading-shimmer {
+  0% {
+    background-position: 120% 0;
+  }
+
+  100% {
+    background-position: -120% 0;
+  }
+}
+
 button,
 input,
 textarea,
@@ -9988,7 +10090,15 @@ html[data-theme='ember'] {
 
 /* v22.8 node runtimes: PDF embeds */
 .pdf-node-reader {
-  gap: 18px;
+  padding: 0;
+  background:
+    radial-gradient(circle at top right, color-mix(in srgb, var(--accent) 12%, transparent), transparent 38%),
+    color-mix(in srgb, var(--reader-stage) 28%, var(--bg-stage));
+}
+
+.pdf-node-reader .pdf-node-toolbar,
+.pdf-node-reader .pdf-node-note {
+  display: none;
 }
 
 .pdf-node-toolbar {
@@ -10022,13 +10132,29 @@ html[data-theme='ember'] {
   background: color-mix(in srgb, var(--surface-raised) 78%, transparent);
 }
 
+.pdf-frame-bezel {
+  width: 100%;
+  padding: clamp(28px, 4.2vw, 58px);
+  border: 1px solid color-mix(in srgb, var(--reader-ink) 14%, transparent);
+  border-radius: clamp(28px, 3.4vw, 52px);
+  background:
+    linear-gradient(145deg, color-mix(in srgb, var(--reader-canvas) 100%, white), color-mix(in srgb, var(--reader-stage) 24%, white));
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, white 78%, transparent),
+    inset 0 0 42px color-mix(in srgb, var(--reader-stage) 28%, transparent),
+    0 24px 60px rgba(0, 0, 0, 0.24);
+}
+
 .pdf-frame {
   width: 100%;
-  min-height: min(78vh, 820px);
-  border: 1px solid var(--border-subtle);
-  border-radius: 28px;
-  background: #0f172a;
-  box-shadow: var(--shadow-lg);
+  min-height: min(82vh, 920px);
+  display: block;
+  border: 0;
+  border-radius: clamp(12px, 1.4vw, 20px);
+  background: var(--reader-canvas);
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--reader-ink) 12%, transparent),
+    0 16px 34px rgba(0, 0, 0, 0.18);
   user-select: none;
 }
 
@@ -10064,8 +10190,13 @@ html[data-theme='ember'] {
   }
 
   .pdf-frame {
-    min-height: 68vh;
-    border-radius: 20px;
+    min-height: 72vh;
+    border-radius: 14px;
+  }
+
+  .pdf-frame-bezel {
+    padding: 18px;
+    border-radius: 28px;
   }
 }
 

@@ -10,7 +10,7 @@ import { paginateList, resolveListPagination } from '@/lib/pagination';
 import { formatDateTimeLabel } from '@/lib/utils';
 import { createServiceRoleSupabaseClient } from '@/src/infrastructure/supabase/serverClient';
 import { requireServerCreatorPageContext } from '@/src/presentation/serverPage';
-import { getSupportUnreadCountForViewer, listSupportThreadsForViewer } from '@/src/server/adminSupport';
+import { getSupportUnreadCountForViewerFast } from '@/src/server/adminSupport';
 
 async function buildCreatorHeatmap(courseIds: string[]): Promise<ContributionDay[]> {
   const supabase = createServiceRoleSupabaseClient();
@@ -72,9 +72,9 @@ export default async function CreatorDashboardPage({
   const { viewer, themeMode, container } = await requireServerCreatorPageContext('/creator/dashboard');
   const { courseBuilderService, courseCollaborationService } = container;
 
-  const [courses, supportThreads, invites] = await Promise.all([
+  const [courses, unreadSupportCount, invites] = await Promise.all([
     courseBuilderService.listCreatorCourses(viewer),
-    listSupportThreadsForViewer(viewer),
+    getSupportUnreadCountForViewerFast(viewer),
     courseCollaborationService.listIncomingInvites(viewer),
   ]);
   const heatmap = await buildCreatorHeatmap(courses.map((course) => course.id));
@@ -87,8 +87,6 @@ export default async function CreatorDashboardPage({
   const pagination = resolveListPagination(resolvedSearchParams);
   const sortedCourses = [...courses].sort((left, right) => new Date(right.updatedAt).getTime() - new Date(left.updatedAt).getTime());
   const pagedCourses = paginateList(sortedCourses, pagination.page, pagination.size);
-  const unreadSupportCount = getSupportUnreadCountForViewer(viewer, supportThreads);
-
   return (
     <CreatorStudioShell
       viewer={viewer}
@@ -184,4 +182,3 @@ export default async function CreatorDashboardPage({
     </CreatorStudioShell>
   );
 }
-

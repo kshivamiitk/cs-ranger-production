@@ -1,31 +1,41 @@
+import Image from 'next/image';
 import Link from 'next/link';
-import { Compass, LockKeyhole, Sparkles, TrendingUp } from 'lucide-react';
+import { unstable_cache } from 'next/cache';
+import { BookOpen, Sparkles, Users } from 'lucide-react';
 
 import { AuthForm } from '@/components/auth/AuthForm';
-import { BrandSymbol } from '@/components/brand/BrandSymbol';
-import { AdminIntroCardPreview } from '@/components/admin/AdminIntroCardPreview';
+import { createServiceRoleSupabaseClient } from '@/src/infrastructure/supabase/serverClient';
 import { safeNextPath } from '@/src/presentation/http/routeUtils';
-import { getActiveAdminIntroCard } from '@/src/server/adminIntro';
 
 type AuthMode = 'signin' | 'signup';
 
-const trustPoints = [
-  {
-    icon: Compass,
-    title: 'Structured learning paths',
-    copy: 'Move from overview to node-level depth through a clean, focused course workspace.',
+const getAuthPageStats = unstable_cache(
+  async () => {
+    try {
+      const supabase = createServiceRoleSupabaseClient();
+      const [usersResult, coursesResult] = await Promise.all([
+        supabase.from('user_profiles').select('user_id', { count: 'exact', head: true }).eq('is_banned', false),
+        supabase.from('courses').select('id', { count: 'exact', head: true }).eq('status', 'published'),
+      ]);
+
+      return {
+        userCount: usersResult.error ? 0 : usersResult.count ?? 0,
+        courseCount: coursesResult.error ? 0 : coursesResult.count ?? 0,
+      };
+    } catch {
+      return {
+        userCount: 0,
+        courseCount: 0,
+      };
+    }
   },
-  {
-    icon: Sparkles,
-    title: 'Creator-grade production flow',
-    copy: 'Build, preview, and publish in one system designed for polished knowledge delivery.',
-  },
-  {
-    icon: LockKeyhole,
-    title: 'Access-aware premium controls',
-    copy: 'Free and premium experiences stay consistent with role-aware guards and entitlement checks.',
-  },
-] as const;
+  ['auth-page-platform-stats-v1'],
+  { revalidate: 300 }
+);
+
+function formatCount(value: number) {
+  return new Intl.NumberFormat('en-IN').format(value);
+}
 
 export default async function LoginPage({
   searchParams,
@@ -37,7 +47,21 @@ export default async function LoginPage({
   const modeValue = resolvedSearchParams.mode;
   const nextPath = safeNextPath(typeof nextValue === 'string' ? nextValue : null);
   const initialMode: AuthMode = modeValue === 'signup' ? 'signup' : 'signin';
-  const adminIntroCard = await getActiveAdminIntroCard().catch(() => null);
+  const isSignup = initialMode === 'signup';
+  const alternateMode: AuthMode = isSignup ? 'signin' : 'signup';
+  const authPageStats = await getAuthPageStats();
+  const learnerStats = [
+    {
+      icon: Users,
+      value: formatCount(authPageStats.userCount),
+      label: authPageStats.userCount === 1 ? 'Registered user' : 'Registered users',
+    },
+    {
+      icon: BookOpen,
+      value: formatCount(authPageStats.courseCount),
+      label: authPageStats.courseCount === 1 ? 'Published course' : 'Published courses',
+    },
+  ] as const;
 
   function authModeHref(mode: AuthMode) {
     const params = new URLSearchParams({ mode });
@@ -48,101 +72,58 @@ export default async function LoginPage({
   }
 
   return (
-    <main className="auth-shell">
-      <section className="auth-page-shell">
-        <header className="auth-topbar">
-          <Link href="/" className="auth-topbar-brand" aria-label="CS Ranger home">
-            <BrandSymbol size="sm" />
-            <span>
-              <strong>CS Ranger</strong>
-              <small>Learning and creator platform</small>
-            </span>
-          </Link>
+    <main className="auth-simple-shell">
+      <section className="auth-simple-card" aria-label="CS Ranger authentication">
+        <section className="auth-simple-left" aria-labelledby="auth-simple-title">
+          <div className="auth-simple-badge">
+            <Sparkles size={18} aria-hidden="true" />
+            <span>{isSignup ? 'Create account' : 'Welcome back'}</span>
+          </div>
 
-          <nav className="auth-topbar-actions" aria-label="Authentication actions">
-            <Link href={authModeHref('signin')} className={initialMode === 'signin' ? 'is-active' : undefined}>
-              Sign in
-            </Link>
-            <Link href={authModeHref('signup')} className={initialMode === 'signup' ? 'is-active' : undefined}>
-              Sign up
-            </Link>
-          </nav>
-        </header>
+          <h1 className="auth-simple-title" id="auth-simple-title">
+            {isSignup ? 'Create your account and start learning today.' : 'Log in to continue your learning journey.'}
+          </h1>
 
-        <div className="auth-layout-grid">
-          <section className="auth-story-panel" aria-labelledby="auth-story-title">
-            <div className="auth-story-top">
-              <BrandSymbol size="lg" />
-              <div className="stack auth-story-stack-gap">
-                <span className="tag auth-story-tag">CS Ranger Platform</span>
-                <h1 className="headline auth-story-title" id="auth-story-title">
-                  Premium learning and creator workflows, in one controlled surface.
-                </h1>
-                <p className="subheadline auth-story-copy">
-                  Continue into a focused environment built for structured study, high-signal authoring, and access-aware premium delivery.
+          <div className="auth-simple-stat-list" aria-label="Platform counts">
+            {learnerStats.map((stat) => {
+              const Icon = stat.icon;
+
+              return (
+                <article className="auth-simple-stat-card" key={stat.label}>
+                  <Icon size={30} aria-hidden="true" />
+                  <div>
+                    <strong>{stat.value}</strong>
+                    <span>{stat.label}</span>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+
+          <div className="auth-simple-team">
+            <h2>Meet the Team</h2>
+            <div className="auth-simple-founder">
+              <Image src="/image.jpg" alt="Kumar Shivam" width={64} height={64} className="auth-simple-founder-image" />
+              <div>
+                <h3>Kumar Shivam</h3>
+                <p>
+                  Hi Everyone, I am Kumar Shivam, a student of IIT Kanpur. CS Ranger is built to make computer science concepts easier
+                  to understand with structured courses and focused nodes.
                 </p>
               </div>
             </div>
+          </div>
 
-            <div className="auth-story-metrics" aria-label="Platform highlights">
-              <article className="auth-metric-card">
-                <span className="auth-metric-value">Unified</span>
-                <span className="auth-metric-label">Learner and creator surfaces</span>
-              </article>
-              <article className="auth-metric-card">
-                <span className="auth-metric-value">
-                  <TrendingUp size={16} aria-hidden="true" /> Premium-ready
-                </span>
-                <span className="auth-metric-label">Free and paid access under one model</span>
-              </article>
-            </div>
+          <div className="auth-simple-switch">
+            <span>{isSignup ? 'Already have an account?' : "Don't have an account?"}</span>
+            <Link href={authModeHref(alternateMode)}>{isSignup ? 'Log in' : 'Sign up'}</Link>
+          </div>
+        </section>
 
-            <div className="auth-trust-grid">
-              {trustPoints.map((point) => {
-                const Icon = point.icon;
-
-                return (
-                  <article key={point.title} className="auth-trust-card">
-                    <div className="auth-trust-icon" aria-hidden="true">
-                      <Icon size={18} />
-                    </div>
-                    <div className="stack stack-gap-8">
-                      <h2 className="auth-trust-title">{point.title}</h2>
-                      <p className="auth-trust-copy">{point.copy}</p>
-                    </div>
-                  </article>
-                );
-              })}
-            </div>
-
-            <div className="auth-founder-note">
-              <div className="section-label">From the team</div>
-              <p className="auth-founder-copy">
-                Every session starts in a premium shell so the learning and publishing experience feels intentional from the first click.
-              </p>
-            </div>
-
-            {adminIntroCard ? (
-              <AdminIntroCardPreview
-                card={{
-                  title: adminIntroCard.title,
-                  body: adminIntroCard.body,
-                  imageUrl: adminIntroCard.imageUrl ?? '',
-                  imageFocus: adminIntroCard.imageFocus,
-                  ctaLabel: adminIntroCard.ctaLabel ?? '',
-                  ctaHref: adminIntroCard.ctaHref ?? '',
-                  isActive: adminIntroCard.isActive,
-                }}
-              />
-            ) : null}
-          </section>
-
-          <section className="auth-form-panel-shell">
-            <AuthForm nextPath={nextPath} initialMode={initialMode} />
-          </section>
-        </div>
+        <section className="auth-simple-right">
+          <AuthForm nextPath={nextPath} initialMode={initialMode} />
+        </section>
       </section>
     </main>
   );
 }
-

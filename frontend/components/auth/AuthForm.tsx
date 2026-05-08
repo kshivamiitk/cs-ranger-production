@@ -1,12 +1,11 @@
 'use client';
 
 import Link from 'next/link';
-import { AlertCircle, CheckCircle2, LoaderCircle } from 'lucide-react';
-import { useState, useTransition } from 'react';
 import { useRouter } from 'next/navigation';
+import { AlertCircle, ArrowRight, AtSign, CheckCircle2, LoaderCircle, LockKeyhole, Mail, UserRound } from 'lucide-react';
+import { useEffect, useState, useTransition } from 'react';
 
 import { apiJson } from '@/src/presentation/http/client';
-import { BrandSymbol } from '@/components/brand/BrandSymbol';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
 import { cn } from '@/lib/utils';
@@ -21,19 +20,28 @@ const modeCopy: Record<
     subtitle: string;
     submitIdle: string;
     submitPending: string;
+    google: string;
+    switchPrompt: string;
+    switchLabel: string;
   }
 > = {
   signin: {
-    title: 'Sign in',
-    subtitle: 'Return to your learning and creator workspace.',
-    submitIdle: 'Continue',
-    submitPending: 'Signing in...',
+    title: 'Welcome Back',
+    subtitle: 'Login to continue learning',
+    submitIdle: 'Login',
+    submitPending: 'Logging in...',
+    google: 'Sign in with Google',
+    switchPrompt: "Don't have an account?",
+    switchLabel: 'Create Account',
   },
   signup: {
-    title: 'Create account',
-    subtitle: 'Start with learner or creator access in the same premium shell.',
+    title: 'Create Account',
+    subtitle: 'Sign up to start learning',
     submitIdle: 'Create account',
     submitPending: 'Creating account...',
+    google: 'Sign up with Google',
+    switchPrompt: 'Already have an account?',
+    switchLabel: 'Log in',
   },
 };
 
@@ -41,12 +49,12 @@ const roleCards: Array<{ value: UserRole; title: string; description: string }> 
   {
     value: 'learner',
     title: 'Learner',
-    description: 'Open courses, complete nodes, and progress through structured content.',
+    description: 'Take courses and complete nodes.',
   },
   {
     value: 'creator',
     title: 'Creator',
-    description: 'Build and publish polished course experiences from the creator studio.',
+    description: 'Publish courses from the studio.',
   },
 ] as const;
 
@@ -62,10 +70,25 @@ export function AuthForm({ nextPath, initialMode = 'signin' }: { nextPath: strin
   const [password, setPassword] = useState('');
   const [primaryRole, setPrimaryRole] = useState<UserRole>('learner');
 
+  useEffect(() => {
+    setMode(initialMode);
+    setError(null);
+    setMessage(null);
+  }, [initialMode]);
+
+  const alternateMode: AuthMode = mode === 'signin' ? 'signup' : 'signin';
   const googleHref = `/api/auth/oauth/google?${new URLSearchParams({
     next: nextPath,
     role: primaryRole,
   }).toString()}`;
+
+  function authModeHref(nextMode: AuthMode) {
+    const params = new URLSearchParams({ mode: nextMode });
+    if (nextPath !== '/dashboard') {
+      params.set('next', nextPath);
+    }
+    return `/login?${params.toString()}`;
+  }
 
   function switchMode(nextMode: AuthMode) {
     if (pending || nextMode === mode) {
@@ -119,45 +142,10 @@ export function AuthForm({ nextPath, initialMode = 'signin' }: { nextPath: strin
   const submitText = pending ? copy.submitPending : copy.submitIdle;
 
   return (
-    <section className="auth-form-shell" aria-labelledby="auth-form-title">
-      <div className="auth-form-header">
-        <div className="auth-form-brand">
-          <BrandSymbol size="sm" />
-          <div className="auth-form-brand-text">
-            <span className="tag">Secure access</span>
-            <span className="auth-form-brand-copy">Email or Google</span>
-          </div>
-        </div>
-
-        <div className="auth-mode-toggle" role="tablist" aria-label="Authentication mode">
-          <Button
-            type="button"
-            variant={mode === 'signin' ? 'secondary' : 'ghost'}
-            className={cn('auth-mode-button', mode === 'signin' ? 'is-active' : undefined)}
-            role="tab"
-            aria-selected={mode === 'signin'}
-            onClick={() => switchMode('signin')}
-            disabled={pending}
-          >
-            Sign in
-          </Button>
-          <Button
-            type="button"
-            variant={mode === 'signup' ? 'secondary' : 'ghost'}
-            className={cn('auth-mode-button', mode === 'signup' ? 'is-active' : undefined)}
-            role="tab"
-            aria-selected={mode === 'signup'}
-            onClick={() => switchMode('signup')}
-            disabled={pending}
-          >
-            Sign up
-          </Button>
-        </div>
-      </div>
-
-      <header className="auth-form-intro">
-        <h2 id="auth-form-title" className="panel-title auth-form-title">{copy.title}</h2>
-        <p className="muted auth-form-subtitle">{copy.subtitle}</p>
+    <section className="auth-clean-form" aria-labelledby="auth-form-title">
+      <header className="auth-clean-header">
+        <h2 id="auth-form-title">{copy.title}</h2>
+        <p>{copy.subtitle}</p>
       </header>
 
       {message ? (
@@ -173,68 +161,82 @@ export function AuthForm({ nextPath, initialMode = 'signin' }: { nextPath: strin
         </div>
       ) : null}
 
-      <form className="auth-input-stack" onSubmit={handleSubmit}>
+      <form className="auth-clean-stack" onSubmit={handleSubmit}>
         {mode === 'signup' ? (
           <>
-            <label className="field">
-              <span className="field-label">Full name</span>
-              <Input
-                value={fullName}
-                onChange={(event) => setFullName(event.target.value)}
-                placeholder="Aarav Sharma"
-                autoComplete="name"
-                required
-                disabled={pending}
-              />
+            <label className="auth-clean-field">
+              <span className="auth-clean-label">Full name</span>
+              <span className="auth-clean-input-shell">
+                <UserRound size={20} aria-hidden="true" />
+                <Input
+                  value={fullName}
+                  onChange={(event) => setFullName(event.target.value)}
+                  placeholder="Kumar Shivam"
+                  autoComplete="name"
+                  required
+                  disabled={pending}
+                />
+              </span>
             </label>
 
-            <label className="field">
-              <span className="field-label">Username</span>
-              <Input
-                value={username}
-                onChange={(event) => setUsername(event.target.value.toLowerCase().replace(/[^a-z0-9_]/g, ''))}
-                placeholder="aarav_sharma"
-                autoComplete="username"
-                required
-                disabled={pending}
-              />
-              <p className="muted auth-field-hint">This unique username is how other creators find you for course collaboration.</p>
+            <label className="auth-clean-field">
+              <span className="auth-clean-label">Username</span>
+              <span className="auth-clean-input-shell">
+                <AtSign size={20} aria-hidden="true" />
+                <Input
+                  value={username}
+                  onChange={(event) => setUsername(event.target.value.toLowerCase().replace(/[^a-z0-9_]/g, ''))}
+                  placeholder="kumar_shivam"
+                  autoComplete="username"
+                  required
+                  disabled={pending}
+                />
+              </span>
             </label>
           </>
         ) : null}
 
-        <label className="field">
-          <span className="field-label">Email address</span>
-          <Input
-            type="email"
-            value={email}
-            onChange={(event) => setEmail(event.target.value)}
-            placeholder="you@example.com"
-            autoComplete="email"
-            required
-            disabled={pending}
-          />
+        <label className="auth-clean-field">
+          <span className="auth-clean-label">Email</span>
+          <span className="auth-clean-input-shell">
+            <Mail size={20} aria-hidden="true" />
+            <Input
+              type="email"
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
+              placeholder="you@example.com"
+              autoComplete="email"
+              required
+              disabled={pending}
+            />
+          </span>
         </label>
 
-        <label className="field">
-          <span className="field-label">Password</span>
-          <Input
-            type="password"
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
-            autoComplete={mode === 'signup' ? 'new-password' : 'current-password'}
-            required
-            disabled={pending}
-          />
+        <label className="auth-clean-field">
+          <span className="auth-clean-label-row">
+            <span>Password</span>
+            {mode === 'signin' ? <Link href={`/forgot-password?next=${encodeURIComponent(nextPath)}`}>Forgot password?</Link> : null}
+          </span>
+          <span className="auth-clean-input-shell">
+            <LockKeyhole size={20} aria-hidden="true" />
+            <Input
+              type="password"
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
+              placeholder="••••••••"
+              autoComplete={mode === 'signup' ? 'new-password' : 'current-password'}
+              required
+              disabled={pending}
+            />
+          </span>
         </label>
 
         {mode === 'signup' ? (
-          <fieldset className="auth-role-fieldset">
-            <legend className="field-label">Primary role</legend>
-            <p className="auth-role-note">This role is also used when creating an account through Google.</p>
-            <div className="auth-role-grid">
+          <fieldset className="auth-clean-role-fieldset">
+            <legend>Choose account type</legend>
+            <div className="auth-clean-role-grid">
               {roleCards.map((role) => (
-                <label key={role.value} className={cn('auth-role-card', primaryRole === role.value ? 'is-active' : undefined)}>
+                <label key={role.value} className={cn('auth-clean-role-card', primaryRole === role.value ? 'is-active' : undefined)}>
                   <input
                     type="radio"
                     className="sr-only"
@@ -244,45 +246,43 @@ export function AuthForm({ nextPath, initialMode = 'signin' }: { nextPath: strin
                     onChange={() => setPrimaryRole(role.value)}
                     disabled={pending}
                   />
-                  <span className="auth-role-title">{role.title}</span>
-                  <span className="auth-role-description">{role.description}</span>
+                  <span>{role.title}</span>
+                  <small>{role.description}</small>
                 </label>
               ))}
             </div>
           </fieldset>
         ) : null}
 
-        <Button type="submit" variant="premium" className="auth-submit" disabled={pending}>
-          {pending ? <LoaderCircle size={16} className="auth-submit-spinner" aria-hidden="true" /> : null}
-          {submitText}
+        <Button type="submit" variant="premium" className="auth-clean-submit" disabled={pending}>
+          {pending ? <LoaderCircle size={18} className="auth-submit-spinner" aria-hidden="true" /> : null}
+          <span>{submitText}</span>
+          {!pending ? <ArrowRight size={20} aria-hidden="true" /> : null}
         </Button>
-
-        {mode === 'signin' ? (
-          <p className="muted auth-forgot-row">
-            <Link href={`/forgot-password?next=${encodeURIComponent(nextPath)}`}>Forgot password?</Link>
-          </p>
-        ) : null}
       </form>
 
-      <div className="auth-divider" role="separator">
-        <span>Or continue with</span>
+      <div className="auth-clean-divider" role="separator">
+        <span>or</span>
       </div>
 
       <a
         href={googleHref}
-        className="button button-secondary auth-google-button"
+        className="auth-clean-google"
         onClick={handleGoogleClick}
         aria-disabled={pending ? 'true' : undefined}
       >
-        Continue with Google
+        <span className="auth-google-mark" aria-hidden="true">
+          G
+        </span>
+        <span>{copy.google}</span>
       </a>
 
-      {mode === 'signup' ? (
-        <p className="muted auth-google-hint">
-          First Google sign-in creates your account using the selected role.
-        </p>
-      ) : null}
+      <p className="auth-clean-switch-line">
+        <span>{copy.switchPrompt}</span>
+        <Link href={authModeHref(alternateMode)} onClick={() => switchMode(alternateMode)}>
+          {copy.switchLabel}
+        </Link>
+      </p>
     </section>
   );
 }
-
